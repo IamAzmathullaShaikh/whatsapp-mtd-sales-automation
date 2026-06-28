@@ -10,6 +10,7 @@ venv/
 *.csv
 !template_party_master.xlsx
 !template_sales_dump.xlsx
+!user_settings.json
 
 # Generated Logs and Exports
 logs/
