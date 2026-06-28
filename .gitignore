@@ -17,3 +17,4 @@ logs/
 exports/
 custom_groups.json
 PyWhatKit_DB.txt
+user_settings.json
