@@ -1,0 +1,16 @@
+# 1. Default line ending handling (Standardizes Windows CRLF to Linux/Mac LF)
+* text=auto
+
+# 2. Force specific text files to always use LF (Best practice for Python)
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+
+# 3. Mark data and image files as binary so Git doesn't try to read them line-by-line
+*.xlsx binary
+*.xls binary
+*.csv binary
+*.png binary
+*.jpg binary
+*.jpeg binary
