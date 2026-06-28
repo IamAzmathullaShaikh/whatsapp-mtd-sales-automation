@@ -36,12 +36,35 @@ elif menu == "Manage Brands":
         # This triggers the existing logic in your terminal
         main.manage_brands(settings)
         st.rerun()
+import streamlit as st
+import subprocess
+import sys
+import main
+
+# ... (keep your existing page config and CSS) ...
+
+def launch_terminal_task(task_name):
+    """
+    Spawns a new Windows Terminal/PowerShell window 
+    running the specific main.py function.
+    """
+    # This command opens a new window and runs the script
+    cmd = f'start powershell -NoExit -Command "python -c \\"import main; {task_name}()\\""'
+    subprocess.Popen(cmd, shell=True)
+    st.success(f"Launching {task_name} in a dedicated terminal window...")
+
+# --- UI LAYOUT ---
+# ... (inside your menu logic) ...
+
+if menu == "Manage Brands":
+    st.subheader("🍾 Portfolio Configuration")
+    st.write("Click below to edit your brands in the Terminal Admin Console.")
+    
+    if st.button("Edit Brands"):
+        # Redirects to main.manage_brands
+        launch_terminal_task("main.manage_brands(main.load_settings())")
 
 elif menu == "Dispatch Engine":
     st.subheader("📡 Dispatch Control")
-    st.warning("Ensure WhatsApp Desktop is open.")
-    
-    if st.button("🚀 Execute Sales Dispatch"):
-        with st.spinner("Processing dispatch engine..."):
-            main.run_dispatch_engine(settings)
-            st.success("Dispatch process finished!")
+    if st.button("🚀 Start Dispatch Pipeline"):
+        launch_terminal_task("main.run_dispatch_engine(main.load_settings())")
