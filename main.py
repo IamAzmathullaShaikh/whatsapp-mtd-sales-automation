@@ -20,7 +20,7 @@ import dispatcher
 SETTINGS_FILE = "user_settings.json"
 
 def load_settings():
-    """Loads user profile and brand configurations. Creates defaults if missing."""
+    """Loads settings and automatically migrates old string-based brands to custom column mappings."""
     default_settings = {
         "profile": {
             "name": "Azmathulla Sk",
@@ -28,19 +28,36 @@ def load_settings():
             "agency": "Sri Krishna Agencies"
         },
         "brands": {
-            "OCW": "Officer's Choice Whisky",
-            "OCBL": "Officer's Choice Blue",
-            "SRB10": "B10",
-            "SRB7": "B7",
-            "IQW": "Iconiq White",
-            "KYRON": "KYRON",
-            "OCBRANDY": "Officer's Choice Brandy"
+            "OCW": {"name": "Officer's Choice Whisky", "target_col": "OCW_TARGET", "actual_col": "OCW.1"},
+            "OCBL": {"name": "Officer's Choice Blue", "target_col": "OCBL_TARGET", "actual_col": "OCBL.1"},
+            "SRB10": {"name": "B10", "target_col": "SRB10_TARGET", "actual_col": "SRB10.1"},
+            "SRB7": {"name": "B7", "target_col": "SRB7_TARGET", "actual_col": "SRB7.1"},
+            "IQW": {"name": "Iconiq White", "target_col": "IQW_TARGET", "actual_col": "IQW.1"},
+            "KYRON": {"name": "KYRON", "target_col": "KYRON_TARGET", "actual_col": "KYRON.1"},
+            "OCBRANDY": {"name": "Officer's Choice Brandy", "target_col": "OCBRANDY_TARGET", "actual_col": "OCBRANDY.1"}
         }
     }
     
     if os.path.exists(SETTINGS_FILE):
         with open(SETTINGS_FILE, "r") as f:
-            return json.load(f)
+            data = json.load(f)
+            
+        # Background migration: Upgrades old simple format to new advanced column-mapping format
+        needs_save = False
+        for k, v in data.get("brands", {}).items():
+            if isinstance(v, str):
+                data["brands"][k] = {
+                    "name": v,
+                    "target_col": f"{k}_TARGET",
+                    "actual_col": f"{k}.1"
+                }
+                needs_save = True
+        
+        if needs_save:
+            with open(SETTINGS_FILE, "w") as fw:
+                json.dump(data, fw, indent=4)
+                
+        return data
     else:
         with open(SETTINGS_FILE, "w") as f:
             json.dump(default_settings, f, indent=4)
@@ -59,13 +76,71 @@ def manage_profile(settings):
     save_settings(settings)
 
 def manage_brands(settings):
-    print("\n--- 🍾 EDIT BRAND PORTFOLIO ---")
-    print("Update the display names for your products. Leave blank to keep current.")
-    for raw_code, current_name in settings["brands"].items():
-        new_name = questionary.text(f"Display name for '{raw_code}' (Current: {current_name}):").ask()
-        if new_name.strip():
-            settings["brands"][raw_code] = new_name.strip()
-    save_settings(settings)
+    while True:
+        print("\n--- 🍾 MANAGE BRAND PORTFOLIO ---")
+        action = questionary.select(
+            "Choose an action:",
+            choices=[
+                "➕ Add a New Brand",
+                "✏️ Edit an Existing Brand (Name & Column Mappings)",
+                "❌ Remove a Brand",
+                "🔙 Back to Main Menu"
+            ]
+        ).ask()
+
+        if "Add" in action:
+            b_code = questionary.text("Enter Brand Short Code (e.g., MH):").ask().strip().upper()
+            if b_code:
+                if b_code in settings["brands"]:
+                    print(f"⚠️ Brand '{b_code}' already exists!")
+                else:
+                    b_name = questionary.text(f"Enter Full Display Name for {b_code}:").ask().strip()
+                    print("\n[Optional Excel Mapping] Hit Enter to use the default column names, or type exact alternatives (e.g. 'Mansion House').")
+                    tgt_col = questionary.text(f"Target Column Name in Master File:", default=f"{b_code}_TARGET").ask().strip()
+                    act_col = questionary.text(f"Actual Column Name in Sales Dump:", default=f"{b_code}.1").ask().strip()
+                    
+                    settings["brands"][b_code] = {
+                        "name": b_name,
+                        "target_col": tgt_col,
+                        "actual_col": act_col
+                    }
+                    save_settings(settings)
+                    print(f"✅ Successfully added {b_code}: {b_name}")
+                    
+        elif "Edit" in action:
+            if not settings["brands"]:
+                print("No brands currently in portfolio.")
+                continue
+            b_code = questionary.select("Select brand to edit:", choices=list(settings["brands"].keys())).ask()
+            if b_code:
+                b_data = settings["brands"][b_code]
+                print(f"\nEditing configuration for: {b_code}")
+                new_name = questionary.text(f"Display Name:", default=b_data["name"]).ask().strip()
+                new_tgt = questionary.text(f"Master File Target Column Name:", default=b_data.get("target_col", f"{b_code}_TARGET")).ask().strip()
+                new_act = questionary.text(f"Sales Dump Actual Column Name:", default=b_data.get("actual_col", f"{b_code}.1")).ask().strip()
+                
+                settings["brands"][b_code] = {
+                    "name": new_name,
+                    "target_col": new_tgt,
+                    "actual_col": new_act
+                }
+                save_settings(settings)
+                print(f"✅ Updated configuration mapping for {b_code}")
+
+        elif "Remove" in action:
+            if not settings["brands"]:
+                print("No brands currently in portfolio.")
+                continue
+            b_code = questionary.select("Select brand to remove:", choices=list(settings["brands"].keys())).ask()
+            if b_code:
+                confirm = questionary.confirm(f"Are you sure you want to completely remove '{b_code}' from tracking?").ask()
+                if confirm:
+                    del settings["brands"][b_code]
+                    save_settings(settings)
+                    print(f"🗑️ Removed brand '{b_code}' from the tracker.")
+
+        elif "Back" in action:
+            break
 
 def select_sales_file():
     files = [f for f in os.listdir('.') if f.startswith('Outlet_Wise_Sales_') and f.endswith('.xlsx')]
@@ -75,6 +150,10 @@ def select_sales_file():
     return questionary.select("📅 Select the historical target report date file to process:", choices=files).ask()
 
 def run_dispatch_engine(settings):
+    if not settings["brands"]:
+        print("🛑 Your brand portfolio is empty! Please add brands via the Main Menu before running the engine.")
+        return
+
     selected_file = select_sales_file()
     print(f"🔄 Ingesting chosen file target: {selected_file}")
 
@@ -119,12 +198,32 @@ def run_dispatch_engine(settings):
     if df_sales.empty:
         raise ValueError("No transactions found for the selected depot(s).")
         
-    sales_brands = ["OCW.1", "OCBL.1", "SRB10.1", "SRB7.1", "IQW.1", "KYRON.1", "OCBRANDY.1"]
+    # ==========================================
+    # ADVANCED CUSTOM COLUMN MAPPING INJECTION
+    # ==========================================
+    brand_map = {}
+    sales_brands = []
+    target_cols = ["TOTAL_TARGET"]
+    
+    # Strip down settings to a flat dict for the templates
+    market_names_for_template = {k: v["name"] for k, v in settings["brands"].items()}
+
+    for b_code, b_data in settings["brands"].items():
+        tgt_col = b_data["target_col"]
+        act_col = b_data["actual_col"]
+        brand_map[b_code] = (tgt_col, act_col)
+        sales_brands.append(act_col)
+        target_cols.append(tgt_col)
+
+    # Safely cast dynamically mapped columns (creates them as 0 if missing from Excel)
     for c in sales_brands + ["Total"]:
+        if c not in df_sales.columns:
+            df_sales[c] = 0
         df_sales[c] = pd.to_numeric(df_sales[c], errors="coerce").fillna(0).astype(int)
         
-    target_cols = ["TOTAL_TARGET", "OCW_TARGET", "OCBL_TARGET", "SRB10_TARGET", "SRB7_TARGET", "IQW_TARGET", "KYRON_TARGET", "OCBRANDY_TARGET"]
     for c in target_cols:
+        if c not in df_master.columns:
+            df_master[c] = 0
         df_master[c] = pd.to_numeric(df_master[c], errors="coerce").fillna(0).astype(int)
         
     filter_mode = questionary.select(
@@ -217,13 +316,6 @@ def run_dispatch_engine(settings):
     for vnd, grp in df_sales[df_sales["SYNDICATE NAME"] == "INDIVIDUAL"].groupby("VENDOR_NAME"):
         actual_perf[vnd] = grp[sales_brands].sum().to_dict()
         actual_perf[vnd]["TOTAL_ACTUAL"] = grp["Total"].sum()
-
-    brand_map = {
-        "OCW": ("OCW_TARGET", "OCW.1"), "OCBL": ("OCBL_TARGET", "OCBL.1"),
-        "SRB10": ("SRB10_TARGET", "SRB10.1"), "SRB7": ("SRB7_TARGET", "SRB7.1"),
-        "IQW": ("IQW_TARGET", "IQW.1"), "KYRON": ("KYRON_TARGET", "KYRON.1"),
-        "OCBRANDY": ("OCBRANDY_TARGET", "OCBRANDY.1")
-    }
     
     dashboard_rows = []
     unordered_queue = []
@@ -255,13 +347,15 @@ def run_dispatch_engine(settings):
             brand_strings.append({"label": b_lbl, "actual": b_act, "balance": b_bal, "target": b_tgt})
                 
         if "Target Announcement" in report_type:
-            message = templates.build_monthly_target_message(recipient, total_target, brand_strings, settings["brands"], settings["profile"])
+            message = templates.build_monthly_target_message(
+                recipient, total_target, brand_strings, market_names_for_template, settings["profile"]
+            )
         else:
             is_completed = True if total_balance <= 0 else False
             message = templates.build_whatsapp_message(
                 recipient, report_date, total_target, total_actual, total_ach_pct, 
                 total_balance, remaining_days, required_drr, brand_strings, 
-                settings["brands"], settings["profile"], target_completed=is_completed
+                market_names_for_template, settings["profile"], target_completed=is_completed
             )
             
         unordered_queue.append({"party": recipient, "phone": phone, "priority": priority, "ach_pct": total_ach_pct, "balance": total_balance, "message": message})
@@ -324,13 +418,15 @@ def run_dispatch_engine(settings):
                 brand_strings.append({"label": b_lbl, "actual": act[act_k], "balance": b_bal, "target": row[tgt_k]})
                 
             if "Target Announcement" in report_type:
-                message = templates.build_monthly_target_message(party, total_target, brand_strings, settings["brands"], settings["profile"])
+                message = templates.build_monthly_target_message(
+                    party, total_target, brand_strings, market_names_for_template, settings["profile"]
+                )
             else:
                 is_completed = True if total_balance <= 0 else False
                 message = templates.build_whatsapp_message(
                     party, report_date, total_target, total_actual, total_ach_pct, 
                     total_balance, remaining_days, required_drr, brand_strings, 
-                    settings["brands"], settings["profile"], target_completed=is_completed
+                    market_names_for_template, settings["profile"], target_completed=is_completed
                 )
             
             item = {"party": party, "phone": phone, "priority": priority, "ach_pct": total_ach_pct, "balance": total_balance, "message": message}
@@ -355,7 +451,6 @@ def run_dispatch_engine(settings):
     print(f"\n🏁 Run Completed Cleanly. Success: {success} | Failed: {failed}")
 
 def main():
-    # Load settings on launch
     settings = load_settings()
 
     while True:
@@ -367,7 +462,7 @@ def main():
             choices=[
                 "📡 Run Sales Dispatch Engine",
                 "👤 Edit My Profile (Name, Role, Agency)",
-                "🍾 Edit Brand Portfolio (Display Names)",
+                "🍾 Manage Brand Portfolio",
                 "❌ Exit"
             ]
         ).ask()
@@ -377,7 +472,7 @@ def main():
             break
         elif "Edit My Profile" in action:
             manage_profile(settings)
-        elif "Edit Brand Portfolio" in action:
+        elif "Manage Brand Portfolio" in action:
             manage_brands(settings)
         else:
             print("Exiting Engine. Have a great day!")
