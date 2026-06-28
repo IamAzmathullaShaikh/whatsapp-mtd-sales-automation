@@ -1,0 +1,18 @@
+# Python environment files
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Private Data & Sales Dumps (CRITICAL)
+*.xlsx
+*.csv
+!template_party_master.xlsx
+!template_sales_dump.xlsx
+
+# Generated Logs and Exports
+logs/
+exports/
+custom_groups.json
+PyWhatKit_DB.txt
