@@ -1,11 +1,12 @@
 import streamlit as st
-import main
+import subprocess
 import pandas as pd
 import json
+import main
 
+# --- PAGE CONFIG ---
 st.set_page_config(page_title="Sales Engine", page_icon="🚀", layout="wide")
 
-# Custom CSS for the "Big Font" minimal look
 st.markdown("""
     <style>
     .big-font { font-size:24px !important; font-weight: bold; }
@@ -15,56 +16,39 @@ st.markdown("""
 st.title("🚀 Sales Engine Control Center")
 st.markdown("<p class='big-font'>Manage your Territory Sales Pipeline</p>", unsafe_allow_html=True)
 
+# --- HELPER FUNCTIONS ---
+def launch_terminal_task(task_name):
+    """Spawns a new Windows PowerShell window running the specific main.py function."""
+    cmd = f'start powershell -NoExit -Command "python -c \\"import main; {task_name}\\""'
+    subprocess.Popen(cmd, shell=True)
+    st.success(f"Launching task in a dedicated terminal window...")
+
+# --- LOAD SETTINGS ---
 settings = main.load_settings()
 
-# Sidebar for Navigation
+# --- SIDEBAR NAV ---
 menu = st.sidebar.radio("Navigation", ["Dashboard", "Manage Brands", "Dispatch Engine"])
 
+# --- UI LOGIC ---
 if menu == "Dashboard":
     st.subheader("📊 Live Territory Performance")
-    # Here you can add logic to read the latest sales file and show a st.bar_chart()
     st.info("Performance charts integration pending...")
 
 elif menu == "Manage Brands":
     st.subheader("🍾 Portfolio Configuration")
     
-    # Create a cleaner table view for brands
+    # Display the brand table
     brand_df = pd.DataFrame.from_dict(settings["brands"], orient="index")
     st.table(brand_df)
     
-    if st.button("Add/Edit Brands via Terminal Menu"):
-        # This triggers the existing logic in your terminal
-        main.manage_brands(settings)
-        st.rerun()
-import streamlit as st
-import subprocess
-import sys
-import main
-
-# ... (keep your existing page config and CSS) ...
-
-def launch_terminal_task(task_name):
-    """
-    Spawns a new Windows Terminal/PowerShell window 
-    running the specific main.py function.
-    """
-    # This command opens a new window and runs the script
-    cmd = f'start powershell -NoExit -Command "python -c \\"import main; {task_name}()\\""'
-    subprocess.Popen(cmd, shell=True)
-    st.success(f"Launching {task_name} in a dedicated terminal window...")
-
-# --- UI LAYOUT ---
-# ... (inside your menu logic) ...
-
-if menu == "Manage Brands":
-    st.subheader("🍾 Portfolio Configuration")
+    st.write("---")
     st.write("Click below to edit your brands in the Terminal Admin Console.")
-    
     if st.button("Edit Brands"):
-        # Redirects to main.manage_brands
         launch_terminal_task("main.manage_brands(main.load_settings())")
 
 elif menu == "Dispatch Engine":
     st.subheader("📡 Dispatch Control")
+    st.warning("Ensure WhatsApp Desktop is open.")
+    
     if st.button("🚀 Start Dispatch Pipeline"):
         launch_terminal_task("main.run_dispatch_engine(main.load_settings())")
