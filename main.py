@@ -7,10 +7,9 @@ import numpy as np
 from datetime import datetime
 import questionary
 
-# Central Import Modules
 from config import (
     PARTY_MASTER, WAIT_TIME, TAB_CLOSE, CLOSE_TIME, 
-    COOL_DOWN, TEST_MODE, TEST_LIMIT, MAX_RETRIES, SKIP_DUPLICATE_PHONES
+    COOL_DOWN, TEST_MODE, TEST_LIMIT, MAX_RETRIES
 )
 import utils
 import calculations
@@ -18,21 +17,64 @@ import templates
 import dashboard
 import dispatcher
 
+SETTINGS_FILE = "user_settings.json"
+
+def load_settings():
+    """Loads user profile and brand configurations. Creates defaults if missing."""
+    default_settings = {
+        "profile": {
+            "name": "Azmathulla Sk",
+            "designation": "Sales Executive",
+            "agency": "Sri Krishna Agencies"
+        },
+        "brands": {
+            "OCW": "Officer's Choice Whisky",
+            "OCBL": "Officer's Choice Blue",
+            "SRB10": "B10",
+            "SRB7": "B7",
+            "IQW": "Iconiq White",
+            "KYRON": "KYRON",
+            "OCBRANDY": "Officer's Choice Brandy"
+        }
+    }
+    
+    if os.path.exists(SETTINGS_FILE):
+        with open(SETTINGS_FILE, "r") as f:
+            return json.load(f)
+    else:
+        with open(SETTINGS_FILE, "w") as f:
+            json.dump(default_settings, f, indent=4)
+        return default_settings
+
+def save_settings(settings_data):
+    with open(SETTINGS_FILE, "w") as f:
+        json.dump(settings_data, f, indent=4)
+    print("✅ Settings successfully saved!")
+
+def manage_profile(settings):
+    print("\n--- 👤 EDIT USER PROFILE ---")
+    settings["profile"]["name"] = questionary.text("Enter Executive Name:", default=settings["profile"]["name"]).ask()
+    settings["profile"]["designation"] = questionary.text("Enter Designation:", default=settings["profile"]["designation"]).ask()
+    settings["profile"]["agency"] = questionary.text("Enter Agency/Distributor Name:", default=settings["profile"]["agency"]).ask()
+    save_settings(settings)
+
+def manage_brands(settings):
+    print("\n--- 🍾 EDIT BRAND PORTFOLIO ---")
+    print("Update the display names for your products. Leave blank to keep current.")
+    for raw_code, current_name in settings["brands"].items():
+        new_name = questionary.text(f"Display name for '{raw_code}' (Current: {current_name}):").ask()
+        if new_name.strip():
+            settings["brands"][raw_code] = new_name.strip()
+    save_settings(settings)
+
 def select_sales_file():
-    """Scans the local directory and prompts user to select a target sales dump file."""
     files = [f for f in os.listdir('.') if f.startswith('Outlet_Wise_Sales_') and f.endswith('.xlsx')]
     if not files:
         raise FileNotFoundError("No 'Outlet_Wise_Sales_*.xlsx' files detected in your directory.")
-    
     files.sort(reverse=True)
-    
-    selected = questionary.select(
-        "📅 Select the historical target report date file to process:",
-        choices=files
-    ).ask()
-    return selected
+    return questionary.select("📅 Select the historical target report date file to process:", choices=files).ask()
 
-def main():
+def run_dispatch_engine(settings):
     selected_file = select_sales_file()
     print(f"🔄 Ingesting chosen file target: {selected_file}")
 
@@ -105,7 +147,7 @@ def main():
     elif "Individual Group" in filter_mode:
         all_master_options = sorted(list(df_master["PARTY"].unique()))
         chosen_groups = questionary.checkbox(
-            "Select one or more accounts/groups to broadcast updates to (Space to select, Enter to confirm):",
+            "Select one or more accounts/groups to broadcast updates to:",
             choices=all_master_options
         ).ask()
         if not chosen_groups:
@@ -145,14 +187,11 @@ def main():
                 print("🛑 No outlets selected. Terminating run execution.")
                 return
                 
-            save_preset = questionary.confirm(
-                f"📝 Do you want to save this combination of {len(selected_outlets)} outlets for future use under '{recipient}'?"
-            ).ask()
-            
+            save_preset = questionary.confirm(f"📝 Save this combination of {len(selected_outlets)} outlets for future use under '{recipient}'?").ask()
             if save_preset:
                 saved_groups[recipient] = selected_outlets
-                with open(config_file, "w") as f:
-                    json.dump(saved_groups, f, indent=4)
+                with open(config_file, "w") as json_file:
+                    json.dump(saved_groups, json_file, indent=4)
                 print(f"✅ Successfully saved custom group mapping for '{recipient}'.")
 
         custom_run_config = {
@@ -193,7 +232,6 @@ def main():
     if custom_run_config:
         recipient = custom_run_config["recipient"]
         selected_outlets = custom_run_config["outlets"]
-        
         row = df_master[df_master["PARTY"] == recipient].iloc[0]
         priority = str(row["PRIORITY"]).strip().upper()
         
@@ -217,12 +255,13 @@ def main():
             brand_strings.append({"label": b_lbl, "actual": b_act, "balance": b_bal, "target": b_tgt})
                 
         if "Target Announcement" in report_type:
-            message = templates.build_monthly_target_message(recipient, total_target, brand_strings)
+            message = templates.build_monthly_target_message(recipient, total_target, brand_strings, settings["brands"], settings["profile"])
         else:
             is_completed = True if total_balance <= 0 else False
             message = templates.build_whatsapp_message(
                 recipient, report_date, total_target, total_actual, total_ach_pct, 
-                total_balance, remaining_days, required_drr, brand_strings, target_completed=is_completed
+                total_balance, remaining_days, required_drr, brand_strings, 
+                settings["brands"], settings["profile"], target_completed=is_completed
             )
             
         unordered_queue.append({"party": recipient, "phone": phone, "priority": priority, "ach_pct": total_ach_pct, "balance": total_balance, "message": message})
@@ -285,12 +324,13 @@ def main():
                 brand_strings.append({"label": b_lbl, "actual": act[act_k], "balance": b_bal, "target": row[tgt_k]})
                 
             if "Target Announcement" in report_type:
-                message = templates.build_monthly_target_message(party, total_target, brand_strings)
+                message = templates.build_monthly_target_message(party, total_target, brand_strings, settings["brands"], settings["profile"])
             else:
                 is_completed = True if total_balance <= 0 else False
                 message = templates.build_whatsapp_message(
                     party, report_date, total_target, total_actual, total_ach_pct, 
-                    total_balance, remaining_days, required_drr, brand_strings, target_completed=is_completed
+                    total_balance, remaining_days, required_drr, brand_strings, 
+                    settings["brands"], settings["profile"], target_completed=is_completed
                 )
             
             item = {"party": party, "phone": phone, "priority": priority, "ach_pct": total_ach_pct, "balance": total_balance, "message": message}
@@ -313,6 +353,35 @@ def main():
         
     success, failed, skipped = dispatcher.process_dispatch_queue(dispatch_queue, WAIT_TIME, TAB_CLOSE, CLOSE_TIME, COOL_DOWN, MAX_RETRIES)
     print(f"\n🏁 Run Completed Cleanly. Success: {success} | Failed: {failed}")
+
+def main():
+    # Load settings on launch
+    settings = load_settings()
+
+    while True:
+        print("\n" + "="*40)
+        print(" 🚀 WHATSAPP SALES AUTOMATION ENGINE")
+        print("="*40)
+        action = questionary.select(
+            "Main Menu:",
+            choices=[
+                "📡 Run Sales Dispatch Engine",
+                "👤 Edit My Profile (Name, Role, Agency)",
+                "🍾 Edit Brand Portfolio (Display Names)",
+                "❌ Exit"
+            ]
+        ).ask()
+
+        if "Run Sales Dispatch" in action:
+            run_dispatch_engine(settings)
+            break
+        elif "Edit My Profile" in action:
+            manage_profile(settings)
+        elif "Edit Brand Portfolio" in action:
+            manage_brands(settings)
+        else:
+            print("Exiting Engine. Have a great day!")
+            break
 
 if __name__ == "__main__":
     main()
