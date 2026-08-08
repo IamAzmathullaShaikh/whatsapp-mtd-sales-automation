@@ -6,7 +6,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-PYBIN="${PYBIN:-.venv/bin/python}"
+if [ -n "${PYBIN:-}" ]; then
+  :  # caller chose the interpreter
+elif [ -x ".venv/bin/python" ]; then
+  PYBIN=".venv/bin/python"
+else
+  PYBIN="python3"
+fi
 ARCH="$(uname -m)"
 
 echo "[1/4] Ensuring PyInstaller in ${PYBIN} ..."

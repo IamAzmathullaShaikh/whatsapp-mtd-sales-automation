@@ -1,14 +1,19 @@
 name: Build release packages
 
-# Builds both ready-to-run packages on every tag push (v*):
-#   Windows: WhatsAppMTD.exe    — double-click, no Python needed
+# Builds both ready-to-run packages on every tag push (v*) and on manual runs:
+#   Windows: WhatsAppMTD.exe        — double-click, no Python needed
 #   Linux:   WhatsAppMTD-<arch>.AppImage — chmod +x, double-click
-# Also runnable manually from the Actions tab.
+# Both are uploaded as artifacts and attached to the GitHub Release.
 
 on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+
+# The repo's default GITHUB_TOKEN permission is read-only, so we must
+# explicitly grant write access here or the release/upload step fails.
+permissions:
+  contents: write
 
 jobs:
   windows:
@@ -44,53 +49,10 @@ jobs:
           python-version: "3.12"
       - name: Install deps + PyInstaller
         run: python -m pip install -r requirements.txt pyinstaller
-      - name: Build the bundled binary
-        run: python -m PyInstaller --noconfirm WhatsAppMTD.spec
       - name: Build the AppImage
-        run: |
-          set -euo pipefail
-          sudo apt-get update -qq && sudo apt-get install -y -qq libfuse2
-          ARCH="$(uname -m)"
-          mkdir -p build/AppDir/usr/bin build/AppDir/usr/share/applications \
-                   build/AppDir/usr/share/icons/hicolor/64x64/apps
-          cp dist/WhatsAppMTD build/AppDir/usr/bin/WhatsAppMTD
-          cat > build/AppDir/AppRun <<'EOF'
-#!/bin/bash
-SELF="$(dirname "$(readlink -f "$0")")"
-exec "$SELF/usr/bin/WhatsAppMTD" "$@"
-EOF
-          chmod +x build/AppDir/AppRun
-          cat > build/AppDir/usr/share/applications/whatsapp-mtd.desktop <<'EOF'
-[Desktop Entry]
-Name=WhatsApp MTD Sales Automation
-Comment=Daily sales progress reports over WhatsApp
-Exec=WhatsAppMTD
-Icon=whatsapp-mtd
-Type=Application
-Categories=Office;
-Terminal=false
-EOF
-          # appimagetool also wants the .desktop at the AppDir root.
-          cp build/AppDir/usr/share/applications/whatsapp-mtd.desktop build/AppDir/whatsapp-mtd.desktop
-          python - <<'EOF'
-import struct, zlib
-w = h = 64
-raw = b"".join(b"\x00" + b"".join(bytes((0x25, 0xd3, 0x66, 255)) for _ in range(w)) for _ in range(h))
-def chunk(tag, data):
-    c = tag + data
-    return struct.pack(">I", len(data)) + c + struct.pack(">I", zlib.crc32(c) & 0xffffffff)
-png = (b"\x89PNG\r\n\x1a\n"
-       + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 6, 0, 0, 0))
-       + chunk(b"IDAT", zlib.compress(raw)) + chunk(b"IEND", b""))
-open("build/AppDir/usr/share/icons/hicolor/64x64/apps/whatsapp-mtd.png", "wb").write(png)
-EOF
-          curl -L --fail -o build/appimagetool \
-            "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-${ARCH}.AppImage"
-          chmod +x build/appimagetool
-          # --appimage-extract-and-run changes CWD to the extracted runtime,
-          # so absolute paths only.
-          ROOT="$(pwd)"
-          build/appimagetool --appimage-extract-and-run "${ROOT}/build/AppDir" "${ROOT}/dist/WhatsAppMTD-${ARCH}.AppImage"
+        env:
+          PYBIN: python3
+        run: bash packaging/build_appimage.sh
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
