@@ -1,0 +1,21 @@
+{
+  "name": "playwright",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/playwright/SKILL.md",
+  "description": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "task",
+    "requires",
+    "automating",
+    "real",
+    "browser",
+    "terminal",
+    "navigation"
+  ],
+  "word_count": 489,
+  "hash": "05ea236fddc77da02998ca83b505d36dda1cf1f4a9fecc5ed8daf7e6fca2a2f1"
+}

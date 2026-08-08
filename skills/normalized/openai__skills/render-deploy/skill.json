@@ -1,0 +1,21 @@
+{
+  "name": "render-deploy",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/render-deploy/SKILL.md",
+  "description": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "deploy",
+    "applications",
+    "render",
+    "analyzing",
+    "codebases",
+    "generating",
+    "render",
+    "yaml"
+  ],
+  "word_count": 2406,
+  "hash": "458b1b739564ddfa68c7e7c986c65391c028ad6e389c221d9de68c17d3e0da76"
+}

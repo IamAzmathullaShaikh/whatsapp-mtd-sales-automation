@@ -1,0 +1,21 @@
+{
+  "name": "figma",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/figma/SKILL.md",
+  "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "figma",
+    "mcp",
+    "server",
+    "fetch",
+    "design",
+    "context",
+    "screenshots"
+  ],
+  "word_count": 427,
+  "hash": "ec4acb3fbb8ad8a3db71b8b067e5d145471fd6953cbd320f77778380fcdddb8e"
+}

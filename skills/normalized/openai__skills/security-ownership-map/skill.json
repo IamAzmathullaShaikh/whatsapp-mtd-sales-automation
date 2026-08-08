@@ -1,0 +1,21 @@
+{
+  "name": "security-ownership-map",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/security-ownership-map/SKILL.md",
+  "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "analyze",
+    "git",
+    "repositories",
+    "build",
+    "security",
+    "ownership",
+    "topology",
+    "people"
+  ],
+  "word_count": 858,
+  "hash": "1bdc4e40e851aa5b61277fa58bb06a74713868848470acd0561847d2f2960d97"
+}

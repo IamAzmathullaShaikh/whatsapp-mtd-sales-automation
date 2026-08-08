@@ -1,0 +1,21 @@
+{
+  "name": "cli-creator",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/cli-creator/SKILL.md",
+  "description": "Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose composable read/write commands, return stable JSON, manage auth, and pair with a companion skill.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "build",
+    "composable",
+    "cli",
+    "codex",
+    "api",
+    "docs",
+    "openapi",
+    "spec"
+  ],
+  "word_count": 1523,
+  "hash": "e91d43070de196613f8002c05c8674db77fa2f7de0fc0aa23e7fa6bcd3311bd4"
+}

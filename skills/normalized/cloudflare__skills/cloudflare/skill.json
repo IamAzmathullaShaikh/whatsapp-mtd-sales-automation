@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/cloudflare/SKILL.md",
+  "description": "Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), feature flags (Flagship), networking (Tunnel, Spectrum), security (WAF, DDoS), and infrastructure-as-code (Terraform, Pulumi). Use for any Cloudflare development task. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "comprehensive",
+    "cloudflare",
+    "platform",
+    "skill",
+    "covering",
+    "workers",
+    "pages",
+    "storage"
+  ],
+  "word_count": 1126,
+  "hash": "1212ce163b1fcb74e7b3c7161aa1e8b99f051ca40f9a07478eed184b7f7b1cb3"
+}

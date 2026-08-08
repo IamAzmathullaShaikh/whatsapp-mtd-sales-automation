@@ -1,0 +1,21 @@
+{
+  "name": "setup-matt-pocock-skills",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+  "description": "Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "configure",
+    "repo",
+    "engineering",
+    "skills",
+    "set",
+    "up",
+    "issue",
+    "tracker"
+  ],
+  "word_count": 1001,
+  "hash": "ebd97c900b4b58b4551d53ca595dfee61c993acfd53e58187d455cceee58bd4c"
+}

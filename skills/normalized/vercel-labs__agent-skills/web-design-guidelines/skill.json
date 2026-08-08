@@ -1,0 +1,25 @@
+{
+  "name": "web-design-guidelines",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/web-design-guidelines/SKILL.md",
+  "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+  "license": "",
+  "metadata": {
+    "author": "vercel",
+    "version": "1.0.0",
+    "argument-hint": "<file-or-pattern>"
+  },
+  "keywords": [
+    "review",
+    "ui",
+    "code",
+    "web",
+    "interface",
+    "guidelines",
+    "compliance",
+    "use"
+  ],
+  "word_count": 136,
+  "hash": "719bba3833259bd6a340906ce16c3e00a4047dbed7cc04b39f14be2a460c8240"
+}

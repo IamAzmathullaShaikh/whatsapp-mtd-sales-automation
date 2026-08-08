@@ -1,0 +1,21 @@
+{
+  "name": "improve-codebase-architecture",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/improve-codebase-architecture/SKILL.md",
+  "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "scan",
+    "codebase",
+    "deepening",
+    "opportunities",
+    "present",
+    "them",
+    "visual",
+    "html"
+  ],
+  "word_count": 884,
+  "hash": "4c6e448eb2ec845564d06e5a674655bacaadc784bf04600f4846a3766976d884"
+}

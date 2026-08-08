@@ -1,0 +1,21 @@
+{
+  "name": "imagegen",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.system/imagegen/SKILL.md",
+  "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "generate",
+    "edit",
+    "raster",
+    "images",
+    "task",
+    "benefits",
+    "ai",
+    "created"
+  ],
+  "word_count": 2252,
+  "hash": "290da71b51be04e73673c08f38490d560f30016a5257d16695f95deb6dc9ec7f"
+}

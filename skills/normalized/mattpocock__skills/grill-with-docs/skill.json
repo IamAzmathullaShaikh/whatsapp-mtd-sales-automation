@@ -1,0 +1,21 @@
+{
+  "name": "grill-with-docs",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/grill-with-docs/SKILL.md",
+  "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "relentless",
+    "interview",
+    "sharpen",
+    "plan",
+    "design",
+    "also",
+    "creates",
+    "docs"
+  ],
+  "word_count": 8,
+  "hash": "0e445978f13023581c4cda81d8b115388dfa38242b80a10d8e588a464d8162bd"
+}

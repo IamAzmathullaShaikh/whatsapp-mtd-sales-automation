@@ -1,0 +1,20 @@
+{
+  "name": "teach",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/teach/SKILL.md",
+  "description": "Teach the user a new skill or concept, within this workspace.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "teach",
+    "user",
+    "new",
+    "skill",
+    "concept",
+    "within",
+    "workspace"
+  ],
+  "word_count": 1464,
+  "hash": "7ac488b9edb252ab8169ca87ab9015677f9fb8f7c3521e81808e726a63765b4c"
+}

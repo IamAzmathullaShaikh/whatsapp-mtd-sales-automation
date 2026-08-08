@@ -1,0 +1,21 @@
+{
+  "name": "wayfinder",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/wayfinder/SKILL.md",
+  "description": "Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "plan",
+    "huge",
+    "chunk",
+    "work",
+    "more",
+    "than",
+    "one",
+    "agent"
+  ],
+  "word_count": 1971,
+  "hash": "d13834a052804c9465c5a422585df99ee2664ec6940beb2ae1d961fd06ff4aff"
+}

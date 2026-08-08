@@ -1,0 +1,21 @@
+{
+  "name": "winui-app",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/winui-app/SKILL.md",
+  "description": "Bootstrap, develop, and design modern WinUI 3 desktop applications with C# and the Windows App SDK using official Microsoft guidance, WinUI Gallery patterns, Windows App SDK samples, and CommunityToolkit components. Use when creating a brand new app, preparing a machine for WinUI, reviewing, refactoring, planning, troubleshooting, environment-checking, or setting up WinUI 3 XAML, controls, navigation, windowing, theming, accessibility, responsiveness, performance, deployment, or related Windows app design and development work.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "bootstrap",
+    "develop",
+    "design",
+    "modern",
+    "winui",
+    "desktop",
+    "applications",
+    "windows"
+  ],
+  "word_count": 1498,
+  "hash": "f00911b6d5128b0e9bc3623d787c478213fc4fe24f71ffb6c0dd074638812d4d"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "pdf",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/pdf/SKILL.md",
+  "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "tasks",
+    "involve",
+    "reading",
+    "creating",
+    "reviewing",
+    "pdf",
+    "files"
+  ],
+  "word_count": 332,
+  "hash": "9e1fcbf830298d0a482d212ba1650816382f2623f0fe3f62a11d66a0adce9138"
+}

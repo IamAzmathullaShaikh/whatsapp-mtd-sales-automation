@@ -1,0 +1,21 @@
+{
+  "name": "theme-factory",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/theme-factory/SKILL.md",
+  "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+  "license": "Complete terms in LICENSE.txt",
+  "metadata": {},
+  "keywords": [
+    "toolkit",
+    "styling",
+    "artifacts",
+    "theme",
+    "these",
+    "artifacts",
+    "slides",
+    "docs"
+  ],
+  "word_count": 433,
+  "hash": "afc4d366cec5f2882dd2163c0f7a938750d76152ac9462c60daeeb0a10e09a09"
+}

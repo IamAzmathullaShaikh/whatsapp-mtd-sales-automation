@@ -1,0 +1,23 @@
+{
+  "name": "gh-address-comments",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/gh-address-comments/SKILL.md",
+  "description": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+  "license": "",
+  "metadata": {
+    "short-description": "Address comments in a GitHub PR review"
+  },
+  "keywords": [
+    "help",
+    "address",
+    "review",
+    "issue",
+    "comments",
+    "open",
+    "github",
+    "pr"
+  ],
+  "word_count": 161,
+  "hash": "760c50276d5ad1ecfa32b529aa43fa4e31e79400ec18c39ee9f83904e146ad24"
+}

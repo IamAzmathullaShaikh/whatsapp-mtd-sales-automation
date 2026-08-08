@@ -1,0 +1,18 @@
+{
+  "name": "grill-me",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/grill-me/SKILL.md",
+  "description": "A relentless interview to sharpen a plan or design.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "relentless",
+    "interview",
+    "sharpen",
+    "plan",
+    "design"
+  ],
+  "word_count": 4,
+  "hash": "69698a24328741d985bacfbda0b656f4ef4fd4a410244720a8482af4660d571c"
+}

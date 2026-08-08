@@ -1,0 +1,21 @@
+{
+  "name": "triage",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/triage/SKILL.md",
+  "description": "Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "move",
+    "issues",
+    "external",
+    "prs",
+    "through",
+    "state",
+    "machine",
+    "triage"
+  ],
+  "word_count": 976,
+  "hash": "e757270e218845d27a190bbd198a2ce46e825eff63dfeac031043ff23eb8ce87"
+}

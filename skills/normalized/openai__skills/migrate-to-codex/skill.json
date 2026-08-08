@@ -1,0 +1,21 @@
+{
+  "name": "migrate-to-codex",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/migrate-to-codex/SKILL.md",
+  "description": "Migrate supported instruction files, skills, agents, and MCP config into Codex project and global files.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "migrate",
+    "supported",
+    "instruction",
+    "files",
+    "skills",
+    "agents",
+    "mcp",
+    "config"
+  ],
+  "word_count": 1060,
+  "hash": "b1deb4032c0c7ab63adf1c14932f911675f8a1be3e092ae444b50497a15078cf"
+}

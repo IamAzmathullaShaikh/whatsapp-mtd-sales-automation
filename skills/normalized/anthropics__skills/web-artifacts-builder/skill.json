@@ -1,0 +1,21 @@
+{
+  "name": "web-artifacts-builder",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/web-artifacts-builder/SKILL.md",
+  "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+  "license": "Complete terms in LICENSE.txt",
+  "metadata": {},
+  "keywords": [
+    "suite",
+    "tools",
+    "creating",
+    "elaborate",
+    "multi",
+    "component",
+    "claude",
+    "ai"
+  ],
+  "word_count": 399,
+  "hash": "e5e9f5de93043f045c5aa4c8cd55b499ac8ab78ddfdebb82f270c9f7f9167a36"
+}

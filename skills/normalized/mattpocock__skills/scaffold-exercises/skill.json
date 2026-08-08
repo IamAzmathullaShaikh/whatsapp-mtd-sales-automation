@@ -1,0 +1,21 @@
+{
+  "name": "scaffold-exercises",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/misc/scaffold-exercises/SKILL.md",
+  "description": "Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "create",
+    "exercise",
+    "directory",
+    "structures",
+    "sections",
+    "problems",
+    "solutions",
+    "explainers"
+  ],
+  "word_count": 407,
+  "hash": "8e839488b9872f19c58cf7d4ca620c415eca75927ae91e8f04cd76b8c36f4da2"
+}

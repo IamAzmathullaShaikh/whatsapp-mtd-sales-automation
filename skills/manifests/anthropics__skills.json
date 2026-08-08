@@ -1,0 +1,27 @@
+{
+  "repo": "anthropics/skills",
+  "url": "https://github.com/anthropics/skills",
+  "commit": "f17010c",
+  "generated_at": "2026-08-08T17:55:21Z",
+  "skill_count": 18,
+  "skills": [
+    "algorithmic-art",
+    "brand-guidelines",
+    "canvas-design",
+    "claude-api",
+    "doc-coauthoring",
+    "docx",
+    "frontend-design",
+    "internal-comms",
+    "mcp-builder",
+    "pdf",
+    "pptx",
+    "skill-creator",
+    "slack-gif-creator",
+    "template-skill",
+    "theme-factory",
+    "web-artifacts-builder",
+    "webapp-testing",
+    "xlsx"
+  ]
+}

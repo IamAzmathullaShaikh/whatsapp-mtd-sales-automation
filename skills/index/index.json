@@ -1,0 +1,2850 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-08T17:55:21Z",
+  "skill_count": 133,
+  "skills": [
+    {
+      "name": "algorithmic-art",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/algorithmic-art/SKILL.md",
+      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "algorithmic",
+        "art",
+        "creating",
+        "using",
+        "p5",
+        "js"
+      ],
+      "word_count": 2707,
+      "hash": "4725918af6002074dbf994b278d9b68342ea9f6dcfa871bc9c562df9764d33c8",
+      "id": "anthropics/skills/algorithmic-art"
+    },
+    {
+      "name": "brand-guidelines",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/brand-guidelines/SKILL.md",
+      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "brand",
+        "guidelines",
+        "anthropic",
+        "colors",
+        "applies",
+        "official",
+        "typography"
+      ],
+      "word_count": 285,
+      "hash": "e85ae675d065886dd2ed593df03812626fc8a707b99a91ec02e548a037d41c53",
+      "id": "anthropics/skills/brand-guidelines"
+    },
+    {
+      "name": "canvas-design",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/canvas-design/SKILL.md",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "canvas",
+        "design",
+        "create",
+        "visual",
+        "art",
+        "piece",
+        "beautiful"
+      ],
+      "word_count": 1693,
+      "hash": "6cd03f4fbf504219763c662935761becae8e60e9b01db425bf854e0df8d3497e",
+      "id": "anthropics/skills/canvas-design"
+    },
+    {
+      "name": "claude-api",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/claude-api/SKILL.md",
+      "description": "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "claude",
+        "api",
+        "anthropic",
+        "model",
+        "tool",
+        "llm",
+        "provider"
+      ],
+      "word_count": 9579,
+      "hash": "0729dd90f19815c01063c5c8e69314832e5c672475cc773943a85a1c2beaba42",
+      "id": "anthropics/skills/claude-api"
+    },
+    {
+      "name": "doc-coauthoring",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/doc-coauthoring/SKILL.md",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "doc",
+        "coauthoring",
+        "documentation",
+        "users",
+        "through",
+        "structured",
+        "workflow",
+        "user"
+      ],
+      "word_count": 2404,
+      "hash": "c05d7c35479b03680fd6daa30d3c78abd2156e9d3d25b4bb5b1155258067ab77",
+      "id": "anthropics/skills/doc-coauthoring"
+    },
+    {
+      "name": "docx",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/docx/SKILL.md",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.",
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "metadata": {},
+      "keywords": [
+        "docx",
+        "word",
+        "use",
+        "files",
+        "documents",
+        "dotx"
+      ],
+      "word_count": 839,
+      "hash": "9a4e594b12a8fca58fb6b09ce049b624359f69a607c00fff8ecfff9284650106",
+      "id": "anthropics/skills/docx"
+    },
+    {
+      "name": "frontend-design",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/frontend-design/SKILL.md",
+      "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "frontend",
+        "design",
+        "guidance",
+        "distinctive",
+        "intentional",
+        "visual",
+        "building"
+      ],
+      "word_count": 1297,
+      "hash": "031d4d4b8389fba5377f113f3c7881faa48abe0c64d919ba315e84d555c3486d",
+      "id": "anthropics/skills/frontend-design"
+    },
+    {
+      "name": "internal-comms",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/internal-comms/SKILL.md",
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "internal",
+        "comms",
+        "updates",
+        "write",
+        "communications",
+        "company",
+        "use"
+      ],
+      "word_count": 151,
+      "hash": "fe59c7523c61b77cdd0530c3c756fa95acb8809b903e12576362b6afae002b41",
+      "id": "anthropics/skills/internal-comms"
+    },
+    {
+      "name": "mcp-builder",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/mcp-builder/SKILL.md",
+      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "mcp",
+        "builder",
+        "servers",
+        "external",
+        "services",
+        "guide",
+        "creating"
+      ],
+      "word_count": 1094,
+      "hash": "6eaabfcf59c08178e7c6a7ac2ec217db2eaeda157962f8f32b7a18ea3ef3d4d9",
+      "id": "anthropics/skills/mcp-builder"
+    },
+    {
+      "name": "pdf",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/pdf/SKILL.md",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "metadata": {},
+      "keywords": [
+        "pdf",
+        "pdfs",
+        "use",
+        "skill",
+        "user",
+        "extracting"
+      ],
+      "word_count": 927,
+      "hash": "614f5cdb7e39096403cb583c22ef0ad93074a74cacc058f700c74a68cd7af2c5",
+      "id": "anthropics/skills/pdf"
+    },
+    {
+      "name": "pptx",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/pptx/SKILL.md",
+      "description": "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.",
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "metadata": {},
+      "keywords": [
+        "pptx",
+        "potx",
+        "any",
+        "file",
+        "use",
+        "skill"
+      ],
+      "word_count": 3000,
+      "hash": "95a32825c64ee1176b7087db58698338466a56adab967898050954fea3f08293",
+      "id": "anthropics/skills/pptx"
+    },
+    {
+      "name": "skill-creator",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/skill-creator/SKILL.md",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "skill",
+        "creator",
+        "create",
+        "skills",
+        "existing",
+        "performance",
+        "optimize"
+      ],
+      "word_count": 5151,
+      "hash": "0b58e93f8aeb0a23fbf9f7a947fdd235dbdd9fc7efc012931eaf6d57e0c70f08",
+      "id": "anthropics/skills/skill-creator"
+    },
+    {
+      "name": "slack-gif-creator",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/slack-gif-creator/SKILL.md",
+      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\"",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "slack",
+        "gif",
+        "creator",
+        "animated",
+        "gifs",
+        "knowledge",
+        "utilities",
+        "creating"
+      ],
+      "word_count": 1057,
+      "hash": "4eef4f18aa71b67c1420aa0837cdd0d2d9ad62db4879d1fdf89425bbfde332c2",
+      "id": "anthropics/skills/slack-gif-creator"
+    },
+    {
+      "name": "template-skill",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "template/SKILL.md",
+      "description": "Replace with description of the skill and when Claude should use it.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "template",
+        "skill",
+        "replace",
+        "description",
+        "claude",
+        "should",
+        "use"
+      ],
+      "word_count": 4,
+      "hash": "70bb1171c3d85a2bd55f13e482ea012ebcb9f33226f98eb2ba37adf5b62cafd8",
+      "id": "anthropics/skills/template-skill"
+    },
+    {
+      "name": "theme-factory",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/theme-factory/SKILL.md",
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "theme",
+        "factory",
+        "artifacts",
+        "toolkit",
+        "styling",
+        "these",
+        "slides"
+      ],
+      "word_count": 433,
+      "hash": "afc4d366cec5f2882dd2163c0f7a938750d76152ac9462c60daeeb0a10e09a09",
+      "id": "anthropics/skills/theme-factory"
+    },
+    {
+      "name": "web-artifacts-builder",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/web-artifacts-builder/SKILL.md",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "web",
+        "artifacts",
+        "builder",
+        "html",
+        "shadcn",
+        "ui",
+        "suite",
+        "tools"
+      ],
+      "word_count": 399,
+      "hash": "e5e9f5de93043f045c5aa4c8cd55b499ac8ab78ddfdebb82f270c9f7f9167a36",
+      "id": "anthropics/skills/web-artifacts-builder"
+    },
+    {
+      "name": "webapp-testing",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/webapp-testing/SKILL.md",
+      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+      "license": "Complete terms in LICENSE.txt",
+      "metadata": {},
+      "keywords": [
+        "webapp",
+        "testing",
+        "browser",
+        "toolkit",
+        "interacting",
+        "local",
+        "web"
+      ],
+      "word_count": 466,
+      "hash": "830bd54146bc08d43e6fb986bd3a189490fb34c76109bc2d0bfa6a852e46ae53",
+      "id": "anthropics/skills/webapp-testing"
+    },
+    {
+      "name": "xlsx",
+      "source": "anthropics/skills",
+      "commit": "f17010c",
+      "source_relative_path": "skills/xlsx/SKILL.md",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "license": "Proprietary. LICENSE.txt has complete terms",
+      "metadata": {},
+      "keywords": [
+        "xlsx",
+        "file",
+        "data",
+        "spreadsheet",
+        "tabular",
+        "trigger",
+        "any"
+      ],
+      "word_count": 1149,
+      "hash": "c514369bada8f26ce9a306cb6ad32f2a5be0af355ca54e5688035e10d6f8dbee",
+      "id": "anthropics/skills/xlsx"
+    },
+    {
+      "name": "agents-sdk",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/agents-sdk/SKILL.md",
+      "description": "Build AI agents on Cloudflare Workers using the Agents SDK. Load when creating stateful agents, durable workflows, real-time WebSocket apps, scheduled tasks, MCP servers, chat applications, voice agents, or browser automation. Covers Agent class, state management, callable RPC, Workflows, durable execution, queues, retries, observability, and React hooks. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "agents",
+        "sdk",
+        "cloudflare",
+        "durable",
+        "workflows",
+        "build",
+        "ai"
+      ],
+      "word_count": 1174,
+      "hash": "b7048cb8787f04fb0c2cd515041cb32569cbcab03ceaceb161a30275f5a40a70",
+      "id": "cloudflare/skills/agents-sdk"
+    },
+    {
+      "name": "cloudflare",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/cloudflare/SKILL.md",
+      "description": "Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), feature flags (Flagship), networking (Tunnel, Spectrum), security (WAF, DDoS), and infrastructure-as-code (Terraform, Pulumi). Use for any Cloudflare development task. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cloudflare",
+        "workers",
+        "ai",
+        "comprehensive",
+        "platform",
+        "skill"
+      ],
+      "word_count": 1126,
+      "hash": "1212ce163b1fcb74e7b3c7161aa1e8b99f051ca40f9a07478eed184b7f7b1cb3",
+      "id": "cloudflare/skills/cloudflare"
+    },
+    {
+      "name": "cloudflare-email-service",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/cloudflare-email-service/SKILL.md",
+      "description": "Send and receive transactional emails with Cloudflare Email Service (Email Sending + Email Routing). Use when building email sending (Workers binding or REST API), email routing, Agents SDK email handling, or integrating email into any app — Workers, Node.js, Python, Go, etc. Also use for email deliverability, SPF/DKIM/DMARC, wrangler email setup, MCP email tools, or when a coding agent needs to send emails. Even for simple requests like \"add email to my Worker\" — this skill has critical config details.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cloudflare",
+        "email",
+        "service",
+        "send",
+        "emails",
+        "sending",
+        "routing",
+        "use"
+      ],
+      "word_count": 1014,
+      "hash": "4129b085f93f798ba319dab91494b2cca4b2c22c90d980cef42a085142b2c9ff",
+      "id": "cloudflare/skills/cloudflare-email-service"
+    },
+    {
+      "name": "cloudflare-one",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/cloudflare-one/SKILL.md",
+      "description": "Guides Cloudflare One Zero Trust and SASE work across Access, Gateway, WARP, Tunnel, Cloudflare WAN, DLP, CASB, device posture, and identity. Use when designing, configuring, troubleshooting, or reviewing Cloudflare One deployments. Retrieval-first: use current Cloudflare docs/API schemas instead of embedded product docs.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cloudflare",
+        "one",
+        "use",
+        "docs",
+        "guides",
+        "zero"
+      ],
+      "word_count": 2580,
+      "hash": "30cda752075ca3af15ec205106e166590446ae718c2317b133d3e7f723bc118e",
+      "id": "cloudflare/skills/cloudflare-one"
+    },
+    {
+      "name": "cloudflare-one-migrations",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/cloudflare-one-migrations/SKILL.md",
+      "description": "Plans migrations from Zscaler ZIA/ZPA, Palo Alto, legacy VPN, SWG, or SASE stacks to Cloudflare One. Use for migration assessments, policy mapping, rollout plans, and parity/gap analysis.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cloudflare",
+        "one",
+        "migrations",
+        "plans",
+        "zscaler",
+        "zia",
+        "zpa",
+        "palo"
+      ],
+      "word_count": 1484,
+      "hash": "f42ee75b9e391fc7b3339a717034af0de5a848d3d94e148c1d91895ce1922ef7",
+      "id": "cloudflare/skills/cloudflare-one-migrations"
+    },
+    {
+      "name": "durable-objects",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/durable-objects/SKILL.md",
+      "description": "Create and review Cloudflare Durable Objects. Use when building stateful coordination (chat rooms, multiplayer games, booking systems), implementing RPC methods, SQLite storage, alarms, WebSockets, or reviewing DO code for best practices. Covers Workers integration, wrangler config, and testing with Vitest. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "durable",
+        "objects",
+        "cloudflare",
+        "create",
+        "review",
+        "use"
+      ],
+      "word_count": 666,
+      "hash": "a32bade6cb30416e72ebf1e2bd7034cbe3201492fff8b60e8e77cfea2fcdf5ee",
+      "id": "cloudflare/skills/durable-objects"
+    },
+    {
+      "name": "sandbox-migrate-to-next",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/sandbox-migrate-to-next/SKILL.md",
+      "description": "Use when porting a Cloudflare Sandbox app from stable @cloudflare/sandbox to @cloudflare/sandbox@next (Sandbox SDK 1.0 preview), or when the user asks to migrate or upgrade to Sandbox 1.0 / @next. Not for day-to-day stable work (sandbox-stable) or new @next apps (sandbox-next).",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "sandbox",
+        "migrate",
+        "next",
+        "cloudflare",
+        "stable",
+        "day",
+        "use"
+      ],
+      "word_count": 933,
+      "hash": "971086ef7084e1084292ca1fc52c2caeb4322debe8460108e5413b09b1f1c77b",
+      "id": "cloudflare/skills/sandbox-migrate-to-next"
+    },
+    {
+      "name": "sandbox-next",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/sandbox-next/SKILL.md",
+      "description": "Use when building or changing Cloudflare Sandbox apps on @cloudflare/sandbox@next (Sandbox SDK 1.0 preview)—code execution, AI runners, interpreters, CI-like jobs, terminals, files, mounts, tunnels, preview URLs, lifecycle, or errors. Not for the default stable package (use sandbox-stable) or for porting stable to @next (use sandbox-migrate-to-next).",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "sandbox",
+        "next",
+        "use",
+        "stable",
+        "cloudflare",
+        "preview"
+      ],
+      "word_count": 717,
+      "hash": "c7275263435c43773ee801ff3be9e4f21cb6d847089953883209157f91bb0215",
+      "id": "cloudflare/skills/sandbox-next"
+    },
+    {
+      "name": "sandbox-stable",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/sandbox-stable/SKILL.md",
+      "description": "Use when building or changing Cloudflare Sandbox apps on the current stable @cloudflare/sandbox package (default npm tag)—commands, sessions, files, ports, tunnels, terminals, bridge, production, or deprecated-API cleanup while staying on stable. Not for @cloudflare/sandbox@next (use sandbox-next) or for porting to 1.0 (use sandbox-migrate-to-next).",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "sandbox",
+        "stable",
+        "use",
+        "cloudflare",
+        "next",
+        "building"
+      ],
+      "word_count": 843,
+      "hash": "a189c1a057de52aed0bfab0de39ff6a996d405142924c1bf93fb6bd37bae2357",
+      "id": "cloudflare/skills/sandbox-stable"
+    },
+    {
+      "name": "turnstile-spin",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/turnstile-spin/SKILL.md",
+      "description": "Set up Cloudflare Turnstile end-to-end in a project. Scan the codebase, create the widget via the Cloudflare API, embed it where user requests need bot verification (form submissions, SPA actions, API endpoints, download links, comment or vote submissions, etc.), wire canonical server-side siteverify in the customer's existing backend, validate, and persist the skill. Load this when a user asks to add Turnstile, set up CAPTCHA, protect a form or endpoint from bots, or fix a Turnstile integration. Mirrors developers.cloudflare.com/turnstile/spin.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "turnstile",
+        "spin",
+        "cloudflare",
+        "set",
+        "up",
+        "end",
+        "api"
+      ],
+      "word_count": 3443,
+      "hash": "54aceb6afb7fcefabcd6f19f23920187ffbccead8b72b6d68dd4c8bb38551379",
+      "id": "cloudflare/skills/turnstile-spin"
+    },
+    {
+      "name": "web-perf",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/web-perf/SKILL.md",
+      "description": "Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "web",
+        "perf",
+        "performance",
+        "speed",
+        "analyzes",
+        "using",
+        "chrome"
+      ],
+      "word_count": 1066,
+      "hash": "0bd435e13716f2be7ee39671f9e4609d244485579aad2dea25fe7bd616a95dcf",
+      "id": "cloudflare/skills/web-perf"
+    },
+    {
+      "name": "workers-best-practices",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/workers-best-practices/SKILL.md",
+      "description": "Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc, or checking for common Workers anti-patterns (streaming, floating promises, global state, secrets, bindings, observability). Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "workers",
+        "best",
+        "practices",
+        "cloudflare",
+        "code",
+        "reviews",
+        "authors",
+        "against"
+      ],
+      "word_count": 927,
+      "hash": "ff0b4ab69d8ebd3d76e34522feb97b4fed207303a81ef9db3e6d8c2a7a866b46",
+      "id": "cloudflare/skills/workers-best-practices"
+    },
+    {
+      "name": "wrangler",
+      "source": "cloudflare/skills",
+      "commit": "f96bff7",
+      "source_relative_path": "skills/wrangler/SKILL.md",
+      "description": "Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines, and Secrets Store. Load before running wrangler commands to ensure correct syntax and best practices. Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "wrangler",
+        "workers",
+        "cloudflare",
+        "cli",
+        "deploying",
+        "developing",
+        "managing"
+      ],
+      "word_count": 2419,
+      "hash": "afcd339e1bdcbf31a03cc577e33c3735650766b2b306aa53da14aa28afa4d381",
+      "id": "cloudflare/skills/wrangler"
+    },
+    {
+      "name": "ask-matt",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/ask-matt/SKILL.md",
+      "description": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "ask",
+        "matt",
+        "skill",
+        "flow",
+        "fits",
+        "situation",
+        "router"
+      ],
+      "word_count": 1778,
+      "hash": "bc024fcc2626d6f9571d40ce6ffdc1119ecaca674e2039e646cfef3c0b69c271",
+      "id": "mattpocock/skills/ask-matt"
+    },
+    {
+      "name": "claude-handoff",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/claude-handoff/SKILL.md",
+      "description": "Hand the current conversation off to a fresh background agent that picks up the work immediately.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "claude",
+        "handoff",
+        "hand",
+        "current",
+        "conversation",
+        "off",
+        "fresh",
+        "background"
+      ],
+      "word_count": 164,
+      "hash": "7f35aedff05b86f666214cba749098c10ef8384e0af2205eeffabecd708fcdf5",
+      "id": "mattpocock/skills/claude-handoff"
+    },
+    {
+      "name": "code-review",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/code-review/SKILL.md",
+      "description": "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\".",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "code",
+        "review",
+        "changes",
+        "since",
+        "branch",
+        "standards"
+      ],
+      "word_count": 1013,
+      "hash": "ec9625d8f441f8a708ec52f697fe13a3c3cf0a9254129a76e008b73c87bd0a04",
+      "id": "mattpocock/skills/code-review"
+    },
+    {
+      "name": "codebase-design",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/codebase-design/SKILL.md",
+      "description": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "codebase",
+        "design",
+        "vocabulary",
+        "deep",
+        "module",
+        "shared",
+        "designing",
+        "modules"
+      ],
+      "word_count": 820,
+      "hash": "7c8f03094e1e8fceb74865b802da0592ddfa8a9b2daaa921c46f59b47e47a0cf",
+      "id": "mattpocock/skills/codebase-design"
+    },
+    {
+      "name": "diagnosing-bugs",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "description": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "diagnosing",
+        "bugs",
+        "diagnosis",
+        "loop",
+        "hard",
+        "performance",
+        "regressions"
+      ],
+      "word_count": 1459,
+      "hash": "afd876c12ac8c9602d079d1539ce54058df4fc6c2de3f59852fc629cf403fd95",
+      "id": "mattpocock/skills/diagnosing-bugs"
+    },
+    {
+      "name": "domain-modeling",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/domain-modeling/SKILL.md",
+      "description": "Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "domain",
+        "modeling",
+        "model",
+        "build",
+        "sharpen",
+        "project",
+        "use"
+      ],
+      "word_count": 475,
+      "hash": "6e49118599619a407f89024b4fc6435883f13728c95707a32136eacf8fe887ca",
+      "id": "mattpocock/skills/domain-modeling"
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/misc/git-guardrails-claude-code/SKILL.md",
+      "description": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "git",
+        "guardrails",
+        "claude",
+        "code",
+        "hooks",
+        "block",
+        "push"
+      ],
+      "word_count": 257,
+      "hash": "5763611772eeae6d192fff50a3c94feba10a8ca36c096688f0654134c1503ef0",
+      "id": "mattpocock/skills/git-guardrails-claude-code"
+    },
+    {
+      "name": "grill-me",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/grill-me/SKILL.md",
+      "description": "A relentless interview to sharpen a plan or design.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "grill",
+        "relentless",
+        "interview",
+        "sharpen",
+        "plan",
+        "design"
+      ],
+      "word_count": 4,
+      "hash": "69698a24328741d985bacfbda0b656f4ef4fd4a410244720a8482af4660d571c",
+      "id": "mattpocock/skills/grill-me"
+    },
+    {
+      "name": "grill-with-docs",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/grill-with-docs/SKILL.md",
+      "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "grill",
+        "docs",
+        "relentless",
+        "interview",
+        "sharpen",
+        "plan",
+        "design",
+        "also"
+      ],
+      "word_count": 8,
+      "hash": "0e445978f13023581c4cda81d8b115388dfa38242b80a10d8e588a464d8162bd",
+      "id": "mattpocock/skills/grill-with-docs"
+    },
+    {
+      "name": "grilling",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/grilling/SKILL.md",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "grilling",
+        "grill",
+        "user",
+        "relentlessly",
+        "about",
+        "plan",
+        "decision"
+      ],
+      "word_count": 277,
+      "hash": "812f2dd2b34cfc19623efa8b713380324783c5fee65db7ee77066054f56da749",
+      "id": "mattpocock/skills/grilling"
+    },
+    {
+      "name": "handoff",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/handoff/SKILL.md",
+      "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "handoff",
+        "compact",
+        "current",
+        "conversation",
+        "into",
+        "document"
+      ],
+      "word_count": 104,
+      "hash": "db7c0bee351b5712f809f5f4a0a561748348ca852f07a870745560a41eb5fcc6",
+      "id": "mattpocock/skills/handoff"
+    },
+    {
+      "name": "implement",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/implement/SKILL.md",
+      "description": "Implement a piece of work based on a spec or set of tickets.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "implement",
+        "piece",
+        "work",
+        "based",
+        "spec",
+        "set"
+      ],
+      "word_count": 50,
+      "hash": "a554cb2567e97279ec125d87f334c54e7cc3cab2695df25ae1bcd19e3cfe0790",
+      "id": "mattpocock/skills/implement"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/improve-codebase-architecture/SKILL.md",
+      "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "improve",
+        "codebase",
+        "architecture",
+        "scan",
+        "deepening",
+        "opportunities",
+        "present",
+        "them"
+      ],
+      "word_count": 884,
+      "hash": "4c6e448eb2ec845564d06e5a674655bacaadc784bf04600f4846a3766976d884",
+      "id": "mattpocock/skills/improve-codebase-architecture"
+    },
+    {
+      "name": "loop-me",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/loop-me/SKILL.md",
+      "description": "Grill me about specs for the workflows I want to build, within this workspace.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "loop",
+        "grill",
+        "about",
+        "specs",
+        "workflows",
+        "want",
+        "build"
+      ],
+      "word_count": 396,
+      "hash": "6edc04e0060139006033fc1872c1a57c943d036d499a541cdc849a2ffd28b1f9",
+      "id": "mattpocock/skills/loop-me"
+    },
+    {
+      "name": "migrate-to-shoehorn",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/misc/migrate-to-shoehorn/SKILL.md",
+      "description": "Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "migrate",
+        "shoehorn",
+        "test",
+        "files",
+        "type",
+        "assertions"
+      ],
+      "word_count": 385,
+      "hash": "376f621668b9f4e77dc8404dc6632e087cdbe8a6906230a58c3ae729418ba6a7",
+      "id": "mattpocock/skills/migrate-to-shoehorn"
+    },
+    {
+      "name": "prototype",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/prototype/SKILL.md",
+      "description": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "prototype",
+        "build",
+        "throwaway",
+        "answer",
+        "design",
+        "question"
+      ],
+      "word_count": 458,
+      "hash": "815c736092b923f41ede980e264497d70737fa7b07509051e142f8b18d60161a",
+      "id": "mattpocock/skills/prototype"
+    },
+    {
+      "name": "research",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/research/SKILL.md",
+      "description": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "research",
+        "investigate",
+        "question",
+        "against",
+        "high",
+        "trust",
+        "primary"
+      ],
+      "word_count": 89,
+      "hash": "24cb65267a1843d108622609ac6b623d024a80d12de62fe0a22a90b17d7c78f0",
+      "id": "mattpocock/skills/research"
+    },
+    {
+      "name": "resolving-merge-conflicts",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/resolving-merge-conflicts/SKILL.md",
+      "description": "Use when you need to resolve an in-progress git merge/rebase conflict.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "resolving",
+        "merge",
+        "conflicts",
+        "use",
+        "need",
+        "resolve",
+        "progress",
+        "git"
+      ],
+      "word_count": 118,
+      "hash": "d520ac6919dd38c7ab9bd97cdd7cd4d8da649f34e2fb64a5bf8eab95f119263c",
+      "id": "mattpocock/skills/resolving-merge-conflicts"
+    },
+    {
+      "name": "scaffold-exercises",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/misc/scaffold-exercises/SKILL.md",
+      "description": "Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "scaffold",
+        "exercises",
+        "create",
+        "exercise",
+        "directory",
+        "structures",
+        "sections",
+        "problems"
+      ],
+      "word_count": 407,
+      "hash": "8e839488b9872f19c58cf7d4ca620c415eca75927ae91e8f04cd76b8c36f4da2",
+      "id": "mattpocock/skills/scaffold-exercises"
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "description": "Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "setup",
+        "matt",
+        "pocock",
+        "skills",
+        "engineering",
+        "configure",
+        "repo",
+        "set",
+        "up"
+      ],
+      "word_count": 1001,
+      "hash": "ebd97c900b4b58b4551d53ca595dfee61c993acfd53e58187d455cceee58bd4c",
+      "id": "mattpocock/skills/setup-matt-pocock-skills"
+    },
+    {
+      "name": "setup-pre-commit",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/misc/setup-pre-commit/SKILL.md",
+      "description": "Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "setup",
+        "pre",
+        "commit",
+        "set",
+        "up",
+        "husky",
+        "hooks"
+      ],
+      "word_count": 295,
+      "hash": "788f37a34aa3fe70604cd73268a00588725afe5f47f24f67711fcd5129047e85",
+      "id": "mattpocock/skills/setup-pre-commit"
+    },
+    {
+      "name": "setup-ts-deep-modules",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
+      "description": "Wire dependency-cruiser into a TypeScript repo so each package is a deep module — implementation hidden in subfolders, reachable only through its entry-point files. User-invoked.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "setup",
+        "ts",
+        "deep",
+        "modules",
+        "wire",
+        "dependency",
+        "cruiser",
+        "into",
+        "typescript",
+        "repo"
+      ],
+      "word_count": 1099,
+      "hash": "973a9c88ab6e6130ee7402849918ddfe1895c66c37679a2e8d251158a8d75062",
+      "id": "mattpocock/skills/setup-ts-deep-modules"
+    },
+    {
+      "name": "tdd",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/tdd/SKILL.md",
+      "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "tdd",
+        "test",
+        "wants",
+        "driven",
+        "development",
+        "use",
+        "user"
+      ],
+      "word_count": 542,
+      "hash": "836573c4225577d98378c2b6eb501593cc2521080b9f3564be2dc1a666b95920",
+      "id": "mattpocock/skills/tdd"
+    },
+    {
+      "name": "teach",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/teach/SKILL.md",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "teach",
+        "user",
+        "new",
+        "skill",
+        "concept",
+        "within"
+      ],
+      "word_count": 1464,
+      "hash": "7ac488b9edb252ab8169ca87ab9015677f9fb8f7c3521e81808e726a63765b4c",
+      "id": "mattpocock/skills/teach"
+    },
+    {
+      "name": "to-questionnaire",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/to-questionnaire/SKILL.md",
+      "description": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "questionnaire",
+        "turn",
+        "decision",
+        "fully",
+        "answer",
+        "into"
+      ],
+      "word_count": 454,
+      "hash": "85ef07ac995cbf3c32e0db3f7ca8ec926adff2956209565461cd307f4dd47498",
+      "id": "mattpocock/skills/to-questionnaire"
+    },
+    {
+      "name": "to-spec",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/to-spec/SKILL.md",
+      "description": "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "spec",
+        "turn",
+        "current",
+        "conversation",
+        "into",
+        "publish"
+      ],
+      "word_count": 461,
+      "hash": "a2ef4cce28dab834923f914338bec06abd7951c57b7e81dff76a85cf52fd1033",
+      "id": "mattpocock/skills/to-spec"
+    },
+    {
+      "name": "to-tickets",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/to-tickets/SKILL.md",
+      "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "tickets",
+        "blocking",
+        "edges",
+        "tracker",
+        "break",
+        "plan",
+        "spec"
+      ],
+      "word_count": 860,
+      "hash": "4e4fa315645b17bba642e91622fd100f3834029890f052ace370b64e1cdb10bf",
+      "id": "mattpocock/skills/to-tickets"
+    },
+    {
+      "name": "triage",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/triage/SKILL.md",
+      "description": "Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "triage",
+        "move",
+        "issues",
+        "external",
+        "prs",
+        "through",
+        "state"
+      ],
+      "word_count": 976,
+      "hash": "e757270e218845d27a190bbd198a2ce46e825eff63dfeac031043ff23eb8ce87",
+      "id": "mattpocock/skills/triage"
+    },
+    {
+      "name": "wait-what",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/wait-what/SKILL.md",
+      "description": "Stop. That last message did not land — re-pitch it.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "wait",
+        "stop",
+        "last",
+        "message",
+        "did",
+        "not",
+        "land"
+      ],
+      "word_count": 32,
+      "hash": "789e8a4080c53e01cfd0ac18aed36443b5d715fa9b4c31915a9954c6782acc06",
+      "id": "mattpocock/skills/wait-what"
+    },
+    {
+      "name": "wayfinder",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/wayfinder/SKILL.md",
+      "description": "Plan a huge chunk of work — more than one agent session can hold — as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "wayfinder",
+        "one",
+        "plan",
+        "huge",
+        "chunk",
+        "work",
+        "more"
+      ],
+      "word_count": 1971,
+      "hash": "d13834a052804c9465c5a422585df99ee2664ec6940beb2ae1d961fd06ff4aff",
+      "id": "mattpocock/skills/wayfinder"
+    },
+    {
+      "name": "wizard",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/engineering/wizard/SKILL.md",
+      "description": "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "wizard",
+        "steps",
+        "perform",
+        "generate",
+        "interactive",
+        "bash"
+      ],
+      "word_count": 634,
+      "hash": "80b3ff1ed1f393c1e1f63de3be0ac9cbb00de20f16cafef3d8b2c58fd16d348c",
+      "id": "mattpocock/skills/wizard"
+    },
+    {
+      "name": "writing-beats",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/writing-beats/SKILL.md",
+      "description": "Writing, exploit — assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "writing",
+        "beats",
+        "exploit",
+        "assemble",
+        "raw",
+        "material",
+        "into"
+      ],
+      "word_count": 842,
+      "hash": "7591f831d7ff250d117b383ccea23b4fdb310ead5f4ebac9b62a9837ff7732c0",
+      "id": "mattpocock/skills/writing-beats"
+    },
+    {
+      "name": "writing-for-agents",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/productivity/writing-for-agents/SKILL.md",
+      "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "writing",
+        "agents",
+        "md",
+        "documents",
+        "use",
+        "creating"
+      ],
+      "word_count": 1786,
+      "hash": "9319af75b1b57fd730c31a149162b0798844bc4f96f895b68aa25e10a43be9ce",
+      "id": "mattpocock/skills/writing-for-agents"
+    },
+    {
+      "name": "writing-fragments",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/writing-fragments/SKILL.md",
+      "description": "Writing, explore — mine raw fragments, no structure yet.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "writing",
+        "fragments",
+        "explore",
+        "mine",
+        "raw",
+        "no"
+      ],
+      "word_count": 587,
+      "hash": "ba6a1c9606a4c3820201be1a7922b8967ae2504b7d70ecaefaba7e13a19aa1a3",
+      "id": "mattpocock/skills/writing-fragments"
+    },
+    {
+      "name": "writing-shape",
+      "source": "mattpocock/skills",
+      "commit": "84fdeff",
+      "source_relative_path": "skills/in-progress/writing-shape/SKILL.md",
+      "description": "Writing, exploit — shape raw material into an article, paragraph by paragraph.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "writing",
+        "shape",
+        "paragraph",
+        "exploit",
+        "raw",
+        "material"
+      ],
+      "word_count": 1024,
+      "hash": "10339105b9bced9d2a5c05f8225a4842b8791e8b3a128dfe9d3bdebc62f6f6b6",
+      "id": "mattpocock/skills/writing-shape"
+    },
+    {
+      "name": "aspnet-core",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/aspnet-core/SKILL.md",
+      "description": "Build, review, refactor, or architect ASP.NET Core web applications using current official guidance for .NET web development. Use when working on Blazor Web Apps, Razor Pages, MVC, Minimal APIs, controller-based Web APIs, SignalR, gRPC, middleware, dependency injection, configuration, authentication, authorization, testing, performance, deployment, or ASP.NET Core upgrades.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "aspnet",
+        "core",
+        "web",
+        "net",
+        "asp",
+        "apis",
+        "build"
+      ],
+      "word_count": 521,
+      "hash": "e5c03ba802f5181c5cb9f917e6ce2403232a47e3aa6eec3e1412640a534f4a5f",
+      "id": "openai/skills/aspnet-core"
+    },
+    {
+      "name": "chatgpt-apps",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/chatgpt-apps/SKILL.md",
+      "description": "Build, scaffold, refactor, and troubleshoot ChatGPT Apps SDK applications that combine an MCP server and widget UI. Use when Codex needs to design tools, register UI resources, wire the MCP Apps bridge or ChatGPT compatibility APIs, apply Apps SDK metadata or CSP or domain settings, or produce a docs-aligned project scaffold. Prefer a docs-first workflow by invoking the openai-docs skill or OpenAI developer docs MCP tools before generating code.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "chatgpt",
+        "apps",
+        "docs",
+        "mcp",
+        "scaffold",
+        "sdk"
+      ],
+      "word_count": 2632,
+      "hash": "0425b62819c58755ca50611dc7ca78508a7b8c3ac9acc83a0ba2aea06ef290cf",
+      "id": "openai/skills/chatgpt-apps"
+    },
+    {
+      "name": "cli-creator",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/cli-creator/SKILL.md",
+      "description": "Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose composable read/write commands, return stable JSON, manage auth, and pair with a companion skill.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cli",
+        "creator",
+        "composable",
+        "codex",
+        "tool",
+        "build",
+        "api"
+      ],
+      "word_count": 1523,
+      "hash": "e91d43070de196613f8002c05c8674db77fa2f7de0fc0aa23e7fa6bcd3311bd4",
+      "id": "openai/skills/cli-creator"
+    },
+    {
+      "name": "cloudflare-deploy",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/cloudflare-deploy/SKILL.md",
+      "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "cloudflare",
+        "deploy",
+        "applications",
+        "infrastructure",
+        "using",
+        "workers"
+      ],
+      "word_count": 938,
+      "hash": "ef4095d3fa32dc67e2de29f9f3ec90c83095f37c187f3c85e55cf96913f7e73e",
+      "id": "openai/skills/cloudflare-deploy"
+    },
+    {
+      "name": "define-goal",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/define-goal/SKILL.md",
+      "description": "Help the user define a concrete, measurable goal before starting work, especially when they ask to use the goal tool, create a goal, set an objective, clarify success criteria, or turn a fuzzy intention into a quantitative outcome. Use this skill for goal creation and goal refinement only; it does not manage durable snapshots, decision logs, or long-running execution artifacts.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "define",
+        "goal",
+        "use",
+        "help",
+        "user",
+        "concrete"
+      ],
+      "word_count": 805,
+      "hash": "1e265dc019296d7c3b7dc8b1f6847b0505f0d8254c390d727192ec8c58abbe9d",
+      "id": "openai/skills/define-goal"
+    },
+    {
+      "name": "figma",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma/SKILL.md",
+      "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "mcp",
+        "design",
+        "code",
+        "use",
+        "server"
+      ],
+      "word_count": 427,
+      "hash": "ec4acb3fbb8ad8a3db71b8b067e5d145471fd6953cbd320f77778380fcdddb8e",
+      "id": "openai/skills/figma"
+    },
+    {
+      "name": "figma-code-connect-components",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-code-connect-components/SKILL.md",
+      "description": "Connects Figma design components to code components using Code Connect mapping tools. Use when user says \"code connect\", \"connect this component to code\", \"map this component\", \"link component to code\", \"create code connect mapping\", or wants to establish mappings between Figma designs and code implementations. For canvas writes via `use_figma`, use `figma-use`.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "code",
+        "connect",
+        "components",
+        "use",
+        "component"
+      ],
+      "word_count": 2174,
+      "hash": "1918903409cc72b8e6a92281217bcf0f0fa3c3dac7e2ca4a1216716facf34802",
+      "id": "openai/skills/figma-code-connect-components"
+    },
+    {
+      "name": "figma-create-design-system-rules",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-create-design-system-rules/SKILL.md",
+      "description": "Generates custom design system rules for the user's codebase. Use when user says \"create design system rules\", \"generate rules for my project\", \"set up design rules\", \"customize design system guidelines\", or wants to establish project-specific conventions for Figma-to-code workflows. Requires Figma MCP server connection.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "create",
+        "design",
+        "system",
+        "rules",
+        "user",
+        "project"
+      ],
+      "word_count": 2499,
+      "hash": "8daa42b7db8912acfdfb33fa7c2e5f60e12feda8214d687bfd547f6ab668a022",
+      "id": "openai/skills/figma-create-design-system-rules"
+    },
+    {
+      "name": "figma-create-new-file",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-create-new-file/SKILL.md",
+      "description": "Create a new blank Figma file. Use when the user wants to create a new Figma design or FigJam file, or when you need a new file before calling use_figma. Handles plan resolution via whoami if needed. Usage — /figma-create-new-file [editorType] [fileName] (e.g. /figma-create-new-file figjam My Whiteboard)",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "create",
+        "new",
+        "file",
+        "use",
+        "figjam"
+      ],
+      "word_count": 368,
+      "hash": "d9f3d154e7b24887034db13fb1c2e869062f95af7a632cc6ab1f5934e6bc3327",
+      "id": "openai/skills/figma-create-new-file"
+    },
+    {
+      "name": "figma-generate-design",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-generate-design/SKILL.md",
+      "description": "Use this skill alongside figma-use when the task involves translating an application page, view, or multi-section layout into Figma. Triggers: 'write to Figma', 'create in Figma from code', 'push page to Figma', 'take this app/page and build it in Figma', 'create a screen', 'build a landing page in Figma', 'update the Figma screen to match code'. This is the preferred workflow skill whenever the user wants to build or update a full page, screen, or view in Figma from code or a description. Discovers design system components, variables, and styles via search_design_system, imports them, and assembles screens incrementally section-by-section using design system tokens instead of hardcoded values.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "generate",
+        "design",
+        "page",
+        "section",
+        "code",
+        "build",
+        "screen"
+      ],
+      "word_count": 2513,
+      "hash": "053b777e8f2528f4b11b6057204b955276eafb3d71c9e688ab8aa31d6e0ea923",
+      "id": "openai/skills/figma-generate-design"
+    },
+    {
+      "name": "figma-generate-library",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-generate-library/SKILL.md",
+      "description": "Build or update a professional-grade design system in Figma from a codebase. Use when the user wants to create variables/tokens, build component libraries, set up theming (light/dark modes), document foundations, or reconcile gaps between code and Figma. This skill teaches WHAT to build and in WHAT ORDER — it complements the `figma-use` skill which teaches HOW to call the Plugin API. Both skills should be loaded together.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "generate",
+        "library",
+        "build",
+        "use",
+        "skill",
+        "teaches",
+        "update"
+      ],
+      "word_count": 2346,
+      "hash": "354b7074852f5169f195ff1b0ddae68f8d46e00f394bad605c559bab78ccb207",
+      "id": "openai/skills/figma-generate-library"
+    },
+    {
+      "name": "figma-implement-design",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-implement-design/SKILL.md",
+      "description": "Translates Figma designs into production-ready application code with 1:1 visual fidelity. Use when implementing UI code from Figma files, when user mentions \"implement design\", \"generate code\", \"implement component\", provides Figma URLs, or asks to build components matching Figma specs. For Figma canvas writes via `use_figma`, use `figma-use`.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "implement",
+        "design",
+        "use",
+        "code",
+        "translates",
+        "designs"
+      ],
+      "word_count": 1516,
+      "hash": "8f773de3377ee3a059ce84a6aae8b36121864b208e225d133373421944e850c5",
+      "id": "openai/skills/figma-implement-design"
+    },
+    {
+      "name": "figma-use",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/figma-use/SKILL.md",
+      "description": "**MANDATORY prerequisite** — you MUST invoke this skill BEFORE every `use_figma` tool call. NEVER call `use_figma` directly without loading this skill first. Skipping it causes common, hard-to-debug failures. Trigger whenever the user wants to perform a write action or a unique read action that requires JavaScript execution in the Figma file context — e.g. create/edit/delete nodes, set up variables or tokens, build components and variants, modify auto-layout or fills, bind variables to properties, or inspect file structure programmatically.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "figma",
+        "use",
+        "skill",
+        "call",
+        "action",
+        "file"
+      ],
+      "word_count": 2404,
+      "hash": "56f1e1580fce7ee311ade54ef148fc61de9e77836b5011aacb52c60d78aeed5f",
+      "id": "openai/skills/figma-use"
+    },
+    {
+      "name": "gh-address-comments",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/gh-address-comments/SKILL.md",
+      "description": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+      "license": "",
+      "metadata": {
+        "short-description": "Address comments in a GitHub PR review"
+      },
+      "keywords": [
+        "gh",
+        "address",
+        "comments",
+        "help",
+        "review",
+        "issue"
+      ],
+      "word_count": 161,
+      "hash": "760c50276d5ad1ecfa32b529aa43fa4e31e79400ec18c39ee9f83904e146ad24",
+      "id": "openai/skills/gh-address-comments"
+    },
+    {
+      "name": "gh-fix-ci",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/gh-fix-ci/SKILL.md",
+      "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "gh",
+        "fix",
+        "ci",
+        "use",
+        "github",
+        "checks",
+        "only",
+        "user"
+      ],
+      "word_count": 468,
+      "hash": "71839b20716b65aade278a3f7845aba2a0b1688304ea4bd94187045cfc183f0d",
+      "id": "openai/skills/gh-fix-ci"
+    },
+    {
+      "name": "hatch-pet",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/hatch-pet/SKILL.md",
+      "description": "Create, repair, validate, visually QA, and package Codex-compatible animated pets and pet spritesheets from character art, generated images, company or prospect brand cues, or visual references. Use when a user wants a lightweight-worker Codex pet workflow, a non-pixel custom pet style, a prospect or company mascot pet, or a full 8x9 animated pet atlas with transparent unused cells, QA contact sheets, and pet.json packaging. This skill composes the installed $imagegen system skill for visual generation and uses bundled scripts for deterministic spritesheet assembly.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "hatch",
+        "pet",
+        "qa",
+        "codex",
+        "animated",
+        "company",
+        "prospect"
+      ],
+      "word_count": 4940,
+      "hash": "56df8e3b1bbea225fa4327b7b2d609226aa30a3c3d5a6b97b63d35d72beac321",
+      "id": "openai/skills/hatch-pet"
+    },
+    {
+      "name": "imagegen",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.system/imagegen/SKILL.md",
+      "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "imagegen",
+        "task",
+        "bitmap",
+        "use",
+        "should",
+        "image",
+        "existing"
+      ],
+      "word_count": 2252,
+      "hash": "290da71b51be04e73673c08f38490d560f30016a5257d16695f95deb6dc9ec7f",
+      "id": "openai/skills/imagegen"
+    },
+    {
+      "name": "jupyter-notebook",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/jupyter-notebook/SKILL.md",
+      "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "jupyter",
+        "notebook",
+        "use",
+        "user",
+        "asks",
+        "create",
+        "scaffold"
+      ],
+      "word_count": 482,
+      "hash": "75cebd9c9650d2385b557963f86f0af6b0b0b9f24a7068f274785813e82229bf",
+      "id": "openai/skills/jupyter-notebook"
+    },
+    {
+      "name": "linear",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/linear/SKILL.md",
+      "description": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
+      "license": "",
+      "metadata": {
+        "short-description": "Manage Linear issues in Codex"
+      },
+      "keywords": [
+        "linear",
+        "manage",
+        "issues",
+        "projects",
+        "team",
+        "workflows"
+      ],
+      "word_count": 666,
+      "hash": "d37a6c7f858c09671dc2d8d35e33f58e5e7e0fb697606f1e327f7f83e2c10708",
+      "id": "openai/skills/linear"
+    },
+    {
+      "name": "migrate-to-codex",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/migrate-to-codex/SKILL.md",
+      "description": "Migrate supported instruction files, skills, agents, and MCP config into Codex project and global files.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "migrate",
+        "codex",
+        "files",
+        "supported",
+        "instruction",
+        "skills",
+        "agents"
+      ],
+      "word_count": 1060,
+      "hash": "b1deb4032c0c7ab63adf1c14932f911675f8a1be3e092ae444b50497a15078cf",
+      "id": "openai/skills/migrate-to-codex"
+    },
+    {
+      "name": "netlify-deploy",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/netlify-deploy/SKILL.md",
+      "description": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "netlify",
+        "deploy",
+        "web",
+        "projects",
+        "using",
+        "cli"
+      ],
+      "word_count": 950,
+      "hash": "461b6d6192bf04338c259723d8edbab1a845e9be4abf16395c01943d856d8169",
+      "id": "openai/skills/netlify-deploy"
+    },
+    {
+      "name": "notion-knowledge-capture",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/notion-knowledge-capture/SKILL.md",
+      "description": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
+      "license": "",
+      "metadata": {
+        "short-description": "Capture conversations into structured Notion pages"
+      },
+      "keywords": [
+        "notion",
+        "knowledge",
+        "capture",
+        "decisions",
+        "into",
+        "conversations",
+        "structured"
+      ],
+      "word_count": 409,
+      "hash": "ec97385e9a8545319c47cd14cd6665951d149f432cc8d5ce66b39ef6ff961564",
+      "id": "openai/skills/notion-knowledge-capture"
+    },
+    {
+      "name": "notion-meeting-intelligence",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/notion-meeting-intelligence/SKILL.md",
+      "description": "Prepare meeting materials with Notion context and Codex research; use when gathering context, drafting agendas/pre-reads, and tailoring materials to attendees.",
+      "license": "",
+      "metadata": {
+        "short-description": "Prep meetings with Notion context and tailored agendas"
+      },
+      "keywords": [
+        "notion",
+        "meeting",
+        "intelligence",
+        "materials",
+        "context",
+        "prepare",
+        "codex"
+      ],
+      "word_count": 406,
+      "hash": "8ce1f32ae7aea1a7923fc04ad9b0a93d6ee1b29a983a459a1d2873cb2f26a5a5",
+      "id": "openai/skills/notion-meeting-intelligence"
+    },
+    {
+      "name": "notion-research-documentation",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/notion-research-documentation/SKILL.md",
+      "description": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
+      "license": "",
+      "metadata": {
+        "short-description": "Research Notion content and produce briefs/reports"
+      },
+      "keywords": [
+        "notion",
+        "research",
+        "documentation",
+        "across",
+        "synthesize",
+        "into",
+        "structured"
+      ],
+      "word_count": 419,
+      "hash": "7790fbeec6806ebbdcac93acdc52c32011174b38efd0e57fa7727af8672fbafb",
+      "id": "openai/skills/notion-research-documentation"
+    },
+    {
+      "name": "notion-spec-to-implementation",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/notion-spec-to-implementation/SKILL.md",
+      "description": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
+      "license": "",
+      "metadata": {
+        "short-description": "Turn Notion specs into implementation plans, tasks, and progress tracking"
+      },
+      "keywords": [
+        "notion",
+        "spec",
+        "implementation",
+        "specs",
+        "plans",
+        "tasks",
+        "turn",
+        "into"
+      ],
+      "word_count": 409,
+      "hash": "d5bfe739eccc7104aa384e314adfc3e213456b0fa3c0f2a714a5a2371e5b9ca6",
+      "id": "openai/skills/notion-spec-to-implementation"
+    },
+    {
+      "name": "openai-docs",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/openai-docs/SKILL.md",
+      "description": "Use when the user asks how to build with OpenAI products or APIs, asks about Codex itself or choosing Codex surfaces, needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade and prompt-upgrade guidance; use OpenAI docs MCP tools for non-Codex docs questions, use the Codex manual helper first for broad Codex self-knowledge, and restrict fallback browsing to official OpenAI domains.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "openai",
+        "docs",
+        "codex",
+        "use",
+        "asks",
+        "choosing",
+        "official"
+      ],
+      "word_count": 2480,
+      "hash": "ff7ab5591203ca3eae38a09588eefe387a5006ac161b54cda47ca691b11667f9",
+      "id": "openai/skills/openai-docs"
+    },
+    {
+      "name": "openai-docs-skills--system-openai-docs",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.system/openai-docs/SKILL.md",
+      "description": "Use when the user asks how to build with OpenAI products or APIs, asks about Codex itself or choosing Codex surfaces, needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade and prompt-upgrade guidance; use OpenAI docs MCP tools for non-Codex docs questions, use the Codex manual helper first for broad Codex self-knowledge, and restrict fallback browsing to official OpenAI domains.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "openai",
+        "docs",
+        "skills",
+        "system",
+        "codex",
+        "use",
+        "asks",
+        "choosing",
+        "official"
+      ],
+      "word_count": 2543,
+      "hash": "1be9eeda42711d9736b586321827155cb9247e42553758a09585b14f659397a2",
+      "id": "openai/skills/openai-docs-skills--system-openai-docs"
+    },
+    {
+      "name": "pdf",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/pdf/SKILL.md",
+      "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "pdf",
+        "use",
+        "rendering",
+        "tasks",
+        "involve",
+        "reading",
+        "creating"
+      ],
+      "word_count": 332,
+      "hash": "9e1fcbf830298d0a482d212ba1650816382f2623f0fe3f62a11d66a0adce9138",
+      "id": "openai/skills/pdf"
+    },
+    {
+      "name": "playwright",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/playwright/SKILL.md",
+      "description": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "playwright",
+        "use",
+        "task",
+        "requires",
+        "automating",
+        "real",
+        "browser"
+      ],
+      "word_count": 489,
+      "hash": "05ea236fddc77da02998ca83b505d36dda1cf1f4a9fecc5ed8daf7e6fca2a2f1",
+      "id": "openai/skills/playwright"
+    },
+    {
+      "name": "playwright-interactive",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/playwright-interactive/SKILL.md",
+      "description": "Persistent browser and Electron interaction through `js_repl` for fast iterative UI debugging.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "playwright",
+        "interactive",
+        "persistent",
+        "browser",
+        "electron",
+        "interaction",
+        "through",
+        "js"
+      ],
+      "word_count": 4371,
+      "hash": "8aa959a45c4418dafbecdd9d95fac0be96e613d132aefd3850f7b35441c92831",
+      "id": "openai/skills/playwright-interactive"
+    },
+    {
+      "name": "plugin-creator",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.system/plugin-creator/SKILL.md",
+      "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, and baseline placeholders you can edit before publishing or testing. Use when Codex needs to create a new local plugin, add optional plugin structure, or generate or update repo-root `.agents/plugins/marketplace.json` entries for plugin ordering and availability metadata.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "plugin",
+        "creator",
+        "codex",
+        "create",
+        "json",
+        "optional",
+        "scaffold"
+      ],
+      "word_count": 697,
+      "hash": "1a589f17d0ecb5c2dbb566e77797d829e974834db7b543dcea2f07281fb857d0",
+      "id": "openai/skills/plugin-creator"
+    },
+    {
+      "name": "render-deploy",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/render-deploy/SKILL.md",
+      "description": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "render",
+        "deploy",
+        "applications",
+        "analyzing",
+        "codebases",
+        "generating"
+      ],
+      "word_count": 2406,
+      "hash": "458b1b739564ddfa68c7e7c986c65391c028ad6e389c221d9de68c17d3e0da76",
+      "id": "openai/skills/render-deploy"
+    },
+    {
+      "name": "screenshot",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/screenshot/SKILL.md",
+      "description": "Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "screenshot",
+        "specific",
+        "capture",
+        "use",
+        "user",
+        "explicitly",
+        "asks"
+      ],
+      "word_count": 943,
+      "hash": "4c7b7a4ad1843d71b60f39736234f0b72f7ad3f3ce65119214390c4d0afa28f8",
+      "id": "openai/skills/screenshot"
+    },
+    {
+      "name": "security-best-practices",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/security-best-practices/SKILL.md",
+      "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "security",
+        "best",
+        "practices",
+        "trigger",
+        "only",
+        "review",
+        "perform"
+      ],
+      "word_count": 1378,
+      "hash": "c897c024ed23b49346224580e1c4dfd9ef428966cbf9aca387f598bcd5bb8992",
+      "id": "openai/skills/security-best-practices"
+    },
+    {
+      "name": "security-ownership-map",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/security-ownership-map/SKILL.md",
+      "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "security",
+        "ownership",
+        "map",
+        "sensitive",
+        "git",
+        "bus",
+        "factor"
+      ],
+      "word_count": 858,
+      "hash": "1bdc4e40e851aa5b61277fa58bb06a74713868848470acd0561847d2f2960d97",
+      "id": "openai/skills/security-ownership-map"
+    },
+    {
+      "name": "security-threat-model",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/security-threat-model/SKILL.md",
+      "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "security",
+        "threat",
+        "model",
+        "modeling",
+        "abuse",
+        "paths",
+        "trigger"
+      ],
+      "word_count": 702,
+      "hash": "f54ff21c5cd11816b101a506f2a175078ce7bc84f2b522ce17a1bffb4f550fe7",
+      "id": "openai/skills/security-threat-model"
+    },
+    {
+      "name": "sentry",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/sentry/SKILL.md",
+      "description": "Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry CLI; perform read-only queries using the `sentry` command.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "sentry",
+        "use",
+        "user",
+        "asks",
+        "inspect",
+        "issues"
+      ],
+      "word_count": 511,
+      "hash": "7cd7585c68d2872a00f78efbfc3b1cc26f1db45a62ac8542a4853502736cfc14",
+      "id": "openai/skills/sentry"
+    },
+    {
+      "name": "skill-creator",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.system/skill-creator/SKILL.md",
+      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.",
+      "license": "",
+      "metadata": {
+        "short-description": "Create or update a skill"
+      },
+      "keywords": [
+        "skill",
+        "creator",
+        "guide",
+        "creating",
+        "effective",
+        "skills",
+        "should"
+      ],
+      "word_count": 2566,
+      "hash": "cfd18ee1d324be10e13af178f2fa52d5db1b0eba7556e74160e842d8a4b7da49",
+      "id": "openai/skills/skill-creator"
+    },
+    {
+      "name": "skill-installer",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.system/skill-installer/SKILL.md",
+      "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+      "license": "",
+      "metadata": {
+        "short-description": "Install curated skills from openai/skills or other repos"
+      },
+      "keywords": [
+        "skill",
+        "installer",
+        "install",
+        "skills",
+        "codex",
+        "curated",
+        "list",
+        "repo"
+      ],
+      "word_count": 379,
+      "hash": "db3e315ec697436eb3b07ed6427ee830409cc47bcdb731033912e429c17eed2a",
+      "id": "openai/skills/skill-installer"
+    },
+    {
+      "name": "speech",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/speech/SKILL.md",
+      "description": "Use when the user asks for text-to-speech narration or voiceover, accessibility reads, audio prompts, or batch speech generation via the OpenAI Audio API; run the bundled CLI (`scripts/text_to_speech.py`) with built-in voices and require `OPENAI_API_KEY` for live calls. Custom voice creation is out of scope.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "speech",
+        "text",
+        "audio",
+        "openai",
+        "api",
+        "use"
+      ],
+      "word_count": 957,
+      "hash": "c7a4fa0c7a98fe260d2d8a2d819c8f8a63f095d49fd11542e7e8d90189623a59",
+      "id": "openai/skills/speech"
+    },
+    {
+      "name": "transcribe",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/transcribe/SKILL.md",
+      "description": "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from recordings, or label speakers in interviews or meetings.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "transcribe",
+        "audio",
+        "text",
+        "files",
+        "optional",
+        "diarization"
+      ],
+      "word_count": 333,
+      "hash": "f7729e8ece05c9432be3ee9beb3407213dffde16fc1250f41c7de6f80d66e576",
+      "id": "openai/skills/transcribe"
+    },
+    {
+      "name": "vercel-deploy",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/vercel-deploy/SKILL.md",
+      "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "vercel",
+        "deploy",
+        "deployment",
+        "applications",
+        "websites",
+        "use"
+      ],
+      "word_count": 344,
+      "hash": "7a840c54e4e6f94999a5bcd1ce4030d1d84daef49891acf75b670bb134e81c39",
+      "id": "openai/skills/vercel-deploy"
+    },
+    {
+      "name": "winui-app",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/winui-app/SKILL.md",
+      "description": "Bootstrap, develop, and design modern WinUI 3 desktop applications with C# and the Windows App SDK using official Microsoft guidance, WinUI Gallery patterns, Windows App SDK samples, and CommunityToolkit components. Use when creating a brand new app, preparing a machine for WinUI, reviewing, refactoring, planning, troubleshooting, environment-checking, or setting up WinUI 3 XAML, controls, navigation, windowing, theming, accessibility, responsiveness, performance, deployment, or related Windows app design and development work.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "winui",
+        "app",
+        "windows",
+        "design",
+        "sdk",
+        "bootstrap"
+      ],
+      "word_count": 1498,
+      "hash": "f00911b6d5128b0e9bc3623d787c478213fc4fe24f71ffb6c0dd074638812d4d",
+      "id": "openai/skills/winui-app"
+    },
+    {
+      "name": "yeet",
+      "source": "openai/skills",
+      "commit": "49f948f",
+      "source_relative_path": "skills/.curated/yeet/SKILL.md",
+      "description": "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "yeet",
+        "github",
+        "use",
+        "only",
+        "user",
+        "explicitly",
+        "asks"
+      ],
+      "word_count": 1061,
+      "hash": "01c87cd5882828315877f0c59c3c435987159ebb424258b830d9a3410bab219e",
+      "id": "openai/skills/yeet"
+    },
+    {
+      "name": "supabase",
+      "source": "supabase/agent-skills",
+      "commit": "1207767",
+      "source_relative_path": "skills/supabase/SKILL.md",
+      "description": "Use when doing ANY task involving Supabase. Triggers: Supabase products (Database, Auth, Edge Functions, Realtime, Storage, Vectors, Cron, Queues); client libraries and SSR integrations (supabase-js, @supabase/ssr) in Next.js, React, SvelteKit, Astro, Remix; auth issues (login, logout, sessions, JWT, cookies, getSession, getUser, getClaims, RLS); Supabase CLI or MCP server; schema changes, migrations, declarative schemas, security audits, Postgres extensions (pg_graphql, pg_cron, pg_vector).",
+      "license": "",
+      "metadata": {
+        "author": "supabase",
+        "version": "0.1.2"
+      },
+      "keywords": [
+        "supabase",
+        "pg",
+        "auth",
+        "cron",
+        "ssr",
+        "js"
+      ],
+      "word_count": 1591,
+      "hash": "f36317d5519206623728cf4d9f6b96bb8f7e787789bbb010bc9904b19441aa93",
+      "id": "supabase/agent-skills/supabase"
+    },
+    {
+      "name": "supabase-postgres-best-practices",
+      "source": "supabase/agent-skills",
+      "commit": "1207767",
+      "source_relative_path": "skills/supabase-postgres-best-practices/SKILL.md",
+      "description": "Postgres best practices maintained by Supabase, for Postgres running anywhere. Load this skill BEFORE writing or changing anything that lives in a Postgres database: creating or altering tables and columns (including choosing column types), schema design, migrations and declarative schema files, RLS policies and the tests that verify them, indexes, triggers, database functions, queues and scheduled jobs (pg_cron, pgmq), vector/semantic search (pgvector), and restoring dumps (pg_restore) or importing data. Also load it when diagnosing slow queries, high CPU, timeouts, EXPLAIN plans, connection exhaustion, locking, bloat, or rows visible to the wrong user or tenant. This is not just a performance guide — schema, migration, security, and SQL authoring tasks need these rules too, even for a one-column change or a single query.",
+      "license": "MIT",
+      "metadata": {
+        "author": "supabase",
+        "version": "1.1.1",
+        "organization": "Supabase",
+        "date": "January 2026",
+        "abstract": "Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental (advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis, and specific performance metrics to guide automated optimization and code generation."
+      },
+      "keywords": [
+        "supabase",
+        "postgres",
+        "best",
+        "practices",
+        "schema",
+        "load",
+        "database",
+        "column",
+        "pg"
+      ],
+      "word_count": 242,
+      "hash": "733b3b5e6dede1b951e69bbb52bc75b53fe4d04ada3fb79bd505285d1084e10a",
+      "id": "supabase/agent-skills/supabase-postgres-best-practices"
+    },
+    {
+      "name": "deploy-to-vercel",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/deploy-to-vercel/SKILL.md",
+      "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+      "license": "",
+      "metadata": {
+        "author": "vercel",
+        "version": "3.0.0"
+      },
+      "keywords": [
+        "deploy",
+        "vercel",
+        "deployment",
+        "applications",
+        "websites",
+        "use"
+      ],
+      "word_count": 1719,
+      "hash": "92a95a2495b4fdb71d28de31d30bab1a5d62ff7e2c4d75320bf2f7823b3e77b8",
+      "id": "vercel-labs/agent-skills/deploy-to-vercel"
+    },
+    {
+      "name": "vercel-cli-with-tokens",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/vercel-cli-with-tokens/SKILL.md",
+      "description": "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\".",
+      "license": "",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0"
+      },
+      "keywords": [
+        "vercel",
+        "cli",
+        "tokens",
+        "deploy",
+        "using",
+        "manage",
+        "projects",
+        "token"
+      ],
+      "word_count": 1495,
+      "hash": "91ff19208658e3d0a866d381382c163d0a5ee7505418119b30564d09b6c322f2",
+      "id": "vercel-labs/agent-skills/vercel-cli-with-tokens"
+    },
+    {
+      "name": "vercel-composition-patterns",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/composition-patterns/SKILL.md",
+      "description": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes.",
+      "license": "MIT",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0"
+      },
+      "keywords": [
+        "vercel",
+        "composition",
+        "patterns",
+        "react",
+        "components",
+        "component",
+        "scale"
+      ],
+      "word_count": 332,
+      "hash": "5dbf3b725742b40fe54d1b65ddbfe46b23650d328c0fd8483be3be6297207d7a",
+      "id": "vercel-labs/agent-skills/vercel-composition-patterns"
+    },
+    {
+      "name": "vercel-optimize",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/vercel-optimize/SKILL.md",
+      "description": "Use for Vercel cost and performance optimization on deployed projects, especially Next.js, SvelteKit, Nuxt, and limited Astro apps. Collect Vercel metrics, usage, project config, and code scan results first; investigate only metric-backed candidates; produce ranked recommendations grounded in verified files and version-aware Vercel/framework docs. Trigger for Vercel bill reduction, slow or expensive routes, caching opportunities, Function Invocations, Build Minutes, Fast Data Transfer, Core Web Vitals, Bot Management, Fluid compute, or cost breakdown requests.",
+      "license": "",
+      "metadata": {
+        "version": "1.2.0"
+      },
+      "keywords": [
+        "vercel",
+        "optimize",
+        "cost",
+        "use",
+        "performance",
+        "optimization",
+        "deployed"
+      ],
+      "word_count": 2049,
+      "hash": "1b91c0a844db28fee56681e432276c992002a23316b42dc12de892fbc4210586",
+      "id": "vercel-labs/agent-skills/vercel-optimize"
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/react-best-practices/SKILL.md",
+      "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+      "license": "MIT",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0"
+      },
+      "keywords": [
+        "vercel",
+        "react",
+        "best",
+        "practices",
+        "next",
+        "js",
+        "performance",
+        "optimization",
+        "guidelines"
+      ],
+      "word_count": 895,
+      "hash": "315f5c4b6e65a9cb8fdec6d383f5723edeec891af6074387a17fe72060301cfd",
+      "id": "vercel-labs/agent-skills/vercel-react-best-practices"
+    },
+    {
+      "name": "vercel-react-native-skills",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/react-native-skills/SKILL.md",
+      "description": "React Native and Expo best practices for building performant mobile apps. Use when building React Native components, optimizing list performance, implementing animations, or working with native modules. Triggers on tasks involving React Native, Expo, mobile performance, or native platform APIs.",
+      "license": "MIT",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0"
+      },
+      "keywords": [
+        "vercel",
+        "react",
+        "native",
+        "skills",
+        "expo",
+        "building",
+        "mobile",
+        "performance"
+      ],
+      "word_count": 523,
+      "hash": "87b85c0cf02794eae0c8134cfb6c65c89de424b5b388cddc551f9b717624a092",
+      "id": "vercel-labs/agent-skills/vercel-react-native-skills"
+    },
+    {
+      "name": "vercel-react-view-transitions",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/react-view-transitions/SKILL.md",
+      "description": "Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page transitions, animate route changes, create shared element animations, animate enter/exit of components, animate list reorder, implement directional (forward/back) navigation animations, or integrate view transitions in Next.js. Also use when the user mentions view transitions, `startViewTransition`, `ViewTransition`, transition types, or asks about animating between UI states in React without third-party animation libraries.",
+      "license": "MIT",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0"
+      },
+      "keywords": [
+        "vercel",
+        "react",
+        "view",
+        "transitions",
+        "animations",
+        "transition",
+        "animate"
+      ],
+      "word_count": 1658,
+      "hash": "de9baba67dadd916d7d84102a25cbf1e95fe388de1fa4c8d0e8191e70a8844fe",
+      "id": "vercel-labs/agent-skills/vercel-react-view-transitions"
+    },
+    {
+      "name": "web-design-guidelines",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/web-design-guidelines/SKILL.md",
+      "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+      "license": "",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0",
+        "argument-hint": "<file-or-pattern>"
+      },
+      "keywords": [
+        "web",
+        "design",
+        "guidelines",
+        "review",
+        "ui",
+        "check",
+        "code",
+        "interface"
+      ],
+      "word_count": 136,
+      "hash": "719bba3833259bd6a340906ce16c3e00a4047dbed7cc04b39f14be2a460c8240",
+      "id": "vercel-labs/agent-skills/web-design-guidelines"
+    },
+    {
+      "name": "writing-guidelines",
+      "source": "vercel-labs/agent-skills",
+      "commit": "7c180d9",
+      "source_relative_path": "skills/writing-guidelines/SKILL.md",
+      "description": "Review docs/prose for Writing Guidelines compliance. Use when asked to \"review my docs\", \"check writing style\", \"audit prose\", \"review docs voice and tone\", or \"check this page against the writing handbook\".",
+      "license": "",
+      "metadata": {
+        "author": "vercel",
+        "version": "1.0.0",
+        "argument-hint": "<file-or-pattern>"
+      },
+      "keywords": [
+        "writing",
+        "guidelines",
+        "review",
+        "docs",
+        "prose",
+        "check"
+      ],
+      "word_count": 134,
+      "hash": "a7c565cace732d8532d138f370254b5b2a134f2070a61fd8d967ccc5bea744eb",
+      "id": "vercel-labs/agent-skills/writing-guidelines"
+    },
+    {
+      "name": "find-skills",
+      "source": "vercel-labs/skills",
+      "commit": "941a7bc",
+      "source_relative_path": "skills/find-skills/SKILL.md",
+      "description": "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
+      "license": "",
+      "metadata": {},
+      "keywords": [
+        "find",
+        "skills",
+        "skill",
+        "helps",
+        "users",
+        "discover",
+        "install",
+        "agent"
+      ],
+      "word_count": 788,
+      "hash": "92d5a7cc56858822cdb740a65b8f68c4ad360c1aaff5ad21e0852782a8fbc2f5",
+      "id": "vercel-labs/skills/find-skills"
+    },
+    {
+      "name": "building-messages",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "building-messages/SKILL.md",
+      "description": "Use when changing, previewing, or debugging the WhatsApp message text itself — daily report or monthly-target layout, brand lines, signature fallback, balance-block states, or why a sent message looks wrong.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "building",
+        "messages",
+        "message",
+        "use",
+        "changing",
+        "previewing",
+        "debugging",
+        "whatsapp"
+      ],
+      "word_count": 315,
+      "hash": "d90b2e0e9879360b71cc25b7e072b446a2b89ab0a0ac98cdb4410f06d5c9c82e",
+      "id": "curated/local/building-messages"
+    },
+    {
+      "name": "codebase-navigation",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "codebase-navigation/SKILL.md",
+      "description": "Use when starting work in this repository, tracing how a request flows from the Excel files to WhatsApp messages, or locating which module holds a given behavior. Trigger on questions like \"where does X happen\", \"how does the data flow\", or any task that touches more than one module.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "codebase",
+        "navigation",
+        "module",
+        "use",
+        "starting",
+        "work",
+        "repository",
+        "tracing"
+      ],
+      "word_count": 296,
+      "hash": "4d92114e7cafad44eb49e30c8b7b38763d1427a44463ae5ae820af06e8fdf447",
+      "id": "curated/local/codebase-navigation"
+    },
+    {
+      "name": "dispatch-pipeline",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "dispatch-pipeline/SKILL.md",
+      "description": "Use when changing dispatch behavior, tracing how a message is built and sent, or debugging why accounts were or were not messaged. Trigger on brand, filter, or dispatcher questions that reach beyond one module.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "dispatch",
+        "pipeline",
+        "were",
+        "use",
+        "changing",
+        "behavior",
+        "tracing"
+      ],
+      "word_count": 231,
+      "hash": "1329579379d062283b9baab1b73bbbeb5c41981c7efe41059dc49bed8e440b17",
+      "id": "curated/local/dispatch-pipeline"
+    },
+    {
+      "name": "excel-schema-and-mapping",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "excel-schema-and-mapping/SKILL.md",
+      "description": "Use when working with the Excel data files, brand column mapping, missing-column errors, or a data-source header rename. Trigger when a brand shows zero sales, a column is not found, or new files do not match the schema.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "excel",
+        "schema",
+        "mapping",
+        "column",
+        "data",
+        "files",
+        "brand",
+        "not",
+        "use"
+      ],
+      "word_count": 294,
+      "hash": "f1718c68d09777fa88b56f7354d52ac7253ec2ef3803b62fccea815f4b5a3b6b",
+      "id": "curated/local/excel-schema-and-mapping"
+    },
+    {
+      "name": "git-conventions",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "git-conventions/SKILL.md",
+      "description": "Use when committing, staging, reviewing diffs, or preparing a push for this repository. Trigger on any git workflow question for this repo.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "git",
+        "conventions",
+        "use",
+        "committing",
+        "staging",
+        "reviewing",
+        "diffs",
+        "preparing"
+      ],
+      "word_count": 223,
+      "hash": "cfea29823e81aceceec0a750f43e50e45320cc9c7bdcc7cbce009a9b7fe2eedb",
+      "id": "curated/local/git-conventions"
+    },
+    {
+      "name": "launching-the-gui",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "launching-the-gui/SKILL.md",
+      "description": "Use when launching, relaunching, or troubleshooting the desktop GUI window, including on this Linux machine. Trigger when the GUI won't start, shows tiny unreadable text, or needs a fresh launch after edits.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "launching",
+        "gui",
+        "use",
+        "relaunching",
+        "troubleshooting",
+        "desktop"
+      ],
+      "word_count": 220,
+      "hash": "7ab7fd714137ec48c9cec99e2d41cbf4b867fe4b0cbe7703d1798406de29f8bd",
+      "id": "curated/local/launching-the-gui"
+    },
+    {
+      "name": "running-tests",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "running-tests/SKILL.md",
+      "description": "Use when verifying a change to this repository, running the test suite, or a test is failing. Also use before claiming work is done, fixed, or passing — evidence before claims.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "running",
+        "tests",
+        "use",
+        "test",
+        "before",
+        "verifying",
+        "change",
+        "repository"
+      ],
+      "word_count": 214,
+      "hash": "c7ee551cf9fcbcbd40960c51d0e53b3d77c190d9d29547f65b41c468a8fb4111",
+      "id": "curated/local/running-tests"
+    },
+    {
+      "name": "skill-library-and-agent",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "skill-library-and-agent/SKILL.md",
+      "description": "Use when working with the skill library subsystem — skills/ data layout, the router, the skilllib CLI (sync/build/route/stats/export/import/ollama/agent/chat), the local Ollama agent, or adding/exporting skills.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "skill",
+        "library",
+        "agent",
+        "skills",
+        "ollama",
+        "use",
+        "working"
+      ],
+      "word_count": 319,
+      "hash": "205d32a40fcc9bdccdb065294785a738e79c8295c860c64c57e996adce47bd80",
+      "id": "curated/local/skill-library-and-agent"
+    },
+    {
+      "name": "using-the-gui",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "using-the-gui/SKILL.md",
+      "description": "Use when operating the desktop GUI itself — where each setting lives in the window, how the Run/Profile/Brands tabs map to user_settings.json, filter modes, depot selection, or the preview dialog. For launching/troubleshooting the window instead, see launching-the-gui.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "using",
+        "gui",
+        "window",
+        "launching",
+        "use",
+        "operating",
+        "desktop"
+      ],
+      "word_count": 343,
+      "hash": "9445dd3e2081694638b76f46335814c72f4d384d674279caf962b855709e74cf",
+      "id": "curated/local/using-the-gui"
+    },
+    {
+      "name": "web-dispatch",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "web-dispatch/SKILL.md",
+      "description": "Use when working with the Linux WhatsApp Web dispatch backend — dispatcher_web.py, Selenium/Chromium setup, QR-code login, DOM-verified sending, invalid-number popups, or choosing DISPATCH_BACKEND.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "web",
+        "dispatch",
+        "backend",
+        "use",
+        "working",
+        "linux"
+      ],
+      "word_count": 300,
+      "hash": "d505c6d4cf29fad95fc3b6895c5636225d514e5da3b1f4e17c09fe096371c6f9",
+      "id": "curated/local/web-dispatch"
+    },
+    {
+      "name": "writing-skills",
+      "source": "curated/local",
+      "commit": "",
+      "source_relative_path": "writing-skills/SKILL.md",
+      "description": "Use when creating, revising, or updating a skill in this repository's .agents/skills set, or when deciding whether a repeated procedure should become a skill.",
+      "license": "MIT",
+      "metadata": {},
+      "keywords": [
+        "writing",
+        "skills",
+        "skill",
+        "use",
+        "creating",
+        "revising",
+        "updating",
+        "repository"
+      ],
+      "word_count": 248,
+      "hash": "e2c0c5270adaf62606ce54f11546fc2734b9e8984bffd987a21f71008f041d7f",
+      "id": "curated/local/writing-skills"
+    }
+  ]
+}

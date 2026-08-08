@@ -5,7 +5,16 @@ import random
 from datetime import datetime
 from urllib.parse import quote
 import numpy as np
-import pyautogui
+
+# pyautogui needs an X11 session (and on Windows is the desktop-automation engine).
+# On Linux/Wayland the import fails (mouseinfo cannot connect to a display), but this
+# module must stay importable so main.py/gui.py can load and pick the web backend.
+# The verification helpers below already degrade to None when pyautogui is missing.
+try:
+    import pyautogui
+except Exception:  # pragma: no cover - environment-dependent
+    pyautogui = None
+
 from config import SKIP_DUPLICATE_PHONES
 
 # ==========================================================
@@ -20,6 +29,8 @@ def _active_title():
     Returns the lowercased title of the active (foreground) window, or None
     when pyautogui cannot read it on this platform (e.g. Linux).
     """
+    if pyautogui is None:
+        return None
     try:
         win = pyautogui.getActiveWindow()
         return (win.title or "").lower() if win is not None else ""
@@ -33,6 +44,8 @@ def _screen_changed(baseline):
     the screen visibly changed. Returns True/False, or None when screenshots are
     unavailable on this platform (e.g. missing scrot on Linux).
     """
+    if pyautogui is None:
+        return None
     try:
         shot = pyautogui.screenshot()
         if shot is None:
@@ -189,10 +202,11 @@ def process_dispatch_queue(queue, wait_time, tab_close, close_time, cool_down, m
 
                 # Baseline BEFORE launching the URI so we can detect the new chat rendering.
                 baseline = None
-                try:
-                    baseline = pyautogui.screenshot()
-                except Exception:
-                    baseline = None
+                if pyautogui is not None:
+                    try:
+                        baseline = pyautogui.screenshot()
+                    except Exception:
+                        baseline = None
 
                 os.startfile(whatsapp_uri)
 

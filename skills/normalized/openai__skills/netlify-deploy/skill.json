@@ -1,0 +1,21 @@
+{
+  "name": "netlify-deploy",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/netlify-deploy/SKILL.md",
+  "description": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "deploy",
+    "web",
+    "projects",
+    "netlify",
+    "using",
+    "netlify",
+    "cli",
+    "npx"
+  ],
+  "word_count": 950,
+  "hash": "461b6d6192bf04338c259723d8edbab1a845e9be4abf16395c01943d856d8169"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "wait-what",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/wait-what/SKILL.md",
+  "description": "Stop. That last message did not land — re-pitch it.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "stop",
+    "last",
+    "message",
+    "did",
+    "not",
+    "land",
+    "re",
+    "pitch"
+  ],
+  "word_count": 32,
+  "hash": "789e8a4080c53e01cfd0ac18aed36443b5d715fa9b4c31915a9954c6782acc06"
+}

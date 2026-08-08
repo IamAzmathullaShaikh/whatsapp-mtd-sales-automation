@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-one",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/cloudflare-one/SKILL.md",
+  "description": "Guides Cloudflare One Zero Trust and SASE work across Access, Gateway, WARP, Tunnel, Cloudflare WAN, DLP, CASB, device posture, and identity. Use when designing, configuring, troubleshooting, or reviewing Cloudflare One deployments. Retrieval-first: use current Cloudflare docs/API schemas instead of embedded product docs.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "guides",
+    "cloudflare",
+    "one",
+    "zero",
+    "trust",
+    "sase",
+    "work",
+    "across"
+  ],
+  "word_count": 2580,
+  "hash": "30cda752075ca3af15ec205106e166590446ae718c2317b133d3e7f723bc118e"
+}

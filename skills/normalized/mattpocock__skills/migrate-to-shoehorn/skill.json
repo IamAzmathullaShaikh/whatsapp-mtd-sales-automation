@@ -1,0 +1,21 @@
+{
+  "name": "migrate-to-shoehorn",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/misc/migrate-to-shoehorn/SKILL.md",
+  "description": "Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "migrate",
+    "test",
+    "files",
+    "type",
+    "assertions",
+    "total",
+    "typescript",
+    "shoehorn"
+  ],
+  "word_count": 385,
+  "hash": "376f621668b9f4e77dc8404dc6632e087cdbe8a6906230a58c3ae729418ba6a7"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-email-service",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/cloudflare-email-service/SKILL.md",
+  "description": "Send and receive transactional emails with Cloudflare Email Service (Email Sending + Email Routing). Use when building email sending (Workers binding or REST API), email routing, Agents SDK email handling, or integrating email into any app — Workers, Node.js, Python, Go, etc. Also use for email deliverability, SPF/DKIM/DMARC, wrangler email setup, MCP email tools, or when a coding agent needs to send emails. Even for simple requests like \"add email to my Worker\" — this skill has critical config details.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "send",
+    "receive",
+    "transactional",
+    "emails",
+    "cloudflare",
+    "email",
+    "service",
+    "email"
+  ],
+  "word_count": 1014,
+  "hash": "4129b085f93f798ba319dab91494b2cca4b2c22c90d980cef42a085142b2c9ff"
+}

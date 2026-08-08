@@ -1,0 +1,23 @@
+{
+  "name": "linear",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/linear/SKILL.md",
+  "description": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
+  "license": "",
+  "metadata": {
+    "short-description": "Manage Linear issues in Codex"
+  },
+  "keywords": [
+    "manage",
+    "issues",
+    "projects",
+    "team",
+    "workflows",
+    "linear",
+    "use",
+    "user"
+  ],
+  "word_count": 666,
+  "hash": "d37a6c7f858c09671dc2d8d35e33f58e5e7e0fb697606f1e327f7f83e2c10708"
+}

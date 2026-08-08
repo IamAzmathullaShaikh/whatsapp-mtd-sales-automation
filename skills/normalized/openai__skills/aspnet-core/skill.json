@@ -1,0 +1,21 @@
+{
+  "name": "aspnet-core",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/aspnet-core/SKILL.md",
+  "description": "Build, review, refactor, or architect ASP.NET Core web applications using current official guidance for .NET web development. Use when working on Blazor Web Apps, Razor Pages, MVC, Minimal APIs, controller-based Web APIs, SignalR, gRPC, middleware, dependency injection, configuration, authentication, authorization, testing, performance, deployment, or ASP.NET Core upgrades.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "build",
+    "review",
+    "refactor",
+    "architect",
+    "asp",
+    "net",
+    "core",
+    "web"
+  ],
+  "word_count": 521,
+  "hash": "e5c03ba802f5181c5cb9f917e6ce2403232a47e3aa6eec3e1412640a534f4a5f"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "writing-beats",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/in-progress/writing-beats/SKILL.md",
+  "description": "Writing, exploit — assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "writing",
+    "exploit",
+    "assemble",
+    "raw",
+    "material",
+    "into",
+    "journey",
+    "beats"
+  ],
+  "word_count": 842,
+  "hash": "7591f831d7ff250d117b383ccea23b4fdb310ead5f4ebac9b62a9837ff7732c0"
+}

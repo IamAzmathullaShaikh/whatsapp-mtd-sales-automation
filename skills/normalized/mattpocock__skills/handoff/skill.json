@@ -1,0 +1,21 @@
+{
+  "name": "handoff",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/handoff/SKILL.md",
+  "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "compact",
+    "current",
+    "conversation",
+    "into",
+    "handoff",
+    "document",
+    "another",
+    "agent"
+  ],
+  "word_count": 104,
+  "hash": "db7c0bee351b5712f809f5f4a0a561748348ca852f07a870745560a41eb5fcc6"
+}

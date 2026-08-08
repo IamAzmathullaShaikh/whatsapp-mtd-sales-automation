@@ -1,0 +1,21 @@
+{
+  "name": "pptx",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/pptx/SKILL.md",
+  "description": "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.",
+  "license": "Proprietary. LICENSE.txt has complete terms",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "skill",
+    "any",
+    "time",
+    "pptx",
+    "potx",
+    "file",
+    "involved"
+  ],
+  "word_count": 3000,
+  "hash": "95a32825c64ee1176b7087db58698338466a56adab967898050954fea3f08293"
+}

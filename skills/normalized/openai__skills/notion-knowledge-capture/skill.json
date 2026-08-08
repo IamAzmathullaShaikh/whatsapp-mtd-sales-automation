@@ -1,0 +1,23 @@
+{
+  "name": "notion-knowledge-capture",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/notion-knowledge-capture/SKILL.md",
+  "description": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
+  "license": "",
+  "metadata": {
+    "short-description": "Capture conversations into structured Notion pages"
+  },
+  "keywords": [
+    "capture",
+    "conversations",
+    "decisions",
+    "into",
+    "structured",
+    "notion",
+    "pages",
+    "use"
+  ],
+  "word_count": 409,
+  "hash": "ec97385e9a8545319c47cd14cd6665951d149f432cc8d5ce66b39ef6ff961564"
+}

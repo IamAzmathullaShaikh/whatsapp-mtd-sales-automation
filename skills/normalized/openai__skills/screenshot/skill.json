@@ -1,0 +1,21 @@
+{
+  "name": "screenshot",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/screenshot/SKILL.md",
+  "description": "Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "user",
+    "explicitly",
+    "asks",
+    "desktop",
+    "system",
+    "screenshot",
+    "full"
+  ],
+  "word_count": 943,
+  "hash": "4c7b7a4ad1843d71b60f39736234f0b72f7ad3f3ce65119214390c4d0afa28f8"
+}

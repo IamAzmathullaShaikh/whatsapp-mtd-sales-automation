@@ -1,0 +1,11 @@
+{
+  "repo": "supabase/agent-skills",
+  "url": "https://github.com/supabase/agent-skills",
+  "commit": "1207767",
+  "generated_at": "2026-08-08T17:55:21Z",
+  "skill_count": 2,
+  "skills": [
+    "supabase",
+    "supabase-postgres-best-practices"
+  ]
+}

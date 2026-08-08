@@ -17,6 +17,7 @@ from config import (
     TOTAL_TARGET_COL, COL_DEPOT, COL_SYNDICATE, COL_VENDOR, COL_PARTY,
     COL_SEND, COL_PRIORITY, COL_PHONE, COL_TOTAL,
     INDIVIDUAL_SYNDICATE, SEND_YES,
+    ELIGIBILITY_MAX_ACH_PCT, ELIGIBILITY_MIN_BALANCE,
 )
 import utils
 import calculations
@@ -63,6 +64,9 @@ def build_brand_map(settings):
     """
     Builds brand -> (target_col, actual_col) mappings plus the supporting column lists
     used for casting and aggregation.
+
+    Brands with enabled=False (muted) are excluded entirely — they are dropped from
+    casting, aggregation, message rendering, and the dashboard in one place.
     """
     brand_map = {}
     sales_brands = []
@@ -70,6 +74,8 @@ def build_brand_map(settings):
     market_names_for_template = {}
 
     for b_code, b_data in settings["brands"].items():
+        if not b_data.get("enabled", True):
+            continue  # muted brand — not dispatched, not aggregated, not shown
         tgt_col = b_data["target_col"]
         act_col = b_data["actual_col"]
         brand_map[b_code] = (tgt_col, act_col)
@@ -78,6 +84,67 @@ def build_brand_map(settings):
         market_names_for_template[b_code] = b_data["name"]
 
     return brand_map, sales_brands, target_cols, market_names_for_template
+
+
+def detect_column_candidates(df_sales, df_master):
+    """
+    Returns (target_candidates, actual_candidates): the plausible column names the
+    user could map a new brand to, derived from the loaded files themselves. This
+    lets the UI offer dropdowns instead of free-typed (and often misspelled) names.
+
+    target_candidates: master-file columns that are not the fixed schema columns.
+    actual_candidates: sales-file columns that are not the fixed schema columns
+                       and not already used as actual columns.
+    """
+    fixed_master = {COL_PARTY, COL_PHONE, COL_SEND, COL_PRIORITY, TOTAL_TARGET_COL, COL_DEPOT}
+    target_candidates = sorted(
+        c for c in df_master.columns if c not in fixed_master
+    )
+    fixed_sales = {COL_DEPOT, COL_SYNDICATE, COL_VENDOR, COL_TOTAL}
+    actual_candidates = sorted(
+        c for c in df_sales.columns if c not in fixed_sales
+    )
+    return target_candidates, actual_candidates
+
+
+def validate_brand_columns(settings, df_sales, df_master):
+    """
+    Checks every mapped brand column actually exists in the loaded files.
+    Returns a list of dicts: {"brand", "column", "kind", "file"} for each missing
+    column. An empty list means the mapping is fully wired up.
+
+    (The engine silently treats missing columns as zero — this surfaces those
+    silent failures before a run instead of after.)
+    """
+    missing = []
+    for b_code, b_data in settings.get("brands", {}).items():
+        if not b_data.get("enabled", True):
+            continue  # muted brands are not dispatched — missing columns are irrelevant
+        tgt_col = b_data.get("target_col", f"{b_code}_TARGET")
+        act_col = b_data.get("actual_col", f"{b_code}.1")
+        if tgt_col not in df_master.columns:
+            missing.append({"brand": b_code, "column": tgt_col, "kind": "target", "file": "party_master.xlsx"})
+        if act_col not in df_sales.columns:
+            missing.append({"brand": b_code, "column": act_col, "kind": "actual", "file": "sales dump"})
+    return missing
+
+
+def filter_parties_by_achievement(df_master, actual_perf, max_ach_pct=ELIGIBILITY_MAX_ACH_PCT):
+    """
+    Returns the set of parties whose achievement % is below `max_ach_pct`.
+    Used by the "Below achievement %" filter strategy to target only laggards.
+    """
+    selected = set()
+    for _, row in df_master.iterrows():
+        party = row[COL_PARTY]
+        if party not in actual_perf:
+            continue
+        total_target = row[TOTAL_TARGET_COL]
+        total_actual = actual_perf[party]["TOTAL_ACTUAL"]
+        _light, ach_pct, _bal = calculations.get_brand_status(total_target, total_actual)
+        if ach_pct < max_ach_pct:
+            selected.add(party)
+    return selected
 
 
 def cast_sales_columns(df_sales, sales_brands):
@@ -273,7 +340,9 @@ def build_regular_items(df_master, actual_perf, brand_level_outlets, brand_map, 
             "ach_pct": total_ach_pct, "balance": total_balance, "message": message
         }
 
-        if allowed_parties is not None or (total_ach_pct < 90.0 or total_balance > 100 or priority == "A"):
+        if allowed_parties is not None or (
+            total_ach_pct < ELIGIBILITY_MAX_ACH_PCT or total_balance > ELIGIBILITY_MIN_BALANCE or priority == "A"
+        ):
             unordered_queue.append(item)
 
         dashboard_rows.append(row_metrics)

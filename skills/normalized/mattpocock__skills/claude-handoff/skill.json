@@ -1,0 +1,21 @@
+{
+  "name": "claude-handoff",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/in-progress/claude-handoff/SKILL.md",
+  "description": "Hand the current conversation off to a fresh background agent that picks up the work immediately.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "hand",
+    "current",
+    "conversation",
+    "off",
+    "fresh",
+    "background",
+    "agent",
+    "picks"
+  ],
+  "word_count": 164,
+  "hash": "7f35aedff05b86f666214cba749098c10ef8384e0af2205eeffabecd708fcdf5"
+}

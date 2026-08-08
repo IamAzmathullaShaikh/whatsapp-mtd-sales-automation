@@ -1,0 +1,24 @@
+{
+  "name": "deploy-to-vercel",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/deploy-to-vercel/SKILL.md",
+  "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+  "license": "",
+  "metadata": {
+    "author": "vercel",
+    "version": "3.0.0"
+  },
+  "keywords": [
+    "deploy",
+    "applications",
+    "websites",
+    "vercel",
+    "use",
+    "user",
+    "requests",
+    "deployment"
+  ],
+  "word_count": 1719,
+  "hash": "92a95a2495b4fdb71d28de31d30bab1a5d62ff7e2c4d75320bf2f7823b3e77b8"
+}

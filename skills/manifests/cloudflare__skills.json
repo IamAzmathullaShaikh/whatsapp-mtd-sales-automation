@@ -1,0 +1,22 @@
+{
+  "repo": "cloudflare/skills",
+  "url": "https://github.com/cloudflare/skills",
+  "commit": "f96bff7",
+  "generated_at": "2026-08-08T17:55:21Z",
+  "skill_count": 13,
+  "skills": [
+    "agents-sdk",
+    "cloudflare",
+    "cloudflare-email-service",
+    "cloudflare-one",
+    "cloudflare-one-migrations",
+    "durable-objects",
+    "sandbox-migrate-to-next",
+    "sandbox-next",
+    "sandbox-stable",
+    "turnstile-spin",
+    "web-perf",
+    "workers-best-practices",
+    "wrangler"
+  ]
+}

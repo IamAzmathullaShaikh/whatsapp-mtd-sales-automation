@@ -1,0 +1,21 @@
+{
+  "name": "turnstile-spin",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/turnstile-spin/SKILL.md",
+  "description": "Set up Cloudflare Turnstile end-to-end in a project. Scan the codebase, create the widget via the Cloudflare API, embed it where user requests need bot verification (form submissions, SPA actions, API endpoints, download links, comment or vote submissions, etc.), wire canonical server-side siteverify in the customer's existing backend, validate, and persist the skill. Load this when a user asks to add Turnstile, set up CAPTCHA, protect a form or endpoint from bots, or fix a Turnstile integration. Mirrors developers.cloudflare.com/turnstile/spin.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "set",
+    "up",
+    "cloudflare",
+    "turnstile",
+    "end",
+    "end",
+    "project",
+    "scan"
+  ],
+  "word_count": 3443,
+  "hash": "54aceb6afb7fcefabcd6f19f23920187ffbccead8b72b6d68dd4c8bb38551379"
+}

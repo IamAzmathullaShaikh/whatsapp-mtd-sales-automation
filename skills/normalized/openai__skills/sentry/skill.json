@@ -1,0 +1,21 @@
+{
+  "name": "sentry",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/sentry/SKILL.md",
+  "description": "Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry CLI; perform read-only queries using the `sentry` command.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "user",
+    "asks",
+    "inspect",
+    "sentry",
+    "issues",
+    "events",
+    "summarize"
+  ],
+  "word_count": 511,
+  "hash": "7cd7585c68d2872a00f78efbfc3b1cc26f1db45a62ac8542a4853502736cfc14"
+}

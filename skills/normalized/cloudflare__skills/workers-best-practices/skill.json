@@ -1,0 +1,21 @@
+{
+  "name": "workers-best-practices",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/workers-best-practices/SKILL.md",
+  "description": "Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc, or checking for common Workers anti-patterns (streaming, floating promises, global state, secrets, bindings, observability). Biases towards retrieval from Cloudflare docs over pre-trained knowledge.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "reviews",
+    "authors",
+    "cloudflare",
+    "workers",
+    "code",
+    "against",
+    "production",
+    "best"
+  ],
+  "word_count": 927,
+  "hash": "ff0b4ab69d8ebd3d76e34522feb97b4fed207303a81ef9db3e6d8c2a7a866b46"
+}

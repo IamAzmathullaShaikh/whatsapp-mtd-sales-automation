@@ -1,0 +1,21 @@
+{
+  "name": "to-spec",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/to-spec/SKILL.md",
+  "description": "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "turn",
+    "current",
+    "conversation",
+    "into",
+    "spec",
+    "publish",
+    "project",
+    "issue"
+  ],
+  "word_count": 461,
+  "hash": "a2ef4cce28dab834923f914338bec06abd7951c57b7e81dff76a85cf52fd1033"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-one-migrations",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/cloudflare-one-migrations/SKILL.md",
+  "description": "Plans migrations from Zscaler ZIA/ZPA, Palo Alto, legacy VPN, SWG, or SASE stacks to Cloudflare One. Use for migration assessments, policy mapping, rollout plans, and parity/gap analysis.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "plans",
+    "migrations",
+    "zscaler",
+    "zia",
+    "zpa",
+    "palo",
+    "alto",
+    "legacy"
+  ],
+  "word_count": 1484,
+  "hash": "f42ee75b9e391fc7b3339a717034af0de5a848d3d94e148c1d91895ce1922ef7"
+}

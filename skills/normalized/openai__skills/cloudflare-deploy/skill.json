@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-deploy",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/cloudflare-deploy/SKILL.md",
+  "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "deploy",
+    "applications",
+    "infrastructure",
+    "cloudflare",
+    "using",
+    "workers",
+    "pages",
+    "related"
+  ],
+  "word_count": 938,
+  "hash": "ef4095d3fa32dc67e2de29f9f3ec90c83095f37c187f3c85e55cf96913f7e73e"
+}

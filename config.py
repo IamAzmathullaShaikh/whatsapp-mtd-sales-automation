@@ -44,6 +44,27 @@ FOCUS_TIMEOUT = 15    # Seconds to wait & verify the WhatsApp chat window is foc
 SKIP_DUPLICATE_PHONES = True
 
 # ==========================================================
+# Account Eligibility Rules ("All Eligible Accounts" filter)
+# ==========================================================
+# An account is messaged automatically when it is behind target (achievement %
+# below ELIGIBILITY_MAX_ACH_PCT), has a balance above ELIGIBILITY_MIN_BALANCE,
+# or is Priority A. Completed accounts stay quiet.
+ELIGIBILITY_MAX_ACH_PCT = 90.0   # Below this achievement % an account needs a nudge
+ELIGIBILITY_MIN_BALANCE = 100     # Above this remaining balance an account needs a nudge
+
+# ==========================================================
+# Dispatch Backend Selection (Windows Desktop vs Linux WhatsApp Web)
+# ==========================================================
+# "auto"    -> Windows uses the native desktop app; Linux uses WhatsApp Web (Selenium).
+# "desktop" -> always the Windows Desktop URI dispatcher (os.startfile + whatsapp://).
+# "web"     -> always the Linux WhatsApp Web dispatcher (Selenium + Chromium).
+DISPATCH_BACKEND = "auto"
+
+WEB_USER_DATA_DIR = ".whatsapp_web_profile"  # Persistent browser profile (keeps the WhatsApp Web login)
+WEB_HEADLESS = False                          # Keep the browser visible so you can see what happens
+WEB_LOGIN_TIMEOUT = 180                       # Seconds to wait for the QR-code scan on first run
+
+# ==========================================================
 # Dynamic Notifications Sign-Off
 # ==========================================================
 MESSAGE_FOOTER = """

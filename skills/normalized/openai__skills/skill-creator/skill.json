@@ -1,0 +1,23 @@
+{
+  "name": "skill-creator",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.system/skill-creator/SKILL.md",
+  "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Codex's capabilities with specialized knowledge, workflows, or tool integrations.",
+  "license": "",
+  "metadata": {
+    "short-description": "Create or update a skill"
+  },
+  "keywords": [
+    "guide",
+    "creating",
+    "effective",
+    "skills",
+    "skill",
+    "should",
+    "used",
+    "users"
+  ],
+  "word_count": 2566,
+  "hash": "cfd18ee1d324be10e13af178f2fa52d5db1b0eba7556e74160e842d8a4b7da49"
+}

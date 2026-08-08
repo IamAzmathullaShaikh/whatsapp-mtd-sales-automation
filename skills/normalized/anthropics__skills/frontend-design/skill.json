@@ -1,0 +1,21 @@
+{
+  "name": "frontend-design",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/frontend-design/SKILL.md",
+  "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+  "license": "Complete terms in LICENSE.txt",
+  "metadata": {},
+  "keywords": [
+    "guidance",
+    "distinctive",
+    "intentional",
+    "visual",
+    "design",
+    "building",
+    "new",
+    "ui"
+  ],
+  "word_count": 1297,
+  "hash": "031d4d4b8389fba5377f113f3c7881faa48abe0c64d919ba315e84d555c3486d"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "notion-spec-to-implementation",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/notion-spec-to-implementation/SKILL.md",
+  "description": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
+  "license": "",
+  "metadata": {
+    "short-description": "Turn Notion specs into implementation plans, tasks, and progress tracking"
+  },
+  "keywords": [
+    "turn",
+    "notion",
+    "specs",
+    "into",
+    "implementation",
+    "plans",
+    "tasks",
+    "progress"
+  ],
+  "word_count": 409,
+  "hash": "d5bfe739eccc7104aa384e314adfc3e213456b0fa3c0f2a714a5a2371e5b9ca6"
+}

@@ -21,3 +21,13 @@ exports/
 custom_groups.json
 PyWhatKit_DB.txt
 user_settings.json
+
+# WhatsApp Web persistent browser profile (holds your login session)
+.whatsapp_web_profile/
+.venv/
+
+# Upstream skill clones (refreshed by .agents/skills/scripts/update.sh)
+.agents/skills/.upstream/
+
+# Skill library: upstream source clones (refetched by `skilllib sync`)
+skills/sources/

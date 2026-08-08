@@ -1,0 +1,21 @@
+{
+  "name": "research",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/research/SKILL.md",
+  "description": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "investigate",
+    "question",
+    "against",
+    "high",
+    "trust",
+    "primary",
+    "sources",
+    "capture"
+  ],
+  "word_count": 89,
+  "hash": "24cb65267a1843d108622609ac6b623d024a80d12de62fe0a22a90b17d7c78f0"
+}

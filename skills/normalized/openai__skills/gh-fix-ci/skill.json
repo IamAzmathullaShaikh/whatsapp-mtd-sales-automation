@@ -1,0 +1,21 @@
+{
+  "name": "gh-fix-ci",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/gh-fix-ci/SKILL.md",
+  "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope and report only the details URL.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "user",
+    "asks",
+    "debug",
+    "fix",
+    "failing",
+    "github",
+    "pr"
+  ],
+  "word_count": 468,
+  "hash": "71839b20716b65aade278a3f7845aba2a0b1688304ea4bd94187045cfc183f0d"
+}

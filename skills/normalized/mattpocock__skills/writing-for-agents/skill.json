@@ -1,0 +1,21 @@
+{
+  "name": "writing-for-agents",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/writing-for-agents/SKILL.md",
+  "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "writing",
+    "documents",
+    "agents",
+    "use",
+    "creating",
+    "editing",
+    "skills",
+    "modifying"
+  ],
+  "word_count": 1786,
+  "hash": "9319af75b1b57fd730c31a149162b0798844bc4f96f895b68aa25e10a43be9ce"
+}

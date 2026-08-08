@@ -1,0 +1,21 @@
+{
+  "name": "to-questionnaire",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/to-questionnaire/SKILL.md",
+  "description": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "turn",
+    "decision",
+    "fully",
+    "answer",
+    "into",
+    "questionnaire",
+    "someone",
+    "else"
+  ],
+  "word_count": 454,
+  "hash": "85ef07ac995cbf3c32e0db3f7ca8ec926adff2956209565461cd307f4dd47498"
+}

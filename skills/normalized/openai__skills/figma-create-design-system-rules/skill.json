@@ -1,0 +1,21 @@
+{
+  "name": "figma-create-design-system-rules",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/figma-create-design-system-rules/SKILL.md",
+  "description": "Generates custom design system rules for the user's codebase. Use when user says \"create design system rules\", \"generate rules for my project\", \"set up design rules\", \"customize design system guidelines\", or wants to establish project-specific conventions for Figma-to-code workflows. Requires Figma MCP server connection.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "generates",
+    "custom",
+    "design",
+    "system",
+    "rules",
+    "user",
+    "codebase",
+    "use"
+  ],
+  "word_count": 2499,
+  "hash": "8daa42b7db8912acfdfb33fa7c2e5f60e12feda8214d687bfd547f6ab668a022"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "setup-ts-deep-modules",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
+  "description": "Wire dependency-cruiser into a TypeScript repo so each package is a deep module — implementation hidden in subfolders, reachable only through its entry-point files. User-invoked.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "wire",
+    "dependency",
+    "cruiser",
+    "into",
+    "typescript",
+    "repo",
+    "so",
+    "each"
+  ],
+  "word_count": 1099,
+  "hash": "973a9c88ab6e6130ee7402849918ddfe1895c66c37679a2e8d251158a8d75062"
+}

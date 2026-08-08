@@ -1,0 +1,21 @@
+{
+  "name": "transcribe",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/transcribe/SKILL.md",
+  "description": "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from recordings, or label speakers in interviews or meetings.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "transcribe",
+    "audio",
+    "files",
+    "text",
+    "optional",
+    "diarization",
+    "known",
+    "speaker"
+  ],
+  "word_count": 333,
+  "hash": "f7729e8ece05c9432be3ee9beb3407213dffde16fc1250f41c7de6f80d66e576"
+}

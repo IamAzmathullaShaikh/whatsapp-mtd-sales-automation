@@ -1,0 +1,21 @@
+{
+  "name": "writing-shape",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/in-progress/writing-shape/SKILL.md",
+  "description": "Writing, exploit — shape raw material into an article, paragraph by paragraph.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "writing",
+    "exploit",
+    "shape",
+    "raw",
+    "material",
+    "into",
+    "article",
+    "paragraph"
+  ],
+  "word_count": 1024,
+  "hash": "10339105b9bced9d2a5c05f8225a4842b8791e8b3a128dfe9d3bdebc62f6f6b6"
+}

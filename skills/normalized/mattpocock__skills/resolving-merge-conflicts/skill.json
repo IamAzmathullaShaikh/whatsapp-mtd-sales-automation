@@ -1,0 +1,21 @@
+{
+  "name": "resolving-merge-conflicts",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/resolving-merge-conflicts/SKILL.md",
+  "description": "Use when you need to resolve an in-progress git merge/rebase conflict.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "need",
+    "resolve",
+    "progress",
+    "git",
+    "merge",
+    "rebase",
+    "conflict"
+  ],
+  "word_count": 118,
+  "hash": "d520ac6919dd38c7ab9bd97cdd7cd4d8da649f34e2fb64a5bf8eab95f119263c"
+}

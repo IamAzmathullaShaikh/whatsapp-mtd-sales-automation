@@ -1,0 +1,21 @@
+{
+  "name": "playwright-interactive",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/playwright-interactive/SKILL.md",
+  "description": "Persistent browser and Electron interaction through `js_repl` for fast iterative UI debugging.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "persistent",
+    "browser",
+    "electron",
+    "interaction",
+    "through",
+    "js",
+    "repl",
+    "fast"
+  ],
+  "word_count": 4371,
+  "hash": "8aa959a45c4418dafbecdd9d95fac0be96e613d132aefd3850f7b35441c92831"
+}

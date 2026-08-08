@@ -1,0 +1,23 @@
+{
+  "name": "notion-research-documentation",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/notion-research-documentation/SKILL.md",
+  "description": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
+  "license": "",
+  "metadata": {
+    "short-description": "Research Notion content and produce briefs/reports"
+  },
+  "keywords": [
+    "research",
+    "across",
+    "notion",
+    "synthesize",
+    "into",
+    "structured",
+    "documentation",
+    "use"
+  ],
+  "word_count": 419,
+  "hash": "7790fbeec6806ebbdcac93acdc52c32011174b38efd0e57fa7727af8672fbafb"
+}

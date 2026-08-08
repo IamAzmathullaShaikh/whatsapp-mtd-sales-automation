@@ -1,0 +1,21 @@
+{
+  "name": "vercel-deploy",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/vercel-deploy/SKILL.md",
+  "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "deploy",
+    "applications",
+    "websites",
+    "vercel",
+    "use",
+    "user",
+    "requests",
+    "deployment"
+  ],
+  "word_count": 344,
+  "hash": "7a840c54e4e6f94999a5bcd1ce4030d1d84daef49891acf75b670bb134e81c39"
+}

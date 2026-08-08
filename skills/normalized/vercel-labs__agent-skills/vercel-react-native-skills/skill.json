@@ -1,0 +1,24 @@
+{
+  "name": "vercel-react-native-skills",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/react-native-skills/SKILL.md",
+  "description": "React Native and Expo best practices for building performant mobile apps. Use when building React Native components, optimizing list performance, implementing animations, or working with native modules. Triggers on tasks involving React Native, Expo, mobile performance, or native platform APIs.",
+  "license": "MIT",
+  "metadata": {
+    "author": "vercel",
+    "version": "1.0.0"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "expo",
+    "best",
+    "practices",
+    "building",
+    "performant",
+    "mobile"
+  ],
+  "word_count": 523,
+  "hash": "87b85c0cf02794eae0c8134cfb6c65c89de424b5b388cddc551f9b717624a092"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "sandbox-next",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/sandbox-next/SKILL.md",
+  "description": "Use when building or changing Cloudflare Sandbox apps on @cloudflare/sandbox@next (Sandbox SDK 1.0 preview)—code execution, AI runners, interpreters, CI-like jobs, terminals, files, mounts, tunnels, preview URLs, lifecycle, or errors. Not for the default stable package (use sandbox-stable) or for porting stable to @next (use sandbox-migrate-to-next).",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "building",
+    "changing",
+    "cloudflare",
+    "sandbox",
+    "apps",
+    "cloudflare",
+    "sandbox"
+  ],
+  "word_count": 717,
+  "hash": "c7275263435c43773ee801ff3be9e4f21cb6d847089953883209157f91bb0215"
+}

@@ -1,0 +1,149 @@
+[library]
+name = "whatsapp-skill-library"
+version = "0.1.0"
+
+# All paths are relative to the repository root.
+[paths]
+sources = "skills/sources"
+normalized = "skills/normalized"
+index = "skills/index/index.json"
+manifests = "skills/manifests"
+
+# Scoring weights used by the router (router/scoring.py).
+[router]
+top_k = 5
+weights = { name = 3.0, description = 1.0, keywords = 2.0, bigrams = 1.0 }
+
+# Local agent (Ollama). `skilllib agent "task"` routes the request, loads the
+# best skills, and asks this model with the skills injected into the prompt.
+[agent]
+model = "qwen3:4b"
+model_tag = "azmath-agent"   # name used by `ollama create` from the Modelfile
+host = "http://localhost:11434"
+temperature = 0.2
+num_ctx = 16384       # CPU-only box: 32k KV cache eats RAM and slows generation
+# qwen3 thinking mode: "auto" | true | false. EMPIRICALLY VERIFIED on this
+# machine (Ollama 0.32.6): think=false makes qwen3 narrate its deliberation INTO
+# the response (the leak); think=true keeps the trace in the separate `thinking`
+# field our client ignores, so output stays clean. "auto" classifies each query:
+# greetings/small talk get the small simple_max_tokens cap (fast, concise),
+# everything else the full max_tokens cap — think stays true in BOTH tiers.
+think = "auto"
+timeout = 600         # seconds to wait for one generate call (CPU 4B is slow)
+max_tokens = 1600     # complex tier cap — must cover the thinking trace + the answer
+simple_max_tokens = 200  # auto mode, greetings/small talk: small cap = fast, concise
+max_skills = 4        # skills injected per request
+max_skill_chars = 2000  # excerpt length per injected skill body
+max_history_turns = 6   # rolling exchanges kept in `skilllib chat` (2 entries per turn)
+
+# Upstream skill repositories. enabled = true sources are synced by
+# `python -m scripts.skilllib sync`; pass --all to sync every repo.
+[[sources.repos]]
+owner = "mattpocock"
+repo = "skills"
+url = "https://github.com/mattpocock/skills"
+enabled = true
+
+[[sources.repos]]
+owner = "anthropics"
+repo = "skills"
+url = "https://github.com/anthropics/skills"
+enabled = true
+
+[[sources.repos]]
+owner = "vercel-labs"
+repo = "skills"
+url = "https://github.com/vercel-labs/skills"
+enabled = true
+
+[[sources.repos]]
+owner = "emilkowalski"
+repo = "skills"
+url = "https://github.com/emilkowalski/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "google"
+repo = "skills"
+url = "https://github.com/google/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "MiniMax-AI"
+repo = "skills"
+url = "https://github.com/MiniMax-AI/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "slavingia"
+repo = "skills"
+url = "https://github.com/slavingia/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "MengTo"
+repo = "Skills"
+url = "https://github.com/MengTo/Skills"
+enabled = false
+
+[[sources.repos]]
+owner = "multica-ai"
+repo = "andrej-karpathy-skills"
+url = "https://github.com/multica-ai/andrej-karpathy-skills"
+enabled = false
+
+[[sources.repos]]
+owner = "obra"
+repo = "superpowers"
+url = "https://github.com/obra/superpowers"
+enabled = false
+
+[[sources.repos]]
+owner = "VoltAgent"
+repo = "awesome-openclaw-skills"
+url = "https://github.com/VoltAgent/awesome-openclaw-skills"
+enabled = false
+
+# --- added from the ecosystem search (see config/README.md) ---
+
+[[sources.repos]]
+owner = "openai"
+repo = "skills"
+url = "https://github.com/openai/skills"
+enabled = true
+
+[[sources.repos]]
+owner = "vercel-labs"
+repo = "agent-skills"
+url = "https://github.com/vercel-labs/agent-skills"
+enabled = true
+
+[[sources.repos]]
+owner = "cloudflare"
+repo = "skills"
+url = "https://github.com/cloudflare/skills"
+enabled = true
+
+[[sources.repos]]
+owner = "supabase"
+repo = "agent-skills"
+url = "https://github.com/supabase/agent-skills"
+enabled = true
+
+[[sources.repos]]
+owner = "JetBrains"
+repo = "skills"
+url = "https://github.com/JetBrains/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "antfu"
+repo = "skills"
+url = "https://github.com/antfu/skills"
+enabled = false
+
+[[sources.repos]]
+owner = "vercel-labs"
+repo = "vercel-kb-skills"
+url = "https://github.com/vercel-labs/vercel-kb-skills"
+enabled = false

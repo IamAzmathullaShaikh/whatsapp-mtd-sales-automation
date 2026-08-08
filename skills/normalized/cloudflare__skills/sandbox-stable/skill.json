@@ -1,0 +1,21 @@
+{
+  "name": "sandbox-stable",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/sandbox-stable/SKILL.md",
+  "description": "Use when building or changing Cloudflare Sandbox apps on the current stable @cloudflare/sandbox package (default npm tag)—commands, sessions, files, ports, tunnels, terminals, bridge, production, or deprecated-API cleanup while staying on stable. Not for @cloudflare/sandbox@next (use sandbox-next) or for porting to 1.0 (use sandbox-migrate-to-next).",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "building",
+    "changing",
+    "cloudflare",
+    "sandbox",
+    "apps",
+    "current",
+    "stable"
+  ],
+  "word_count": 843,
+  "hash": "a189c1a057de52aed0bfab0de39ff6a996d405142924c1bf93fb6bd37bae2357"
+}

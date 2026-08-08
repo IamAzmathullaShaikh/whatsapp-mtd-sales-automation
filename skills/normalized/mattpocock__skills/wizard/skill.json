@@ -1,0 +1,21 @@
+{
+  "name": "wizard",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/wizard/SKILL.md",
+  "description": "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "generate",
+    "interactive",
+    "bash",
+    "wizard",
+    "walks",
+    "human",
+    "through",
+    "steps"
+  ],
+  "word_count": 634,
+  "hash": "80b3ff1ed1f393c1e1f63de3be0ac9cbb00de20f16cafef3d8b2c58fd16d348c"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "domain-modeling",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/domain-modeling/SKILL.md",
+  "description": "Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "build",
+    "sharpen",
+    "project",
+    "domain",
+    "model",
+    "use",
+    "user",
+    "wants"
+  ],
+  "word_count": 475,
+  "hash": "6e49118599619a407f89024b4fc6435883f13728c95707a32136eacf8fe887ca"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "slack-gif-creator",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/slack-gif-creator/SKILL.md",
+  "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\"",
+  "license": "Complete terms in LICENSE.txt",
+  "metadata": {},
+  "keywords": [
+    "knowledge",
+    "utilities",
+    "creating",
+    "animated",
+    "gifs",
+    "optimized",
+    "slack",
+    "provides"
+  ],
+  "word_count": 1057,
+  "hash": "4eef4f18aa71b67c1420aa0837cdd0d2d9ad62db4879d1fdf89425bbfde332c2"
+}

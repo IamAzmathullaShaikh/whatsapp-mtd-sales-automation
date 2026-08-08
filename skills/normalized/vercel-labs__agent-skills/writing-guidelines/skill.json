@@ -1,0 +1,25 @@
+{
+  "name": "writing-guidelines",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/writing-guidelines/SKILL.md",
+  "description": "Review docs/prose for Writing Guidelines compliance. Use when asked to \"review my docs\", \"check writing style\", \"audit prose\", \"review docs voice and tone\", or \"check this page against the writing handbook\".",
+  "license": "",
+  "metadata": {
+    "author": "vercel",
+    "version": "1.0.0",
+    "argument-hint": "<file-or-pattern>"
+  },
+  "keywords": [
+    "review",
+    "docs",
+    "prose",
+    "writing",
+    "guidelines",
+    "compliance",
+    "use",
+    "asked"
+  ],
+  "word_count": 134,
+  "hash": "a7c565cace732d8532d138f370254b5b2a134f2070a61fd8d967ccc5bea744eb"
+}

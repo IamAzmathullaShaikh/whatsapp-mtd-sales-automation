@@ -1,0 +1,21 @@
+{
+  "name": "grilling",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/productivity/grilling/SKILL.md",
+  "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "grill",
+    "user",
+    "relentlessly",
+    "about",
+    "plan",
+    "decision",
+    "idea",
+    "use"
+  ],
+  "word_count": 277,
+  "hash": "812f2dd2b34cfc19623efa8b713380324783c5fee65db7ee77066054f56da749"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "ask-matt",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/ask-matt/SKILL.md",
+  "description": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "ask",
+    "skill",
+    "flow",
+    "fits",
+    "situation",
+    "router",
+    "over",
+    "skills"
+  ],
+  "word_count": 1778,
+  "hash": "bc024fcc2626d6f9571d40ce6ffdc1119ecaca674e2039e646cfef3c0b69c271"
+}

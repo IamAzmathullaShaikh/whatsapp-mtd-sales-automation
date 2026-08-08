@@ -1,0 +1,21 @@
+{
+  "name": "figma-create-new-file",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/figma-create-new-file/SKILL.md",
+  "description": "Create a new blank Figma file. Use when the user wants to create a new Figma design or FigJam file, or when you need a new file before calling use_figma. Handles plan resolution via whoami if needed. Usage — /figma-create-new-file [editorType] [fileName] (e.g. /figma-create-new-file figjam My Whiteboard)",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "create",
+    "new",
+    "blank",
+    "figma",
+    "file",
+    "use",
+    "user",
+    "wants"
+  ],
+  "word_count": 368,
+  "hash": "d9f3d154e7b24887034db13fb1c2e869062f95af7a632cc6ab1f5934e6bc3327"
+}

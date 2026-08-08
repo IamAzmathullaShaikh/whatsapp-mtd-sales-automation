@@ -1,0 +1,21 @@
+{
+  "name": "sandbox-migrate-to-next",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/sandbox-migrate-to-next/SKILL.md",
+  "description": "Use when porting a Cloudflare Sandbox app from stable @cloudflare/sandbox to @cloudflare/sandbox@next (Sandbox SDK 1.0 preview), or when the user asks to migrate or upgrade to Sandbox 1.0 / @next. Not for day-to-day stable work (sandbox-stable) or new @next apps (sandbox-next).",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "porting",
+    "cloudflare",
+    "sandbox",
+    "app",
+    "stable",
+    "cloudflare",
+    "sandbox"
+  ],
+  "word_count": 933,
+  "hash": "971086ef7084e1084292ca1fc52c2caeb4322debe8460108e5413b09b1f1c77b"
+}

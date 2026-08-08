@@ -1,0 +1,21 @@
+{
+  "name": "diagnosing-bugs",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/diagnosing-bugs/SKILL.md",
+  "description": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "diagnosis",
+    "loop",
+    "hard",
+    "bugs",
+    "performance",
+    "regressions",
+    "use",
+    "user"
+  ],
+  "word_count": 1459,
+  "hash": "afd876c12ac8c9602d079d1539ce54058df4fc6c2de3f59852fc629cf403fd95"
+}

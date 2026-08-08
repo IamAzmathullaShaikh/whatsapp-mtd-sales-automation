@@ -1,0 +1,21 @@
+{
+  "name": "internal-comms",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "skills/internal-comms/SKILL.md",
+  "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+  "license": "Complete terms in LICENSE.txt",
+  "metadata": {},
+  "keywords": [
+    "set",
+    "resources",
+    "help",
+    "write",
+    "all",
+    "kinds",
+    "internal",
+    "communications"
+  ],
+  "word_count": 151,
+  "hash": "fe59c7523c61b77cdd0530c3c756fa95acb8809b903e12576362b6afae002b41"
+}

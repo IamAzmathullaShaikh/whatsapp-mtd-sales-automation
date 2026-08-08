@@ -1,0 +1,21 @@
+{
+  "name": "tdd",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/tdd/SKILL.md",
+  "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "test",
+    "driven",
+    "development",
+    "use",
+    "user",
+    "wants",
+    "build",
+    "features"
+  ],
+  "word_count": 542,
+  "hash": "836573c4225577d98378c2b6eb501593cc2521080b9f3564be2dc1a666b95920"
+}

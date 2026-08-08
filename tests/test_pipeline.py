@@ -1,7 +1,7 @@
 import pandas as pd
 
 from config import (
-    COL_PARTY, COL_PHONE, COL_PRIORITY, COL_SEND, COL_SYNDICATE, COL_TOTAL,
+    COL_DEPOT, COL_PARTY, COL_PHONE, COL_PRIORITY, COL_SEND, COL_SYNDICATE, COL_TOTAL,
     COL_VENDOR, INDIVIDUAL_SYNDICATE, SEND_YES, TOTAL_TARGET_COL,
 )
 from pipeline import (
@@ -15,9 +15,12 @@ from pipeline import (
     cast_target_columns,
     compute_required_drr,
     compute_run_dates,
+    detect_column_candidates,
     export_missing_contacts,
+    filter_parties_by_achievement,
     normalize_phone,
     render_message,
+    validate_brand_columns,
 )
 
 SETTINGS = {
@@ -70,6 +73,29 @@ class TestBuildBrandMap:
         assert sales_brands == ["OCW.1", "OCBL.1"]
         assert target_cols == [TOTAL_TARGET_COL, "OCW_TARGET", "OCBL_TARGET"]
         assert market_names["OCW"] == "Officer's Choice Whisky"
+
+    def test_muted_brand_excluded_everywhere(self):
+        muted_settings = {
+            "brands": {
+                "OCW": {"name": "OC Whisky", "target_col": "OCW_TARGET", "actual_col": "OCW.1", "enabled": True},
+                "OCBL": {"name": "OC Blue", "target_col": "OCBL_TARGET", "actual_col": "OCBL.1", "enabled": False},
+            }
+        }
+        brand_map, sales_brands, target_cols, market_names = build_brand_map(muted_settings)
+        # The muted brand is dropped from the map, the cast lists, and the template names.
+        assert brand_map == {"OCW": ("OCW_TARGET", "OCW.1")}
+        assert sales_brands == ["OCW.1"]
+        assert target_cols == [TOTAL_TARGET_COL, "OCW_TARGET"]
+        assert "OCBL" not in market_names
+
+    def test_missing_enabled_defaults_to_true(self):
+        legacy = {
+            "brands": {
+                "OCW": {"name": "OC Whisky", "target_col": "OCW_TARGET", "actual_col": "OCW.1"},
+            }
+        }
+        brand_map, *_ = build_brand_map(legacy)
+        assert "OCW" in brand_map  # no 'enabled' key => included
 
 
 class TestCastColumns:
@@ -253,6 +279,86 @@ class TestComputeRunDates:
         assert report_date == "08-Aug-2026"
         assert file_date_str == "2026-08-08"
         assert remaining_days == 24  # August has 31 days: (31 - 8) + 1
+
+
+class TestDetectColumnCandidates:
+    def test_excludes_schema_columns(self):
+        df_sales = pd.DataFrame({
+            COL_DEPOT: [], COL_SYNDICATE: [], COL_VENDOR: [], COL_TOTAL: [],
+            "OCW.1": [], "OCBL.1": [], "SRB.1": [],
+        })
+        df_master = pd.DataFrame({
+            COL_PARTY: [], COL_PHONE: [], COL_SEND: [], COL_PRIORITY: [],
+            TOTAL_TARGET_COL: [], "OCW_TARGET": [], "SRB_TARGET": [],
+        })
+        targets, actuals = detect_column_candidates(df_sales, df_master)
+        assert "OCW_TARGET" in targets and "SRB_TARGET" in targets
+        assert TOTAL_TARGET_COL not in targets and COL_PARTY not in targets
+        assert "OCW.1" in actuals and "SRB.1" in actuals
+        assert COL_DEPOT not in actuals and COL_TOTAL not in actuals
+
+
+class TestValidateBrandColumns:
+    def _frames(self):
+        df_sales = pd.DataFrame({COL_VENDOR: [], "OCW.1": [], "OCBL.1": []})
+        df_master = pd.DataFrame({COL_PARTY: [], "OCW_TARGET": [], "OCBL_TARGET": []})
+        return df_sales, df_master
+
+    def test_all_columns_present(self):
+        df_sales, df_master = self._frames()
+        assert validate_brand_columns(SETTINGS, df_sales, df_master) == []
+
+    def test_missing_columns_reported(self):
+        df_sales = pd.DataFrame({COL_VENDOR: [], "OCW.1": []})
+        df_master = pd.DataFrame({COL_PARTY: [], "OCW_TARGET": []})
+        # OCBL columns don't exist in either file.
+        missing = validate_brand_columns(SETTINGS, df_sales, df_master)
+        assert {m["brand"] for m in missing} == {"OCBL"}
+        assert {m["kind"] for m in missing} == {"target", "actual"}
+        assert all(m["column"].startswith("OCBL") for m in missing)
+
+    def test_muted_brand_columns_not_flagged(self):
+        df_sales = pd.DataFrame({COL_VENDOR: []})
+        df_master = pd.DataFrame({COL_PARTY: []})
+        muted_settings = {
+            "brands": {
+                "OCW": {"name": "OCW", "target_col": "OCW_TARGET", "actual_col": "OCW.1", "enabled": False},
+            }
+        }
+        # The muted brand's columns are missing, but it is not dispatched, so no warning.
+        assert validate_brand_columns(muted_settings, df_sales, df_master) == []
+
+
+class TestFilterPartiesByAchievement:
+    def _frames(self):
+        df_master = pd.DataFrame({
+            COL_PARTY: ["A", "B", "C", "NoData"],
+            TOTAL_TARGET_COL: [100, 100, 100, 100],
+        })
+        actual_perf = {
+            "A": {"TOTAL_ACTUAL": 20},    # 20%
+            "B": {"TOTAL_ACTUAL": 80},    # 80%
+            "C": {"TOTAL_ACTUAL": 95},    # 95%
+        }
+        return df_master, actual_perf
+
+    def test_selects_only_below_threshold(self):
+        df_master, actual_perf = self._frames()
+        assert filter_parties_by_achievement(df_master, actual_perf, 90.0) == {"A", "B"}
+
+    def test_no_data_parties_excluded(self):
+        df_master, actual_perf = self._frames()
+        assert "NoData" not in filter_parties_by_achievement(df_master, actual_perf, 90.0)
+
+    def test_default_threshold_matches_config_knob(self):
+        from config import ELIGIBILITY_MAX_ACH_PCT
+        df_master, actual_perf = self._frames()
+        # The default must equal the config knob (not a duplicated literal).
+        assert filter_parties_by_achievement(df_master, actual_perf) == \
+            filter_parties_by_achievement(df_master, actual_perf, ELIGIBILITY_MAX_ACH_PCT)
+        # And the documented default is 90% — accounts at exactly 90 are NOT below it.
+        assert "B" in filter_parties_by_achievement(df_master, actual_perf, 90.0)  # 80% < 90
+        assert "C" not in filter_parties_by_achievement(df_master, actual_perf, 90.0)  # 95% >= 90
 
 
 class TestExportMissingContacts:

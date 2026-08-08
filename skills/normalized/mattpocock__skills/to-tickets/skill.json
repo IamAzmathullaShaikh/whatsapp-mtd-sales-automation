@@ -1,0 +1,21 @@
+{
+  "name": "to-tickets",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/to-tickets/SKILL.md",
+  "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "break",
+    "plan",
+    "spec",
+    "current",
+    "conversation",
+    "into",
+    "set",
+    "tracer"
+  ],
+  "word_count": 860,
+  "hash": "4e4fa315645b17bba642e91622fd100f3834029890f052ace370b64e1cdb10bf"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "code-review",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/code-review/SKILL.md",
+  "description": "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes — Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\".",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "review",
+    "changes",
+    "since",
+    "fixed",
+    "point",
+    "commit",
+    "branch",
+    "tag"
+  ],
+  "word_count": 1013,
+  "hash": "ec9625d8f441f8a708ec52f697fe13a3c3cf0a9254129a76e008b73c87bd0a04"
+}

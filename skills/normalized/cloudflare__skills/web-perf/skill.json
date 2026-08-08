@@ -1,0 +1,21 @@
+{
+  "name": "web-perf",
+  "source": "cloudflare/skills",
+  "commit": "f96bff7",
+  "source_relative_path": "skills/web-perf/SKILL.md",
+  "description": "Analyzes web performance using Chrome DevTools MCP. Measures Core Web Vitals (LCP, INP, CLS) and supplementary metrics (FCP, TBT, Speed Index), identifies render-blocking resources, network dependency chains, layout shifts, caching issues, and accessibility gaps. Use when asked to audit, profile, debug, or optimize page load performance, Lighthouse scores, or site speed. Biases towards retrieval from current documentation over pre-trained knowledge.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "analyzes",
+    "web",
+    "performance",
+    "using",
+    "chrome",
+    "devtools",
+    "mcp",
+    "measures"
+  ],
+  "word_count": 1066,
+  "hash": "0bd435e13716f2be7ee39671f9e4609d244485579aad2dea25fe7bd616a95dcf"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "speech",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/speech/SKILL.md",
+  "description": "Use when the user asks for text-to-speech narration or voiceover, accessibility reads, audio prompts, or batch speech generation via the OpenAI Audio API; run the bundled CLI (`scripts/text_to_speech.py`) with built-in voices and require `OPENAI_API_KEY` for live calls. Custom voice creation is out of scope.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "user",
+    "asks",
+    "text",
+    "speech",
+    "narration",
+    "voiceover",
+    "accessibility"
+  ],
+  "word_count": 957,
+  "hash": "c7a4fa0c7a98fe260d2d8a2d819c8f8a63f095d49fd11542e7e8d90189623a59"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "prototype",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/prototype/SKILL.md",
+  "description": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "build",
+    "throwaway",
+    "prototype",
+    "answer",
+    "design",
+    "question",
+    "use",
+    "user"
+  ],
+  "word_count": 458,
+  "hash": "815c736092b923f41ede980e264497d70737fa7b07509051e142f8b18d60161a"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "vercel-cli-with-tokens",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/vercel-cli-with-tokens/SKILL.md",
+  "description": "Deploy and manage projects on Vercel using token-based authentication. Use when working with Vercel CLI using access tokens rather than interactive login — e.g. \"deploy to vercel\", \"set up vercel\", \"add environment variables to vercel\".",
+  "license": "",
+  "metadata": {
+    "author": "vercel",
+    "version": "1.0.0"
+  },
+  "keywords": [
+    "deploy",
+    "manage",
+    "projects",
+    "vercel",
+    "using",
+    "token",
+    "based",
+    "authentication"
+  ],
+  "word_count": 1495,
+  "hash": "91ff19208658e3d0a866d381382c163d0a5ee7505418119b30564d09b6c322f2"
+}

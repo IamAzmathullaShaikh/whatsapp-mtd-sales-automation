@@ -12,6 +12,7 @@ a live log pane via a background thread + thread-safe queue.
 import json
 import os
 import queue
+import sys
 import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, scrolledtext, ttk
@@ -20,11 +21,12 @@ from config import (
     WAIT_TIME, TAB_CLOSE, CLOSE_TIME, COOL_DOWN, MAX_RETRIES, FOCUS_TIMEOUT,
     TEST_MODE, TEST_LIMIT, SALES_FILE_PREFIX, SALES_FILE_EXTENSION,
     COL_DEPOT, COL_VENDOR, COL_PARTY, COL_PRIORITY,
+    ELIGIBILITY_MAX_ACH_PCT,
 )
 import pipeline
 import dashboard
 import dispatcher
-from main import load_settings, save_settings
+from main import load_settings, save_settings, resolve_dispatcher
 
 # ---------------------------------------------------------------------------
 # Palette & fonts
@@ -40,18 +42,28 @@ ACCENT_TXT = "#04250f"   # text on accent
 DANGER     = "#ef4444"
 BORDER     = "#2b3b58"
 
-UI_FONT    = ("Segoe UI", 10)
-BOLD_FONT  = ("Segoe UI", 10, "bold")
-TITLE_FONT = ("Segoe UI", 15, "bold")
-MONO_FONT  = ("Consolas", 10)
+# Font families: Segoe UI/Consolas only exist on Windows — on Linux tk silently
+# falls back to the tiny 'fixed' bitmap font (unreadable), so pick per-platform.
+if sys.platform == "win32":
+    _UI_FAMILY = "Segoe UI"
+    _MONO_FAMILY = "Consolas"
+else:
+    _UI_FAMILY = "Noto Sans"
+    _MONO_FAMILY = "DejaVu Sans Mono"
+
+UI_FONT    = (_UI_FAMILY, 10)
+BOLD_FONT  = (_UI_FAMILY, 10, "bold")
+TITLE_FONT = (_UI_FAMILY, 15, "bold")
+MONO_FONT  = (_MONO_FAMILY, 10)
 
 DAILY_REPORT   = "Daily Sales Progress Report (Invoiced / Balance)"
 MONTHLY_REPORT = "Start-of-Month Target Announcement"
 
-FILTER_ALL      = "all"
-FILTER_PRIORITY = "priority"
-FILTER_GROUPS   = "groups"
-FILTER_CUSTOM   = "custom"
+FILTER_ALL         = "all"
+FILTER_PRIORITY    = "priority"
+FILTER_ACHIEVEMENT = "achievement"
+FILTER_GROUPS      = "groups"
+FILTER_CUSTOM      = "custom"
 
 CUSTOM_GROUPS_FILE = "custom_groups.json"
 
@@ -60,10 +72,17 @@ CUSTOM_GROUPS_FILE = "custom_groups.json"
 # Small reusable dialogs
 # ---------------------------------------------------------------------------
 def _center_over(parent, win, w, h):
-    """Centers `win` over `parent`, clamped to the screen so large dialogs never clip."""
+    """Centers `win` over `parent`, clamped to the screen so large dialogs never clip.
+    Dialog sizes are scaled by the HiDPI factor so they stay proportional to fonts."""
     parent.update_idletasks()
     screen_w = parent.winfo_screenwidth()
     screen_h = parent.winfo_screenheight()
+    try:
+        factor = max(1.0, screen_w / 1920.0)
+    except (ZeroDivisionError, tk.TclError):
+        factor = 1.0
+    w = int(w * factor)
+    h = int(h * factor)
     w = min(w, screen_w - 40)
     h = min(h, screen_h - 80)
     x = parent.winfo_rootx() + max(0, (parent.winfo_width() - w) // 2)
@@ -196,36 +215,55 @@ def message_preview_dialog(parent, items):
     return result["value"]
 
 
-def brand_dialog(parent, current):
+def brand_dialog(parent, current, target_candidates=None, actual_candidates=None):
     """
-    Add/edit brand dialog (code, name, target column, actual column).
-    Returns (code, name, target_col, actual_col) or None when cancelled.
+    Add/edit brand dialog (code, name, target column, actual column, enabled).
+    Target/actual columns are Comboboxes pre-filled with the columns detected in
+    the loaded files (still editable, so custom names remain possible).
+    Returns (code, name, target_col, actual_col, enabled) or None when cancelled.
     """
     dlg = tk.Toplevel(parent)
     dlg.title("Edit Brand" if current else "Add New Brand")
     dlg.configure(bg=PANEL)
     dlg.transient(parent)
-    _center_over(parent, dlg, 400, 300)
+    _center_over(parent, dlg, 440, 360)
     result = {"value": None}
 
     cur_code = current[0] if current else ""
+    cur_enabled = current[4] if current and len(current) > 4 else True
+    tgt_default = current[2] if current else f"{cur_code}_TARGET"
+    act_default = current[3] if current else f"{cur_code}.1"
     rows = [
-        ("Short Code (e.g. OCW)", cur_code),
-        ("Display Name", current[1] if current else ""),
-        ("Master Target Column", current[2] if current else ""),
-        ("Sales Actual Column", current[3] if current else ""),
+        ("Short Code (e.g. OCW)", cur_code, None),
+        ("Display Name", current[1] if current else "", None),
+        ("Master Target Column", tgt_default, target_candidates),
+        ("Sales Actual Column", act_default, actual_candidates),
     ]
     entries = {}
     body = tk.Frame(dlg, bg=PANEL)
     body.pack(fill="both", expand=True, padx=16, pady=16)
-    for i, (label, value) in enumerate(rows):
+    for i, (label, value, candidates) in enumerate(rows):
         tk.Label(body, text=label, bg=PANEL, fg=MUTED, font=UI_FONT).grid(row=i, column=0, sticky="w", pady=6)
         var = tk.StringVar(value=value)
-        entry = tk.Entry(body, textvariable=var, bg=PANEL2, fg=FG, insertbackground=FG,
-                         relief="flat", font=UI_FONT)
-        entry.grid(row=i, column=1, sticky="ew", pady=6, padx=(10, 0))
+        if candidates:
+            combo = ttk.Combobox(body, textvariable=var, values=candidates, style="UI.TCombobox")
+            combo.grid(row=i, column=1, sticky="ew", pady=6, padx=(10, 0))
+        else:
+            entry = tk.Entry(body, textvariable=var, bg=PANEL2, fg=FG, insertbackground=FG,
+                             relief="flat", font=UI_FONT)
+            entry.grid(row=i, column=1, sticky="ew", pady=6, padx=(10, 0))
         entries[["code", "name", "target_col", "actual_col"][i]] = var
+
+    enabled_var = tk.IntVar(value=1 if cur_enabled else 0)
+    tk.Checkbutton(body, text="Include this brand in dispatches (uncheck to mute)",
+                   variable=enabled_var, bg=PANEL, fg=FG, activebackground=PANEL,
+                   activeforeground=FG, selectcolor=PANEL2, anchor="w",
+                   font=UI_FONT).grid(row=4, column=0, columnspan=2, sticky="w", pady=(10, 0))
     body.columnconfigure(1, weight=1)
+    if target_candidates or actual_candidates:
+        tk.Label(body, text=f"Detected {len(target_candidates)} target / {len(actual_candidates or [])} actual "
+                            f"columns in the loaded files.",
+                 bg=PANEL, fg=MUTED, font=UI_FONT).grid(row=5, column=0, columnspan=2, sticky="w", pady=(8, 0))
 
     btns = tk.Frame(dlg, bg=PANEL)
     btns.pack(fill="x", padx=16, pady=(0, 14))
@@ -240,6 +278,7 @@ def brand_dialog(parent, current):
             entries["name"].get().strip() or code,
             entries["target_col"].get().strip() or f"{code}_TARGET",
             entries["actual_col"].get().strip() or f"{code}.1",
+            bool(enabled_var.get()),
         )
         dlg.destroy()
 
@@ -258,14 +297,26 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("WhatsApp Sales Automation Engine")
-        self.geometry("1280x800")
-        self.minsize(1120, 700)
         self.configure(bg=BG)
+
+        # HiDPI: rescale tk (points -> pixels) from the real panel width, so text
+        # and widgets are legible on 2K/4K Linux displays.
+        try:
+            env = float(os.environ.get("GUI_SCALE", "0"))
+            factor = min(env, 3.0) if env > 0 else max(1.0, self.winfo_screenwidth() / 1920.0)
+        except (ValueError, tk.TclError):
+            factor = 1.0
+        self._scale = factor
+        self.tk.call("tk", "scaling", 96.0 * factor / 72.0)
+        self.geometry(f"{int(1280 * factor)}x{int(800 * factor)}")
+        self.minsize(int(1120 * factor), int(700 * factor))
 
         self.settings = load_settings()
         self.sales_file = None
         self.df_sales = None
         self.df_master = None
+        self.target_candidates = []
+        self.actual_candidates = []
         self.master_parties = []
         self.depot_vars = {}
         self.groups_selection = []
@@ -394,6 +445,7 @@ class App(tk.Tk):
         for key, label in [
             (FILTER_ALL, "All Eligible Accounts (Standard Pacing Rules)"),
             (FILTER_PRIORITY, "Filter by Specific Priority Slab (A / B / C)"),
+            (FILTER_ACHIEVEMENT, "Accounts Below Achievement %"),
             (FILTER_GROUPS, "Select Individual Groups / Syndicates / Outlets"),
             (FILTER_CUSTOM, "Custom Consolidation (Cross-Syndicate Outlets)"),
         ]:
@@ -413,6 +465,14 @@ class App(tk.Tk):
         ttk.Combobox(self.priority_row, textvariable=self.priority_var, values=["A", "B", "C"],
                      state="readonly", width=6, style="UI.TCombobox").pack(side="left", padx=6)
 
+        self.achievement_row = tk.Frame(self.filter_extras, bg=PANEL)
+        tk.Label(self.achievement_row, text="Achievement below:", bg=PANEL, fg=FG, font=UI_FONT).pack(side="left")
+        self.achievement_var = tk.StringVar(value=str(int(ELIGIBILITY_MAX_ACH_PCT)))
+        ttk.Combobox(self.achievement_row, textvariable=self.achievement_var, values=["50", "60", "70", "80", "90", "100"],
+                     width=6, style="UI.TCombobox").pack(side="left", padx=6)
+        tk.Label(self.achievement_row, text="%  (e.g. 90 = only accounts under 90% of target)",
+                 bg=PANEL, fg=MUTED, font=UI_FONT).pack(side="left")
+
         self.groups_row = tk.Frame(self.filter_extras, bg=PANEL)
         ttk.Button(self.groups_row, text="Choose Groups…", command=self._choose_groups).pack(side="left")
         self.groups_status = tk.Label(self.groups_row, text="none selected", bg=PANEL, fg=MUTED, font=UI_FONT)
@@ -429,19 +489,23 @@ class App(tk.Tk):
         self._toggle_filter_mode()
 
         # Start button
-        self.start_btn = ttk.Button(tab, text="▶ START DISPATCH", style="Accent.TButton",
+        self.start_btn =        ttk.Button(tab, text="▶ START DISPATCH", style="Accent.TButton",
                                     command=self._start_dispatch)
         self.start_btn.pack(fill="x", pady=(16, 4))
-        tk.Label(tab, text="Dispatch requires WhatsApp Desktop (Windows) open & logged in.",
-                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left", wraplength=380).pack(anchor="w")
+        tk.Label(tab, text="Dispatch backend: WhatsApp Desktop (Windows) or WhatsApp Web (Chromium) — "
+                            "selected automatically from DISPATCH_BACKEND.",
+                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left", wraplength=int(380 * self._scale)).pack(anchor="w")
         return tab
 
     def _toggle_filter_mode(self):
         mode = self.filter_var.get()
-        for row in (self.priority_row, self.groups_row, self.custom_row, self.custom_status):
+        for row in (self.priority_row, self.achievement_row, self.groups_row,
+                    self.custom_row, self.custom_status):
             row.pack_forget()
         if mode == FILTER_PRIORITY:
             self.priority_row.pack(fill="x", pady=(2, 0))
+        elif mode == FILTER_ACHIEVEMENT:
+            self.achievement_row.pack(fill="x", pady=(2, 0))
         elif mode == FILTER_GROUPS:
             self.groups_row.pack(fill="x", pady=(2, 0))
         elif mode == FILTER_CUSTOM:
@@ -467,7 +531,8 @@ class App(tk.Tk):
         ttk.Button(tab, text="Save Profile", style="Accent.TButton",
                    command=self._save_profile).pack(anchor="w", pady=(18, 0))
         tk.Label(tab, text="The profile is used in the message header & signature.",
-                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left", wraplength=360).pack(anchor="w", pady=(10, 0))
+                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left",
+                 wraplength=int(360 * self._scale)).pack(anchor="w", pady=(10, 0))
         return tab
 
     # --------------------------------------------------- Brands tab
@@ -488,7 +553,11 @@ class App(tk.Tk):
         btns.pack(fill="x", pady=(10, 0))
         ttk.Button(btns, text="➕ Add", command=self._add_brand).pack(side="left", padx=(0, 6))
         ttk.Button(btns, text="✏️ Edit", command=self._edit_brand).pack(side="left", padx=(0, 6))
+        ttk.Button(btns, text="🔕 Mute/Unmute", command=self._toggle_brand).pack(side="left", padx=(0, 6))
         ttk.Button(btns, text="❌ Remove", command=self._remove_brand).pack(side="left")
+        tk.Label(tab, text="Muted brands (🔕) stay in the portfolio but are excluded from all dispatches.",
+                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left",
+                 wraplength=int(360 * self._scale)).pack(anchor="w", pady=(8, 0))
         return tab
 
     # ---------------------------------------------------- Log panel
@@ -513,8 +582,8 @@ class App(tk.Tk):
         ]:
             box = tk.Frame(summary, bg=PANEL2)
             box.pack(side="left", padx=10)
-            tk.Label(box, text=label.upper(), bg=PANEL2, fg=MUTED, font=("Segoe UI", 8)).pack()
-            tk.Label(box, textvariable=var, bg=PANEL2, fg=color, font=("Segoe UI", 16, "bold")).pack()
+            tk.Label(box, text=label.upper(), bg=PANEL2, fg=MUTED, font=(_UI_FAMILY, 8)).pack()
+            tk.Label(box, textvariable=var, bg=PANEL2, fg=color, font=(_UI_FAMILY, 16, "bold")).pack()
 
     # --------------------------------------------------------- actions
     def _refresh_file_list(self):
@@ -553,6 +622,8 @@ class App(tk.Tk):
         # Only commit state once the file has been validated.
         self.sales_file = name
         self.df_sales, self.df_master = df_sales, df_master
+        self.target_candidates, self.actual_candidates = pipeline.detect_column_candidates(df_sales, df_master)
+        self._log(f"🧭 Detected {len(self.target_candidates)} target / {len(self.actual_candidates)} actual column candidates.")
 
         for w in self.depot_inner.winfo_children():
             w.destroy()
@@ -637,6 +708,11 @@ class App(tk.Tk):
         if not self.settings.get("brands"):
             messagebox.showerror("Empty portfolio", "Add at least one brand in the Brands tab first.", parent=self)
             return
+        if not any(b.get("enabled", True) for b in self.settings["brands"].values()):
+            messagebox.showerror("All brands muted",
+                                 "Every brand is muted (🔕). Enable at least one in the Brands tab "
+                                 "before dispatching.", parent=self)
+            return
         name = self.file_var.get().strip()
         if not name or not os.path.exists(name):
             messagebox.showerror("No sales file", "Choose and load an Outlet_Wise_Sales_*.xlsx file first.", parent=self)
@@ -658,9 +734,27 @@ class App(tk.Tk):
                 raise ValueError("No transactions found for the selected depot(s).")
             df_master = self.df_master
 
+            # Surface silent column-mapping failures before the run (the engine would
+            # otherwise treat a misspelled column as a zeroed brand).
+            missing_cols = pipeline.validate_brand_columns(self.settings, df_sales, df_master)
+            if missing_cols:
+                details = "\n".join(f"• {m['brand']}: {m['column']} (missing from {m['file']})" for m in missing_cols[:8])
+                extra = f"\n… and {len(missing_cols) - 8} more" if len(missing_cols) > 8 else ""
+                proceed = messagebox.askyesno(
+                    "Column mapping warning",
+                    f"{len(missing_cols)} mapped column(s) were not found in the loaded files "
+                    f"— those brands will count as zero.\n\n{details}{extra}\n\nContinue anyway?",
+                    parent=self)
+                if not proceed:
+                    self._set_busy(False)
+                    return
+                self._log(f"⚠️ {len(missing_cols)} mapped column(s) missing — continuing with zeroed brands.")
+
             brand_map, sales_brands, target_cols, market_names = pipeline.build_brand_map(self.settings)
             pipeline.cast_sales_columns(df_sales, sales_brands)
             pipeline.cast_target_columns(df_master, target_cols)
+
+            actual_perf, brand_level_outlets = pipeline.aggregate_actuals(df_sales, sales_brands)
 
             mode = self.filter_var.get()
             allowed_parties = None
@@ -670,6 +764,14 @@ class App(tk.Tk):
                 allowed_parties = set(df_master[df_master[COL_PRIORITY].str.upper() == tier][COL_PARTY])
                 if not allowed_parties:
                     raise ValueError(f"No master accounts found with priority '{tier}'.")
+            elif mode == FILTER_ACHIEVEMENT:
+                try:
+                    max_ach = float(self.achievement_var.get())
+                except ValueError:
+                    raise ValueError(f"Achievement threshold '{self.achievement_var.get()}' is not a number.")
+                allowed_parties = pipeline.filter_parties_by_achievement(df_master, actual_perf, max_ach)
+                if not allowed_parties:
+                    raise ValueError(f"No accounts below {max_ach:.0f}% achievement.")
             elif mode == FILTER_GROUPS:
                 if not self.groups_selection:
                     raise ValueError("No groups selected — click 'Choose Groups…' first.")
@@ -680,7 +782,6 @@ class App(tk.Tk):
                                      "(choose them above).")
                 custom_run_config = {"recipient": self.custom_recipient, "outlets": self.custom_outlets}
 
-            actual_perf, brand_level_outlets = pipeline.aggregate_actuals(df_sales, sales_brands)
             user_profile = self.settings["profile"]
             report_type = self.report_var.get()
 
@@ -729,7 +830,8 @@ class App(tk.Tk):
 
     def _run_dispatch_thread(self, dispatch_queue):
         try:
-            success, failed, skipped = dispatcher.process_dispatch_queue(
+            dispatch_fn = resolve_dispatcher()
+            success, failed, skipped = dispatch_fn(
                 dispatch_queue, WAIT_TIME, TAB_CLOSE, CLOSE_TIME, COOL_DOWN,
                 MAX_RETRIES, FOCUS_TIMEOUT,
                 log=lambda line: self.log_q.put(line),
@@ -785,20 +887,28 @@ class App(tk.Tk):
     def _refresh_brand_list(self):
         self.brand_list.delete(0, "end")
         for code, data in self.settings.get("brands", {}).items():
+            muted = not data.get("enabled", True)
+            marker = "🔕" if muted else "✅"
             self.brand_list.insert(
                 "end",
-                f"{code} — {data.get('name', code)}   (target: {data.get('target_col', code + '_TARGET')} | "
+                f"{marker} {code} — {data.get('name', code)}   (target: {data.get('target_col', code + '_TARGET')} | "
                 f"actual: {data.get('actual_col', code + '.1')})")
+            if muted:
+                self.brand_list.itemconfig("end", fg=MUTED)
 
     def _add_brand(self):
-        result = brand_dialog(self, None)
+        if self.df_sales is None or self.df_master is None:
+            messagebox.showinfo("Load a file first",
+                                "Load a sales file to auto-detect columns for the dropdowns "
+                                "(you can still type column names manually).", parent=self)
+        result = brand_dialog(self, None, self.target_candidates, self.actual_candidates)
         if result is None:
             return
-        code, name, tgt, act = result
+        code, name, tgt, act, enabled = result
         if code in self.settings["brands"]:
             messagebox.showerror("Duplicate", f"Brand '{code}' already exists.", parent=self)
             return
-        self.settings["brands"][code] = {"name": name, "target_col": tgt, "actual_col": act}
+        self.settings["brands"][code] = {"name": name, "target_col": tgt, "actual_col": act, "enabled": enabled}
         save_settings(self.settings)
         self._refresh_brand_list()
         self._log(f"🍾 Added brand {code} — {name}.")
@@ -812,15 +922,30 @@ class App(tk.Tk):
         data = self.settings["brands"][code]
         result = brand_dialog(self, (code, data.get("name", code),
                                      data.get("target_col", code + "_TARGET"),
-                                     data.get("actual_col", code + ".1")))
+                                     data.get("actual_col", code + ".1"),
+                                     data.get("enabled", True)),
+                              self.target_candidates, self.actual_candidates)
         if result is None:
             return
-        new_code, name, tgt, act = result
+        new_code, name, tgt, act, enabled = result
         del self.settings["brands"][code]
-        self.settings["brands"][new_code] = {"name": name, "target_col": tgt, "actual_col": act}
+        self.settings["brands"][new_code] = {"name": name, "target_col": tgt, "actual_col": act, "enabled": enabled}
         save_settings(self.settings)
         self._refresh_brand_list()
         self._log(f"🍾 Updated brand {new_code}.")
+
+    def _toggle_brand(self):
+        sel = self.brand_list.curselection()
+        if not sel:
+            messagebox.showinfo("Select first", "Select a brand in the list to mute/unmute.", parent=self)
+            return
+        code = list(self.settings["brands"].keys())[sel[0]]
+        data = self.settings["brands"][code]
+        data["enabled"] = not data.get("enabled", True)
+        save_settings(self.settings)
+        self._refresh_brand_list()
+        state = "🔕 muted" if not data["enabled"] else "✅ enabled"
+        self._log(f"🔄 Brand {code} is now {state}.")
 
     def _remove_brand(self):
         sel = self.brand_list.curselection()

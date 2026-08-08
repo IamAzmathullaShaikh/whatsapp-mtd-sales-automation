@@ -1,0 +1,20 @@
+{
+  "name": "implement",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/engineering/implement/SKILL.md",
+  "description": "Implement a piece of work based on a spec or set of tickets.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "implement",
+    "piece",
+    "work",
+    "based",
+    "spec",
+    "set",
+    "tickets"
+  ],
+  "word_count": 50,
+  "hash": "a554cb2567e97279ec125d87f334c54e7cc3cab2695df25ae1bcd19e3cfe0790"
+}

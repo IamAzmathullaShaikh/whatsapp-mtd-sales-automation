@@ -1,0 +1,24 @@
+{
+  "name": "vercel-composition-patterns",
+  "source": "vercel-labs/agent-skills",
+  "commit": "7c180d9",
+  "source_relative_path": "skills/composition-patterns/SKILL.md",
+  "description": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, context providers, or component architecture. Includes React 19 API changes.",
+  "license": "MIT",
+  "metadata": {
+    "author": "vercel",
+    "version": "1.0.0"
+  },
+  "keywords": [
+    "react",
+    "composition",
+    "patterns",
+    "scale",
+    "use",
+    "refactoring",
+    "components",
+    "boolean"
+  ],
+  "word_count": 332,
+  "hash": "5dbf3b725742b40fe54d1b65ddbfe46b23650d328c0fd8483be3be6297207d7a"
+}

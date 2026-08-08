@@ -1,0 +1,21 @@
+{
+  "name": "yeet",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/yeet/SKILL.md",
+  "description": "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "only",
+    "user",
+    "explicitly",
+    "asks",
+    "stage",
+    "commit",
+    "push"
+  ],
+  "word_count": 1061,
+  "hash": "01c87cd5882828315877f0c59c3c435987159ebb424258b830d9a3410bab219e"
+}

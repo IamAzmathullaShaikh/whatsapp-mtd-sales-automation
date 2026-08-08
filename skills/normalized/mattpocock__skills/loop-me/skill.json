@@ -1,0 +1,21 @@
+{
+  "name": "loop-me",
+  "source": "mattpocock/skills",
+  "commit": "84fdeff",
+  "source_relative_path": "skills/in-progress/loop-me/SKILL.md",
+  "description": "Grill me about specs for the workflows I want to build, within this workspace.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "grill",
+    "about",
+    "specs",
+    "workflows",
+    "want",
+    "build",
+    "within",
+    "workspace"
+  ],
+  "word_count": 396,
+  "hash": "6edc04e0060139006033fc1872c1a57c943d036d499a541cdc849a2ffd28b1f9"
+}

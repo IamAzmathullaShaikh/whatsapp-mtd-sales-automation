@@ -1,0 +1,21 @@
+{
+  "name": "jupyter-notebook",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/jupyter-notebook/SKILL.md",
+  "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "use",
+    "user",
+    "asks",
+    "create",
+    "scaffold",
+    "edit",
+    "jupyter",
+    "notebooks"
+  ],
+  "word_count": 482,
+  "hash": "75cebd9c9650d2385b557963f86f0af6b0b0b9f24a7068f274785813e82229bf"
+}

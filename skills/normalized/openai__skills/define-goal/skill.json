@@ -1,0 +1,21 @@
+{
+  "name": "define-goal",
+  "source": "openai/skills",
+  "commit": "49f948f",
+  "source_relative_path": "skills/.curated/define-goal/SKILL.md",
+  "description": "Help the user define a concrete, measurable goal before starting work, especially when they ask to use the goal tool, create a goal, set an objective, clarify success criteria, or turn a fuzzy intention into a quantitative outcome. Use this skill for goal creation and goal refinement only; it does not manage durable snapshots, decision logs, or long-running execution artifacts.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "help",
+    "user",
+    "define",
+    "concrete",
+    "measurable",
+    "goal",
+    "before",
+    "starting"
+  ],
+  "word_count": 805,
+  "hash": "1e265dc019296d7c3b7dc8b1f6847b0505f0d8254c390d727192ec8c58abbe9d"
+}

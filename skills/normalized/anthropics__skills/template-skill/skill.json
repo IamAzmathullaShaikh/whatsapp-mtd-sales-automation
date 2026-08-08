@@ -1,0 +1,19 @@
+{
+  "name": "template-skill",
+  "source": "anthropics/skills",
+  "commit": "f17010c",
+  "source_relative_path": "template/SKILL.md",
+  "description": "Replace with description of the skill and when Claude should use it.",
+  "license": "",
+  "metadata": {},
+  "keywords": [
+    "replace",
+    "description",
+    "skill",
+    "claude",
+    "should",
+    "use"
+  ],
+  "word_count": 4,
+  "hash": "70bb1171c3d85a2bd55f13e482ea012ebcb9f33226f98eb2ba37adf5b62cafd8"
+}
