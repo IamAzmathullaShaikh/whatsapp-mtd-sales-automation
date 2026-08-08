@@ -5,6 +5,9 @@ __pycache__/
 venv/
 .env
 
+# Freebuff app data
+.freebuff/
+
 # Private Data & Sales Dumps (CRITICAL)
 *.xlsx
 *.csv
