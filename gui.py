@@ -15,18 +15,20 @@ import queue
 import sys
 import threading
 import tkinter as tk
-from tkinter import filedialog, messagebox, scrolledtext, ttk
+from tkinter import filedialog, messagebox, scrolledtext, simpledialog, ttk
 
 from config import (
     WAIT_TIME, TAB_CLOSE, CLOSE_TIME, COOL_DOWN, MAX_RETRIES, FOCUS_TIMEOUT,
-    TEST_MODE, TEST_LIMIT, SALES_FILE_PREFIX, SALES_FILE_EXTENSION,
+    TEST_MODE, TEST_LIMIT, SALES_FILE_PREFIX, SALES_FILE_EXTENSION, PARTY_MASTER,
     COL_DEPOT, COL_VENDOR, COL_PARTY, COL_PRIORITY,
     ELIGIBILITY_MAX_ACH_PCT,
 )
 import pipeline
 import dashboard
 import dispatcher
-from main import load_settings, save_settings, resolve_dispatcher
+import companies
+import schema
+from main import resolve_dispatcher
 
 # ---------------------------------------------------------------------------
 # Palette & fonts
@@ -90,6 +92,91 @@ def _center_over(parent, win, w, h):
     x = max(0, min(x, screen_w - w))
     y = max(0, min(y, screen_h - h))
     win.geometry(f"{w}x{h}+{x}+{y}")
+
+
+def schema_mapping_dialog(parent, file_path, detected, roles, title):
+    """
+    Confirms/edits a per-file MTD schema mapping.
+
+    `roles` is an ordered list of role keys (e.g. ["depot", "syndicate", "vendor",
+    "total"] for sales, party roles for the master). Returns
+    {"sheet", "header_row", "columns": {role: actual_header}} or None when cancelled.
+    """
+    sheets = schema.sheet_names(file_path)
+    detected = detected or {}
+    columns = detected.get("columns", {}) or {}
+
+    dlg = tk.Toplevel(parent)
+    dlg.title(title)
+    dlg.configure(bg=PANEL)
+    dlg.transient(parent)
+    _center_over(parent, dlg, 480, 380)
+    result = {"value": None}
+
+    body = tk.Frame(dlg, bg=PANEL)
+    body.pack(fill="both", expand=True, padx=14, pady=(14, 8))
+
+    tk.Label(body, text="SHEET", bg=PANEL, fg=ACCENT, font=BOLD_FONT).pack(anchor="w")
+    sheet_var = tk.StringVar(value=detected.get("sheet") or (sheets[0] if sheets else ""))
+    sheet_combo = ttk.Combobox(body, textvariable=sheet_var, values=sheets, state="readonly",
+                               style="UI.TCombobox")
+    sheet_combo.pack(fill="x", pady=(2, 8))
+
+    tk.Label(body, text="HEADER ROW (0 = first row)", bg=PANEL, fg=ACCENT, font=BOLD_FONT).pack(anchor="w")
+    header_var = tk.StringVar(value=str(detected.get("header_row", 0)))
+    ttk.Combobox(body, textvariable=header_var,
+                 values=[str(i) for i in range(12)], width=6, style="UI.TCombobox").pack(anchor="w", pady=(2, 8))
+
+    tk.Label(body, text="COLUMN MAPPING", bg=PANEL, fg=ACCENT, font=BOLD_FONT).pack(anchor="w")
+    role_vars = {}
+    role_combos = {}
+    for role in roles:
+        row = tk.Frame(body, bg=PANEL)
+        row.pack(fill="x", pady=2)
+        tk.Label(row, text=role.replace("_", " ").title() + ":", bg=PANEL, fg=FG,
+                 width=14, anchor="w", font=UI_FONT).pack(side="left")
+        var = tk.StringVar(value=columns.get(role, ""))
+        combo = ttk.Combobox(row, textvariable=var, style="UI.TCombobox")
+        combo.pack(side="left", fill="x", expand=True)
+        role_vars[role] = var
+        role_combos[role] = combo
+
+    def _refresh_headers(*_):
+        try:
+            row = int(header_var.get())
+        except ValueError:
+            return
+        headers = schema.header_row_values(file_path, sheet_var.get(), row)
+        for role in roles:
+            role_combos[role]["values"] = headers
+            if not role_vars[role].get() and headers:
+                role_vars[role].set(headers[0])
+
+    sheet_combo.bind("<<ComboboxSelected>>", _refresh_headers)
+    header_var.trace_add("write", _refresh_headers)
+    dlg.after(50, _refresh_headers)
+
+    btns = tk.Frame(dlg, bg=PANEL)
+    btns.pack(fill="x", padx=14, pady=(0, 14))
+
+    def _ok():
+        try:
+            header_row = int(header_var.get())
+        except ValueError:
+            header_row = 0
+        result["value"] = {
+            "sheet": sheet_var.get(),
+            "header_row": header_row,
+            "columns": {r: role_vars[r].get().strip() for r in roles
+                        if role_vars[r].get().strip()},
+        }
+        dlg.destroy()
+
+    ttk.Button(btns, text="OK", style="Accent.TButton", command=_ok).pack(side="left")
+    ttk.Button(btns, text="Cancel", command=dlg.destroy).pack(side="left", padx=(8, 0))
+    dlg.grab_set()
+    parent.wait_window(dlg)
+    return result["value"]
 
 
 def multi_select_dialog(parent, title, options, preselect=None):
@@ -311,10 +398,14 @@ class App(tk.Tk):
         self.geometry(f"{int(1280 * factor)}x{int(800 * factor)}")
         self.minsize(int(1120 * factor), int(700 * factor))
 
-        self.settings = load_settings()
+        self.company_slug = companies.ensure_default_company()
+        self.settings = companies.load_company(self.company_slug) or {}
         self.sales_file = None
         self.df_sales = None
         self.df_master = None
+        self.sales_mapping = {}
+        self.party_mapping = {}
+        self.party_master = PARTY_MASTER
         self.target_candidates = []
         self.actual_candidates = []
         self.master_parties = []
@@ -378,6 +469,7 @@ class App(tk.Tk):
 
         notebook = ttk.Notebook(left)
         notebook.pack(fill="both", expand=True)
+        notebook.add(self._build_company_tab(notebook), text="  🏢 Company  ")
         notebook.add(self._build_run_tab(notebook), text="  ▶ Run  ")
         notebook.add(self._build_profile_tab(notebook), text="  👤 Profile  ")
         notebook.add(self._build_brands_tab(notebook), text="  🍾 Brands  ")
@@ -512,6 +604,100 @@ class App(tk.Tk):
             self.custom_row.pack(fill="x", pady=(2, 0))
             self.custom_status.pack(anchor="w", pady=(2, 2))
 
+    # --------------------------------------------------- Company tab
+    def _build_company_tab(self, parent):
+        tab = tk.Frame(parent, bg=PANEL, padx=14, pady=12)
+        tk.Label(tab, text="COMPANY / AGENCY", bg=PANEL, fg=ACCENT,
+                 font=BOLD_FONT).pack(anchor="w", pady=(0, 4))
+        tk.Label(tab, text="One company = its own profile, brands, party master, "
+                            "MTD file prefix, and Excel mapping. Switch freely — "
+                            "everything else follows.",
+                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left",
+                 wraplength=int(380 * self._scale)).pack(anchor="w", pady=(0, 10))
+
+        pick = tk.Frame(tab, bg=PANEL)
+        pick.pack(fill="x")
+        self.company_var = tk.StringVar(value=self.company_slug or "")
+        company_combo = ttk.Combobox(pick, textvariable=self.company_var,
+                                     values=companies.list_companies(),
+                                     state="readonly", style="UI.TCombobox")
+        company_combo.pack(side="left", fill="x", expand=True)
+        company_combo.bind("<<ComboboxSelected>>", self._switch_company)
+        ttk.Button(pick, text="➕ New", command=self._new_company).pack(side="left", padx=(6, 0))
+        ttk.Button(pick, text="❌ Delete", command=self._delete_company).pack(side="left", padx=(4, 0))
+
+        fields = tk.Frame(tab, bg=PANEL2, padx=12, pady=10)
+        fields.pack(fill="x", pady=(12, 6))
+        tk.Label(fields, text="PARTY MASTER FILE", bg=PANEL2, fg=ACCENT, font=BOLD_FONT).pack(anchor="w")
+        self.company_master_var = tk.StringVar(
+            value=self.settings.get("party_master") or PARTY_MASTER)
+        ttk.Entry(fields, textvariable=self.company_master_var, style="UI.TCombobox").pack(fill="x", pady=(2, 8))
+        tk.Label(fields, text="MTD FILE PREFIX (used to auto-list sales dumps)", bg=PANEL2,
+                 fg=ACCENT, font=BOLD_FONT).pack(anchor="w")
+        self.company_prefix_var = tk.StringVar(
+            value=self.settings.get("sales_prefix") or SALES_FILE_PREFIX)
+        ttk.Entry(fields, textvariable=self.company_prefix_var).pack(fill="x", pady=(2, 0))
+        ttk.Button(fields, text="Save company settings", style="Accent.TButton",
+                   command=self._save_company_fields).pack(anchor="w", pady=(10, 0))
+        tk.Label(tab, text="When you load a sales dump for a company the first time, "
+                            "its sheet/header/column layout is auto-detected and stored "
+                            "for that company — so different MTD file types just work.",
+                 bg=PANEL, fg=MUTED, font=UI_FONT, justify="left",
+                 wraplength=int(380 * self._scale)).pack(anchor="w", pady=(6, 0))
+        return tab
+
+    def _switch_company(self, _event=None):
+        slug = self.company_var.get()
+        if not slug or slug == self.company_slug:
+            return
+        companies.set_active_company(slug)
+        self._load_company_state(slug)
+
+    def _new_company(self):
+        name = tk.simpledialog.askstring("New company",
+                                         "Company / agency name:", parent=self)
+        if not name or not name.strip():
+            return
+        companies.new_company(name.strip())
+        companies.set_active_company(companies.slugify(name.strip()))
+        self._load_company_state(companies.slugify(name.strip()))
+
+    def _delete_company(self):
+        slug = self.company_var.get()
+        if not slug:
+            messagebox.showwarning("No company", "Pick a company to delete first.", parent=self)
+            return
+        if not messagebox.askyesno("Delete company",
+                                   f"Delete '{slug}' and all its brands/mapping?", parent=self):
+            return
+        companies.delete_company(slug)
+        self._load_company_state(companies.ensure_default_company())
+
+    def _save_company_fields(self):
+        settings = companies.load_company(self.company_slug) or {}
+        settings["party_master"] = self.company_master_var.get().strip() or PARTY_MASTER
+        settings["sales_prefix"] = self.company_prefix_var.get().strip() or SALES_FILE_PREFIX
+        companies.save_company(settings)
+        self._log(f"💾 Company '{self.company_slug}' saved (party master + MTD prefix).")
+        self._refresh_file_list()
+
+    def _load_company_state(self, slug):
+        self.company_slug = slug
+        self.company_var.set(slug or "")
+        self.settings = companies.load_company(slug) or {}
+        self.company_master_var.set(self.settings.get("party_master") or PARTY_MASTER)
+        self.company_prefix_var.set(self.settings.get("sales_prefix") or SALES_FILE_PREFIX)
+        self.sales_file = None
+        self.df_sales = None
+        self.df_master = None
+        self.sales_mapping = {}
+        self.party_mapping = {}
+        self.party_master = PARTY_MASTER
+        self._refresh_brand_list()
+        self._refresh_file_list()
+        self.file_status.config(text=f"Company: {slug} — load a sales file to begin", fg=MUTED)
+        self._log(f"🏢 Switched to company '{slug}'.")
+
     # --------------------------------------------------- Profile tab
     def _build_profile_tab(self, parent):
         tab = tk.Frame(parent, bg=PANEL, padx=18, pady=16)
@@ -587,7 +773,8 @@ class App(tk.Tk):
 
     # --------------------------------------------------------- actions
     def _refresh_file_list(self):
-        files = [f for f in os.listdir(".") if f.startswith(SALES_FILE_PREFIX) and f.endswith(SALES_FILE_EXTENSION)]
+        prefix = (self.settings.get("sales_prefix") if self.settings else None) or SALES_FILE_PREFIX
+        files = [f for f in os.listdir(".") if f.startswith(prefix) and f.endswith(SALES_FILE_EXTENSION)]
         files.sort(reverse=True)
         self.file_combo["values"] = files
         if files and not self.file_var.get():
@@ -610,7 +797,7 @@ class App(tk.Tk):
                                  "Pick a file with Browse… or Refresh List.", parent=self)
             return
         try:
-            df_sales, df_master = pipeline.load_dataframes(name)
+            df_sales, df_master = self._load_with_schema(name)
         except Exception as e:
             messagebox.showerror("Load failed", f"Could not read '{name}':\n{e}", parent=self)
             return
@@ -642,6 +829,50 @@ class App(tk.Tk):
         self.file_status.config(text=f"Loaded: {name}  ·  {len(depots)} depots  ·  {len(self.master_parties)} accounts",
                                 fg=ACCENT)
         self._log(f"✅ Loaded '{name}' — {len(depots)} depots, {len(self.master_parties)} master accounts.")
+
+    def _load_with_schema(self, name):
+        """Load a sales dump through the active company's schema mapping.
+
+        First time a company loads a file type, the MTD layout is auto-detected
+        and confirmed in a dialog, then stored on the company — so every
+        subsequent file of that type loads without asking.
+        """
+        company = companies.load_company(self.company_slug) or {}
+        schema_cfg = company.get("schema") or {}
+        self.sales_mapping = dict(schema_cfg.get("sales") or {})
+        self.party_mapping = dict(schema_cfg.get("party") or {})
+        self.party_master = company.get("party_master") or PARTY_MASTER
+
+        if not self.sales_mapping.get("columns"):
+            detected = schema.detect_sales_schema(name)
+            proposed = schema_mapping_dialog(
+                self, name, detected,
+                ["depot", "syndicate", "vendor", "total"],
+                "Sales dump layout — confirm or edit")
+            if proposed is None:
+                raise ValueError("Mapping cancelled — no file loaded.")
+            self.sales_mapping = proposed
+            schema_cfg["sales"] = proposed
+            company["schema"] = schema_cfg
+            companies.save_company(company)
+            self._log(f"🧭 Sales schema stored: sheet '{proposed['sheet']}', "
+                      f"header row {proposed['header_row']}.")
+
+        if not self.party_mapping.get("columns") and os.path.exists(self.party_master):
+            detected = schema.detect_party_schema(self.party_master)
+            proposed = schema_mapping_dialog(
+                self, self.party_master, detected,
+                ["party", "phone", "send", "priority", "total_target"],
+                "Party master layout — confirm or edit")
+            if proposed is not None:
+                self.party_mapping = proposed
+                schema_cfg["party"] = proposed
+                company["schema"] = schema_cfg
+                companies.save_company(company)
+
+        return pipeline.load_dataframes(
+            name, party_master=self.party_master,
+            sales_mapping=self.sales_mapping, party_mapping=self.party_mapping)
 
     def _set_all_depots(self, value):
         for var in self.depot_vars.values():
@@ -726,7 +957,7 @@ class App(tk.Tk):
         self._log(f"🔄 Preparing run with '{name}' …")
         try:
             if self.df_sales is None:
-                self.df_sales, self.df_master = pipeline.load_dataframes(name)
+                self.df_sales, self.df_master = self._load_with_schema(name)
             report_date, file_date_str, remaining_days = pipeline.compute_run_dates(name)
 
             df_sales = self.df_sales[self.df_sales[COL_DEPOT].isin(selected_depots)].copy()
@@ -880,7 +1111,7 @@ class App(tk.Tk):
             "designation": self.profile_designation.get().strip(),
             "agency": self.profile_agency.get().strip(),
         }
-        save_settings(self.settings)
+        companies.save_active_settings(self.settings)
         self._log("👤 Profile updated.")
         messagebox.showinfo("Saved", "Profile saved.", parent=self)
 
@@ -909,7 +1140,7 @@ class App(tk.Tk):
             messagebox.showerror("Duplicate", f"Brand '{code}' already exists.", parent=self)
             return
         self.settings["brands"][code] = {"name": name, "target_col": tgt, "actual_col": act, "enabled": enabled}
-        save_settings(self.settings)
+        companies.save_active_settings(self.settings)
         self._refresh_brand_list()
         self._log(f"🍾 Added brand {code} — {name}.")
 
@@ -930,7 +1161,7 @@ class App(tk.Tk):
         new_code, name, tgt, act, enabled = result
         del self.settings["brands"][code]
         self.settings["brands"][new_code] = {"name": name, "target_col": tgt, "actual_col": act, "enabled": enabled}
-        save_settings(self.settings)
+        companies.save_active_settings(self.settings)
         self._refresh_brand_list()
         self._log(f"🍾 Updated brand {new_code}.")
 
@@ -942,7 +1173,7 @@ class App(tk.Tk):
         code = list(self.settings["brands"].keys())[sel[0]]
         data = self.settings["brands"][code]
         data["enabled"] = not data.get("enabled", True)
-        save_settings(self.settings)
+        companies.save_active_settings(self.settings)
         self._refresh_brand_list()
         state = "🔕 muted" if not data["enabled"] else "✅ enabled"
         self._log(f"🔄 Brand {code} is now {state}.")
@@ -955,7 +1186,7 @@ class App(tk.Tk):
         code = list(self.settings["brands"].keys())[sel[0]]
         if messagebox.askyesno("Remove brand", f"Remove '{code}' from the portfolio?", parent=self):
             del self.settings["brands"][code]
-            save_settings(self.settings)
+            companies.save_active_settings(self.settings)
             self._refresh_brand_list()
             self._log(f"🗑️ Removed brand {code}.")
 

@@ -1,0 +1,37 @@
+{
+  "name": "Example Agencies",
+  "slug": "example-agencies",
+  "profile": {
+    "name": "Your Name",
+    "designation": "Sales Executive",
+    "agency": "Example Agencies"
+  },
+  "brands": {
+    "ABC": {"name": "Example Whisky", "target_col": "ABC_TARGET", "actual_col": "ABC.1", "enabled": true}
+  },
+  "party_master": "party_master.xlsx",
+  "sales_prefix": "Outlet_Wise_Sales_",
+  "schema": {
+    "sales": {
+      "sheet": "DATA",
+      "header_row": 4,
+      "columns": {
+        "depot": "Name Of Depot",
+        "syndicate": "SYNDICATE NAME",
+        "vendor": "VENDOR_NAME",
+        "total": "Total"
+      }
+    },
+    "party": {
+      "sheet": null,
+      "header_row": 0,
+      "columns": {
+        "party": "PARTY",
+        "phone": "PHONE",
+        "send": "SEND",
+        "priority": "PRIORITY",
+        "total_target": "TOTAL_TARGET"
+      }
+    }
+  }
+}

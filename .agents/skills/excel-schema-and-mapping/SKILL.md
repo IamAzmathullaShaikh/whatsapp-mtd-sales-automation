@@ -10,7 +10,17 @@ license: MIT
 
 # Excel Schema & Column Mapping
 
-## The schema lives in config.py — a rename is a config change, not a code change
+## Two layers: config.py defaults + per-company mappings
+
+The **default** schema lives in config.py — a rename there is a config change,
+not a code change. But each company (companies/<slug>.json) can carry its own
+`schema.sales` / `schema.party` mapping (sheet, header_row, {role: actual
+column}); the first load of a file auto-detects it via `schema.py` (fuzzy
+synonym matching) and stores it. `pipeline.load_dataframes` renames the
+actual columns to the canonical names at load time, so the engine never sees
+the raw layout.
+
+## The default schema (config.py)
 
 | Setting | Default | Meaning |
 |---|---|---|
@@ -38,7 +48,11 @@ Default convention: target `<CODE>_TARGET` in the master, actual `<CODE>.1` in t
 
 ## When a column is renamed upstream
 
-Edit the value in `config.py` (and only that). No pipeline/template changes. For a brand with a custom column, update it in `user_settings.json` or the Brands tab.
+Edit the value in `config.py` (and only that) for the global default — or, for
+one company only, update its `companies/<slug>.json` schema mapping (or re-run
+the mapping dialog in the GUI Company/Run flow). No pipeline/template changes.
+For a brand with a custom column, update it in `user_settings.json` or the
+Brands tab.
 
 ## Common mistakes
 

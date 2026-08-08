@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import argparse
 import questionary
 
 from config import (
@@ -229,16 +230,16 @@ def resolve_dispatcher():
     raise ValueError(f"Unknown DISPATCH_BACKEND: '{DISPATCH_BACKEND}' (use auto, desktop or web)")
 
 
-def select_sales_file():
-    files = [f for f in os.listdir('.') if f.startswith(SALES_FILE_PREFIX) and f.endswith(SALES_FILE_EXTENSION)]
+def select_sales_file(prefix=SALES_FILE_PREFIX):
+    files = [f for f in os.listdir('.') if f.startswith(prefix) and f.endswith(SALES_FILE_EXTENSION)]
     if not files:
         raise FileNotFoundError(
-            f"No '{SALES_FILE_PREFIX}*{SALES_FILE_EXTENSION}' files detected in your directory."
+            f"No '{prefix}*{SALES_FILE_EXTENSION}' files detected in your directory."
         )
     files.sort(reverse=True)
     return questionary.select("📅 Select the historical target report date file to process:", choices=files).ask()
 
-def run_dispatch_engine(settings):
+def run_dispatch_engine(settings, company=None):
     """
     Interactive orchestration of the full dispatch run.
 
@@ -253,7 +254,8 @@ def run_dispatch_engine(settings):
               "via 'Toggle Brand Enable/Disable' in Manage Brand Portfolio.")
         return
 
-    selected_file = select_sales_file()
+    prefix = (company or {}).get("sales_prefix") or SALES_FILE_PREFIX
+    selected_file = select_sales_file(prefix)
     print(f"🔄 Ingesting chosen file target: {selected_file}")
 
     report_type = questionary.select(
@@ -266,7 +268,15 @@ def run_dispatch_engine(settings):
 
     report_date, file_date_str, remaining_days = pipeline.compute_run_dates(selected_file)
 
-    df_sales, df_master = pipeline.load_dataframes(selected_file)
+    if company:
+        company_schema = (company.get("schema") or {})
+        df_sales, df_master = pipeline.load_dataframes(
+            selected_file,
+            party_master=company.get("party_master"),
+            sales_mapping=company_schema.get("sales") or {},
+            party_mapping=company_schema.get("party") or {})
+    else:
+        df_sales, df_master = pipeline.load_dataframes(selected_file)
 
     available_depots = sorted([d for d in df_sales[COL_DEPOT].unique() if d])
     if not available_depots:
@@ -439,8 +449,8 @@ def run_dispatch_engine(settings):
     )
     print(f"\n🏁 Run Completed Cleanly. Success: {success} | Failed: {failed} | Skipped: {skipped}")
 
-def main():
-    settings = load_settings()
+def main(company=None):
+    settings = company if company else load_settings()
 
     while True:
         print("\n" + "="*40)
@@ -468,4 +478,18 @@ def main():
             break
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="WhatsApp Sales Automation Engine")
+    parser.add_argument("--company", default=None,
+                        help="company slug (see companies/); defaults to the active company")
+    args = parser.parse_args()
+    company = None
+    if args.company:
+        import companies
+        company = companies.load_company(args.company)
+        if company is None:
+            sys.exit(f"Unknown company '{args.company}' — available: {companies.list_companies()}")
+    elif os.path.isdir("companies"):
+        import companies
+        slug = companies.ensure_default_company()
+        company = companies.load_company(slug)
+    main(company)

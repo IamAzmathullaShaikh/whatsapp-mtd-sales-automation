@@ -26,6 +26,14 @@ user_settings.json
 .whatsapp_web_profile/
 .venv/
 
+# Multi-company data (per-company settings + active pointer; sample.json.example is committed)
+companies/*.json
+companies/active.txt
+
+# Release build artifacts (built locally; CI produces the official packages)
+dist/
+build/
+
 # Upstream skill clones (refreshed by .agents/skills/scripts/update.sh)
 .agents/skills/.upstream/
 

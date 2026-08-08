@@ -44,13 +44,41 @@ def compute_run_dates(selected_file):
     return report_date, file_date_str, remaining_days
 
 
-def load_dataframes(selected_file):
-    """Reads and normalizes the sales dump and party master dataframes."""
-    df_sales = pd.read_excel(selected_file, sheet_name=SALES_SHEET, header=SALES_HEADER_ROW, dtype=str)
-    df_master = pd.read_excel(PARTY_MASTER, dtype=str)
+def load_dataframes(selected_file, party_master=None, sales_mapping=None,
+                    party_mapping=None):
+    """
+    Reads and normalizes the sales dump and party master dataframes.
+
+    `sales_mapping` / `party_mapping` are per-company schema overrides (see
+    schema.py / companies.py): each may carry {"sheet", "header_row",
+    "columns": {role: actual_header}}. Columns named differently from the
+    canonical schema are *renamed to the canonical names* at load time, so the
+    rest of the pipeline keeps working unchanged for any MTD file layout.
+    When omitted, the config.py defaults are used (existing behavior).
+    """
+    sales_mapping = sales_mapping or {}
+    party_mapping = party_mapping or {}
+    sales_sheet = sales_mapping.get("sheet") or SALES_SHEET
+    sales_header = sales_mapping.get("header_row")
+    if sales_header is None:
+        sales_header = SALES_HEADER_ROW
+    party_file = party_master or PARTY_MASTER
+    party_sheet = party_mapping.get("sheet")
+
+    df_sales = pd.read_excel(selected_file, sheet_name=sales_sheet,
+                             header=sales_header, dtype=str)
+    if party_sheet:
+        df_master = pd.read_excel(party_file, sheet_name=party_sheet, dtype=str)
+    else:
+        # sheet_name=None would return a {sheet: df} dict — keep the old default
+        # of reading the first sheet as a plain DataFrame.
+        df_master = pd.read_excel(party_file, dtype=str)
 
     df_sales.columns = df_sales.columns.str.strip()
     df_master.columns = df_master.columns.str.strip()
+
+    _rename_aliases(df_sales, sales_mapping.get("columns") or {})
+    _rename_aliases(df_master, party_mapping.get("columns") or {})
 
     df_sales[COL_DEPOT] = df_sales[COL_DEPOT].fillna("").astype(str).str.strip()
     df_sales[COL_SYNDICATE] = df_sales[COL_SYNDICATE].fillna("").astype(str).str.strip()
@@ -58,6 +86,20 @@ def load_dataframes(selected_file):
     df_master[COL_PARTY] = df_master[COL_PARTY].fillna("").astype(str).str.strip()
 
     return df_sales, df_master
+
+
+def _rename_aliases(df, columns):
+    """Rename non-canonical column spellings to the canonical schema names.
+
+    `columns` maps role -> actual header (e.g. {"depot": "Depot Name"}); the
+    canonical name for each role comes from config. Renames only happen when
+    the canonical name itself is absent, so already-canonical files are untouched.
+    """
+    from schema import apply_mapping
+    rename = apply_mapping(columns, list(df.columns))
+    for canonical, actual in rename.items():
+        if canonical not in df.columns and actual in df.columns:
+            df.rename(columns={actual: canonical}, inplace=True)
 
 
 def build_brand_map(settings):

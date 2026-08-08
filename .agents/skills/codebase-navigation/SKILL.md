@@ -24,7 +24,9 @@ WhatsApp MTD Sales Automation: reads a monthly sales dump + a party master, comp
 | `pipeline.py` | Pure engine: load, brand map, casting, aggregation, filters, queue building |
 | `dispatcher.py` | Windows desktop dispatcher (pyautogui, `whatsapp://` URIs) |
 | `dispatcher_web.py` | Linux WhatsApp Web dispatcher (Selenium + Chromium, DOM-level verification) |
-| `config.py` | Schema names, thresholds, timing, backend selection — single source of truth |
+| `config.py` | Default schema names, thresholds, timing, backend selection |
+| `companies.py` | Per-company registry (profile, brands, party master, MTD prefix, schema) |
+| `schema.py` | Auto-detects MTD/party Excel layout (sheet, header row, column roles) |
 | `calculations.py` | Pure math: achievement %, status labels |
 | `templates.py` | WhatsApp message builders + signature |
 | `dashboard.py` | Territory dashboard export (leaderboards per brand) |

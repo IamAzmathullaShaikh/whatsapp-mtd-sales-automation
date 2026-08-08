@@ -361,6 +361,81 @@ class TestFilterPartiesByAchievement:
         assert "C" not in filter_parties_by_achievement(df_master, actual_perf, 90.0)  # 95% >= 90
 
 
+class TestLoadDataFrames:
+    """load_dataframes must normalize any MTD layout onto the canonical schema."""
+
+    @staticmethod
+    def _write_workbook(path, sheet, header_idx, headers, rows, extra_sheet=None):
+        from openpyxl import Workbook
+        wb = Workbook()
+        ws = wb.active
+        ws.title = sheet
+        for _ in range(header_idx):
+            ws.append(["junk row"])
+        ws.append(headers)
+        for r in rows:
+            ws.append(r)
+        if extra_sheet:
+            wb.create_sheet(extra_sheet)
+        wb.save(path)
+
+    def test_aliases_renamed_to_canonical(self, tmp_path):
+        from pipeline import load_dataframes
+        sales = tmp_path / "mtd.xlsx"
+        self._write_workbook(sales, "SalesData", 2,
+                             ["Depot Name", "Syndicate", "Vendor Name", "Total"],
+                             [["Guntur-I", "SYN-A", "Outlet1", 10]])
+        master = tmp_path / "master.xlsx"
+        self._write_workbook(master, "Master", 0,
+                             ["Party", "Phone", "Send", "Priority", "Total Target"],
+                             [["SYN-A", "9876543210", "YES", "A", 100]])
+        df_sales, df_master = load_dataframes(
+            str(sales), party_master=str(master),
+            sales_mapping={"sheet": "SalesData", "header_row": 2,
+                           "columns": {"depot": "Depot Name", "syndicate": "Syndicate",
+                                        "vendor": "Vendor Name", "total": "Total"}},
+            party_mapping={"sheet": "Master", "header_row": 0,
+                           "columns": {"party": "Party", "phone": "Phone",
+                                        "send": "Send", "priority": "Priority",
+                                        "total_target": "Total Target"}},
+        )
+        # The rest of the pipeline sees the canonical column names.
+        assert list(df_sales.columns) == [COL_DEPOT, COL_SYNDICATE, COL_VENDOR, COL_TOTAL]
+        assert df_sales.iloc[0][COL_DEPOT] == "Guntur-I"
+        assert df_sales.iloc[0][COL_VENDOR] == "Outlet1"
+        assert df_master.iloc[0][COL_PARTY] == "SYN-A"
+
+    def test_backward_compat_defaults(self, tmp_path):
+        """No mapping + canonical layout + explicit party master -> old behavior."""
+        from pipeline import load_dataframes
+        sales = tmp_path / "Outlet_Wise_Sales_08-08-2026.xlsx"
+        self._write_workbook(sales, "DATA", 4,
+                             ["Name Of Depot", "SYNDICATE NAME", "VENDOR_NAME", "Total"],
+                             [["Guntur-I", "SYN-A", "Outlet1", 10]])
+        master = tmp_path / "party_master.xlsx"
+        self._write_workbook(master, "Sheet1", 0,
+                             [COL_PARTY, COL_PHONE, COL_SEND, COL_PRIORITY, TOTAL_TARGET_COL],
+                             [["SYN-A", "9876543210", "YES", "A", 100]])
+        df_sales, df_master = load_dataframes(str(sales), party_master=str(master))
+        assert df_sales.iloc[0][COL_DEPOT] == "Guntur-I"
+        assert df_master.iloc[0][COL_PARTY] == "SYN-A"
+
+
+class TestComputeRunDatesFormats:
+    def test_iso_filename(self):
+        report_date, file_date_str, _ = compute_run_dates("MTD_2026-06-08.xlsx")
+        assert report_date == "08-Jun-2026"
+        assert file_date_str == "2026-06-08"
+
+    def test_single_digit_month_and_two_digit_year(self):
+        report_date, _, _ = compute_run_dates("OFFTAKE_24.6.26.xlsx")
+        assert report_date == "24-Jun-2026"
+
+    def test_underscore_separator(self):
+        report_date, _, _ = compute_run_dates("Sales_09_08_2026.xlsx")
+        assert report_date == "09-Aug-2026"
+
+
 class TestExportMissingContacts:
     def test_writes_csv_under_logs(self, tmp_path, monkeypatch):
         monkeypatch.chdir(tmp_path)

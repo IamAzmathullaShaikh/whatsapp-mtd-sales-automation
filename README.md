@@ -7,6 +7,24 @@ A terminal-based automation pipeline for FMCG, Alco-Bev, and Territory Sales Exe
 
 ---
 
+## 🚀 Quick start — no install needed (Windows GUI)
+
+Grab the ready-made **`WhatsAppMTD.exe`** from the [Releases](https://github.com/IamAzmathullaShaikh/whatsapp-mtd-sales-automation/releases) page (Linux: the `WhatsAppMTD-x86_64.AppImage`). No Python, no packages, nothing to install.
+
+1. **Download `WhatsAppMTD.exe`** and put it in a folder with your two Excel files:
+   - `party_master.xlsx` — your account directory & monthly targets
+   - your sales dump(s), e.g. `Outlet_Wise_Sales_08-08-2026.xlsx`
+2. **Double-click the .exe** — the window opens instantly.
+3. **🏢 Company → ➕ New** — type your agency name (first run auto-creates one from your old settings).
+4. **▶ Run → Load File** — pick your sales dump; the layout is **auto-detected** and confirmed once, then remembered.
+5. **🍾 Brands → ➕ Add** — map each brand's target & actual columns, then **▶ START DISPATCH**.
+
+That's it. Everything is saved per company, so switching agencies or MTD file formats is just a dropdown change. First-time users: use the *daily* report and the **Below Achievement %** filter to start small.
+
+**Windows will show a SmartScreen warning** for unsigned apps — click *More info → Run anyway*; the same applies to the AppImage on Linux (`chmod +x` first). See [docs/RELEASE.md](docs/RELEASE.md) for how the packages are built and how to build them yourself.
+
+---
+
 ## ✨ Features
 - **Interactive CLI Menu** – configure your profile and brand portfolio without touching code.
 - **Dynamic Brand Portfolio** – manage product lines with flexible **Excel column mapping**.
@@ -111,15 +129,16 @@ The **filename must embed the report date** (`Outlet_Wise_Sales_05-08-2026.xlsx`
 
 ---
 
-## 🖥️ Desktop GUI (optional)
+## 🖥️ Desktop GUI
 
-Prefer a window over a terminal? The same engine is wrapped in a native **tkinter** app (Python's built-in GUI library — zero extra dependencies):
+Prefer a window over a terminal? The same engine is wrapped in a native **tkinter** app (Python's built-in GUI library — zero extra dependencies). Most users never open a terminal: grab `WhatsAppMTD.exe` / `.AppImage` from [Releases](https://github.com/IamAzmathullaShaikh/whatsapp-mtd-sales-automation/releases) (see the Quick start at the top). From a checkout you can also run:
 
 ```bash
 python gui.py
 ```
 
 The GUI provides:
+- **Company tab** — create / switch / delete companies (one per agency: own profile, brands, party master, MTD prefix, and Excel mapping).
 - **Run tab** — sales-file picker (Browse or auto-detected list), report-type radios, depot checkboxes, filter-mode radios (all / priority slab / groups / custom consolidation with savable presets), and a one-click **Start Dispatch** button.
 - **Profile tab** — edit the executive name, designation, and agency used in message headers/signatures.
 - **Brands tab** — add / edit / remove brands, their Excel column mappings, and a **Mute/Unmute** toggle per brand (muted brands are kept but excluded from dispatch).
@@ -170,6 +189,37 @@ wine "$HOME/.wine/drive_c/users/$USER/AppData/Local/Programs/Python/Python312/py
 ```
 
 > **The one-time Wine install needs root** (run the printed pacman/apt command with sudo yourself); everything in the script runs as your normal user. Needs an X/Wayland display — the GUI window is rendered by Wine on your current display.
+
+---
+
+## 🏢 Multiple companies, brands & MTD file types (newbie-friendly)
+
+The tool is **per-company**: each agency/distributor gets its own profile,
+brand portfolio, party master, MTD file prefix, and Excel mapping. Companies
+live in `companies/` (one JSON per company — see `companies/README.md`), the
+GUI has a **🏢 Company** tab to create/switch/delete them, and the CLI takes
+`--company <slug>` (`python main.py --company my-agency`).
+
+**Different MTD layouts just work.** Each company stores its own schema
+mapping — which sheet, which header row, and which columns hold the depot,
+syndicate, vendor, total (sales) and party, phone, send, priority, target
+(master). The first time you load a sales dump for a company, the layout is
+**auto-detected** (`schema.py` fuzzy-matches column headers against synonym
+sets) and confirmed in a one-shot dialog; after that every file of that type
+loads silently. Files with different spellings, header rows, or sheet names
+are renamed to the canonical schema at load time, so the dispatch engine never
+changes.
+
+**Newbie quickstart (no config knowledge needed):**
+
+1. `python gui.py` → **🏢 Company → ➕ New** → type the agency name.
+2. **▶ Run → Browse… → Load File** → confirm the auto-detected sales mapping.
+3. Confirm the party master mapping (party / phone / send / priority / target).
+4. **🍾 Brands → ➕ Add** each brand (target + actual columns) and run.
+
+Existing users are unaffected: the first run seeds a **Default Company** from
+your current `user_settings.json`, keeping your profile and brands exactly as
+ they were.
 
 ---
 
