@@ -1,0 +1,36 @@
+# azmath agent platform configuration.
+# Loaded by azmath.core.config.settings; every key can be overridden by an
+# AZMATH_* environment variable (see ENV_OVERRIDES in core/config/settings.py).
+
+[model]
+provider = "ollama"          # only "ollama" today; others plug in via azmath/models
+name = "qwen3:4b"            # base model
+host = "http://localhost:11434"
+temperature = 0.2
+num_ctx = 16384              # CPU box: 32k pushes this machine into swap (measured)
+max_tokens = 3200            # complex-tier cap — must cover thinking + answer; 1600
+                             # was measured to starve the answer on tool prompts
+simple_max_tokens = 200      # greetings/small talk: fast + concise
+think = "auto"               # "auto" | true | false — auto classifies per query
+timeout = 300                # seconds for one model call
+
+[loop]
+max_iterations = 8           # runtime owns termination, not the model
+tool_timeout = 60            # seconds per tool call
+verify = true                # run the verification stage before finishing
+max_obs_chars = 8000         # truncate each tool observation fed back to the model
+retry_on_error = 1           # extra attempt after a tool failure
+
+[tools]
+enabled = ["fs", "shell", "git", "web", "python"]
+# approval_mode: "prompt" (ask when interactive) | "deny" | "allow"
+approval_mode = "prompt"
+
+[memory]
+backend = "json"             # only "json" today; backend is replaceable
+path = "~/.azmath/memory.json"
+persist_without_approval = false
+
+[observability]
+log_level = "info"           # info | debug | warning | error
+events_file = "~/.azmath/events.jsonl"   # "" disables the JSONL trace

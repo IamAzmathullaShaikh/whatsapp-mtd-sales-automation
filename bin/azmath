@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# azmath — launcher for the local agent platform.
+# Prefers the project venv; falls back to system python3.
+set -euo pipefail
+DIR="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+if [ -x "$DIR/.venv/bin/python" ]; then
+  PY="$DIR/.venv/bin/python"
+else
+  PY=python3
+fi
+exec "$PY" -m azmath "$@"

@@ -362,6 +362,26 @@ The agent personality lives in `prompts/agent-system.md` — a deliberately tigh
 
 **`think` is `"auto"` by default**: each request is classified — greetings/small talk get a small `simple_max_tokens` cap (fast, concise), everything else gets the full `max_tokens` reasoning budget. `think` stays `true` in both tiers: on this Ollama build (0.32.6), `think: false` makes qwen3 narrate its deliberation *into the answer* (the "Okay, the user said…" leak), while `think: true` keeps the trace in a separate `thinking` field the client ignores — so output stays clean. In interactive `ollama run azmath-agent`, the CLI shows the trace by design; use `--hidethinking` (or `/set nothink` inside a session) to hide it. Avoid `--think=false` for this model.
 
+## 🤖 azmath — the autonomous local agent platform
+
+The same model + skill library now sit inside a **general-purpose agent runtime** (`azmath/`): tools, permissions, an iterative loop, verification, memory, and observability — so it can *do* things, not just answer.
+
+```bash
+./bin/azmath run "List the Python files at the root of this repository"   # uses fs.list, verifies, answers
+./bin/azmath chat                        # interactive session
+./bin/azmath doctor                      # environment self-diagnostics
+./bin/azmath tools list                  # 21 capabilities with permission levels
+./bin/azmath skills search "excel schema"
+./bin/azmath models list
+./bin/azmath config
+```
+
+**How it works** — each request is routed to the relevant skills, tool schemas are injected into the prompt, and the model decides what to do. If it emits a tool call (`{"tool": ...}`), the runtime checks the **permission policy** (reads are safe; writes, deletes, pushes, shell, and Python execution require approval — blocked in non-interactive runs), executes the tool, feeds the observation back, and loops. The runtime owns termination (iteration cap, timeouts, empty-response detection), a **verifier** checks the trace before declaring success, and everything emits structured events to `~/.azmath/events.jsonl` (secrets redacted). Provider-agnostic: the loop knows `ModelProvider`, not Ollama.
+
+Configuration: `config/agent.toml` + `config/permissions.toml`, overridable via `AZMATH_*` env vars. See `docs/ARCHITECTURE.md`, `docs/TOOLS.md`, `docs/CONFIGURATION.md`, `docs/SECURITY.md`, `docs/SKILLS.md`, `docs/TROUBLESHOOTING.md`, `docs/DEVELOPMENT.md`.
+
+> ⏱️ **Honest speed note**: CPU-only qwen3:4b generates at ~4 tok/s. `hello` ≈ 1 min; a real tool-use task ≈ 5–11 min. Bounded by the token cap, streaming throughout.
+
 ---
 
 ## 📄 License

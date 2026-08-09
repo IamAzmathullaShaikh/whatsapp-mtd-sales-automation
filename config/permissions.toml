@@ -1,0 +1,24 @@
+# azmath permission policy. Consulted by azmath.tools.policy.Policy.
+#
+# Levels: "safe" (runs without approval) | "approval" (requires explicit user
+# approval; denied in non-interactive runs) | "denied" (never runs).
+#
+# Each tool declares its own default permission (see azmath/tools/*). This file
+# overrides those defaults. For the shell tool, command_patterns are matched in
+# order; the first match wins.
+
+[tools]
+"shell" = "approval"     # default for shell; narrowed by patterns below
+"fs.write" = "approval"
+"fs.delete" = "approval"
+"git.push" = "approval"
+"web.search" = "safe"
+"web.fetch" = "safe"
+"python.exec" = "approval"
+
+[shell.patterns]
+# safe read-only / test commands — first match wins
+"^(ls|pwd|echo|cat|head|tail|wc|find|grep|rg|which|date|env|git status|git log|git diff|git branch|git remote|python3? -m pytest|uv run pytest)" = "safe"
+"^git (add|commit|checkout|reset|rebase|merge|clone|pull|push|rm)" = "approval"
+"^(rm|rmdir|mv|cp|dd|mkfs|shutdown|reboot|systemctl|pacman|apt|dnf|sudo|pkexec|chmod|chown)" = "approval"
+# anything not matched above defaults to the tool default ("approval")
