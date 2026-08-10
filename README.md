@@ -311,7 +311,7 @@ The set was authored by studying the public skills ecosystem (`anthropics/skills
 Beyond the curated set above, this repo ships a **skill library** — a small engine that ingests upstream skill repos, normalizes them, indexes them, and routes tasks to the best-matching skill:
 
 ```
-skills/            sources/ (clones, gitignored) · normalized/ · index/ · manifests/
+skills/            sources/ (committed snapshots, refresh via sync) · normalized/ · index/ · manifests/
 router/            stdlib-only scorer + router (tokenizer, scoring, route)
 scripts/           skilllib CLI: sync · build · route · stats
 prompts/           route + skill-use templates

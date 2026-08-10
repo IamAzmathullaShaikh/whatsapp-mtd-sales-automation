@@ -34,8 +34,6 @@ companies/active.txt
 dist/
 build/
 
-# Upstream skill clones (refreshed by .agents/skills/scripts/update.sh)
-.agents/skills/.upstream/
-
-# Skill library: upstream source clones (refetched by `skilllib sync`)
-skills/sources/
+# Upstream skill clones are committed snapshots (skills/sources/ and
+# .agents/skills/.upstream/). `skilllib sync` / update.sh re-clone them fresh
+# when a .git dir is missing — see scripts/sync.py.

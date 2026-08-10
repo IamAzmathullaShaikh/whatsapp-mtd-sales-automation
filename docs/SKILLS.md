@@ -47,7 +47,7 @@ no model rebuild. Follow the conventions of the existing 11 curated skills
 
 ## Where things live
 
-- `skills/sources/` — git clones (gitignored, refetchable via `sync`)
+- `skills/sources/` — committed upstream snapshots (refresh via `sync`: re-cloned fresh, no `.git`)
 - `skills/normalized/` — parsed SKILL.md bodies
 - `skills/index/index.json` — the routing index
 - `skills/manifests/` — per-source + library manifests

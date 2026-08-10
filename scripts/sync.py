@@ -1,5 +1,11 @@
-"""Clone/update upstream skill sources into skills/sources/."""
+"""Clone/update upstream skill sources into skills/sources/.
 
+The committed `skills/sources/` trees are snapshots without `.git`; when one is
+found, it is wiped and re-cloned fresh (git needs a repository to fetch into).
+Clones that do carry `.git` (e.g. after a previous sync) are fast-forwarded.
+"""
+
+import shutil
 import subprocess
 
 from .common import enabled_sources, source_id, source_root
@@ -17,10 +23,17 @@ def current_commit(repo_dir):
 
 
 def sync_source(src, paths):
-    """Shallow-clone (or fast-forward) one source; return its commit SHA."""
+    """Shallow-clone (or fast-forward) one source; return its commit SHA.
+
+    A source directory without `.git` is a committed snapshot: it is removed
+    and re-cloned fresh. With `.git` present, the clone is fast-forwarded.
+    """
     dest = source_root(paths, src)
     dest.mkdir(parents=True, exist_ok=True)
     if not (dest / ".git").exists():
+        # committed snapshot without .git — wipe and re-clone fresh
+        shutil.rmtree(dest, ignore_errors=True)
+        dest.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             ["git", "clone", "--depth", "1", "-q", src["url"], str(dest)], check=True
         )

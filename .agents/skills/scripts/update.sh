@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # update.sh — refresh the upstream skills repos this skill set was learned from,
 # record their current state in upstream-manifest.md, and report what changed.
-# Shallow clones live in .agents/skills/.upstream/ (gitignored).
+# The .upstream/ trees are committed snapshots without .git; a missing .git
+# means the snapshot is wiped and re-cloned fresh.
 set -euo pipefail
 
 SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -50,7 +51,8 @@ CHANGED=0
 
 for repo in "${REPOS[@]}"; do
   dir="$UPSTREAM_DIR/${repo//\//_}"
-  if [[ ! -d "$dir/.git" ]]; then
+  if [[ ! -e "$dir/.git" ]]; then
+    rm -rf "$dir"
     git clone --depth 1 -q "https://github.com/$repo.git" "$dir" >/dev/null 2>&1 \
       || { echo "  !! failed to clone $repo"; continue; }
   else

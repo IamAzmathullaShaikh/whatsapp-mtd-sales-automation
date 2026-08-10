@@ -38,7 +38,7 @@ The set is versioned and upstream-tracked. To refresh:
 .agents/skills/scripts/update.sh
 ```
 
-It shallow-clones the upstream repos into `.agents/skills/.upstream/` (gitignored), records their current commit SHAs and skill counts in `upstream-manifest.md`, and prints a drift report. When an upstream repo moves, review its changes and fold improvements into the relevant skills per `writing-skills`, bumping each skill's `version`.
+It shallow-clones the upstream repos into `.agents/skills/.upstream/` (committed snapshot; a missing `.git` means it is re-cloned fresh), records their current commit SHAs and skill counts in `upstream-manifest.md`, and prints a drift report. When an upstream repo moves, review its changes and fold improvements into the relevant skills per `writing-skills`, bumping each skill's `version`.
 
 ## Conventions
 
